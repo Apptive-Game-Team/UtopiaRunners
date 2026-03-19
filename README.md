@@ -33,11 +33,11 @@ ex) feat(파일명)
       </a>
     </td>
     <td align="center">
-        개발자
+        기획자
       </a>
     </td>
     <td align="center">
-        디자이너
+        스토리
       </a>
     </td>
   </tr>
@@ -48,8 +48,8 @@ ex) feat(파일명)
       </a>
     </td>
     <td align="center" width="200px">
-      <a href="https://github.com/PureBrightness" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/127014921?v=4" alt="장대규 프로필" />
+      <a href="https://github.com/jdkyu44" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/173862139?v=4" alt="장대규 프로필" />
       </a>
     </td>
     <td align="center" width="200px">
@@ -58,8 +58,8 @@ ex) feat(파일명)
       </a>
     </td>
     <td align="center" width="200px">
-      <a href="https://github.com/SoCheol Kwak" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/181458108?v=4" alt="곽소철 프로필" />
+      <a href="https://github.com/thcjfd" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/188744684?v=4" alt="곽소철 프로필" />
       </a>
     </td>
   </tr>
