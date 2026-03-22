@@ -9,6 +9,7 @@
 |update|기존 기능 업데이트|
 |feat|새로운 기능 추가|
 |fix|문제점 수정|
+|chore|그외 자잘한 수정|
 |refact|코드 리팩토링|
 |balance|밸런스 및 수치 조정|
 |comment|주석 추가(코드 변경X) 혹은 오타 수정|
@@ -26,11 +27,11 @@ ex) feat(파일명)
 <table>
       <tr>
     <td align="center">
-        개발자
+        프로그래머
       </a>
     </td>
     <td align="center">
-        개발자
+        프로그래머
       </a>
     </td>
     <td align="center">
