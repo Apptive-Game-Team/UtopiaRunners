@@ -1,5 +1,5 @@
 # UtopiaRunners
-낙원을 달리는 우리
+낙원을 달리는 사람들  
 러닝액션게임 유토피아 러너즈 입니다.
 
 ## commit convention
