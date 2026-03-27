@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00.Scenes/SampleScene.unity
+    path: Assets/00.Scenes/00.TitleScene.unity
+    guid: 2fd9748784372a1469ae9c785db51451
+  - enabled: 1
+    path: Assets/00.Scenes/01.WorldSelectScene.unity
+    guid: f4af2e37f8aab334c842b4a7d07ade8d
+  - enabled: 1
+    path: Assets/00.Scenes/02.StageSelectScene.unity
+    guid: baa94e332346c354fba4392319cab5cb
+  - enabled: 1
+    path: Assets/00.Scenes/03.CharacterSelectScene.unity
+    guid: 5e2365ce16558e1409d66aa8128d4be4
+  - enabled: 1
+    path: Assets/00.Scenes/04.UpgradeScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/00.Scenes/05.InGame(Temp).unity
+    guid: 6d4dd923b61e22044ab275dfd6af5e58
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
