@@ -38,6 +38,7 @@ namespace _01.Scripts._00.Manager
         protected override void Awake()
         {
             base.Awake();
+            
             InitInputs();
         }
 
@@ -99,6 +100,6 @@ namespace _01.Scripts._00.Manager
 
         public void SetKeyActive(ActionCode action, bool active) => _keyActiveFlags[action] = active;
         
-        public void SetKeyMapping(ActionCode code, KeyCode key) => _keyMappings[code] = key;
+        public void SetKeyMapping(ActionCode action, KeyCode key) => _keyMappings[action] = key;
     }
 }
