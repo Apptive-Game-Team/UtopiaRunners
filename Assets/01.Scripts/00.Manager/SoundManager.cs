@@ -54,6 +54,7 @@ namespace _01.Scripts._00.Manager
             base.Awake();
             
             Init();
+            PlayBgm(BGM.Default);
         }
 
         private void Init()
