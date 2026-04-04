@@ -27,12 +27,11 @@ namespace _01.Scripts._00.Manager
     
     public class InputManager : SingletonObject<InputManager>
     {
-        public static event Action<ActionCode, InputType> OnKeyEvent;
+        private static Dictionary<(ActionCode, InputType), Action> _eventDict = new();
 
         private Dictionary<ActionCode, KeyCode> _keyMappings = new();
         private Dictionary<ActionCode, KeyCode> _altKeyMappings = new();
         private Dictionary<ActionCode, bool> _keyActiveFlags = new();
-        
         private List<ActionCode> _actionCodes = new();
 
         protected override void Awake()
@@ -85,16 +84,40 @@ namespace _01.Scripts._00.Manager
                 
                 if (Input.GetKeyDown(mainKey) || (altKey != KeyCode.None && Input.GetKeyDown(altKey)))
                 {
-                    OnKeyEvent?.Invoke(action, InputType.Down);
+                    ExecuteEvent(action, InputType.Down);
                 }
                 else if (Input.GetKeyUp(mainKey) || (altKey != KeyCode.None && Input.GetKeyUp(altKey)))
                 {
-                    OnKeyEvent?.Invoke(action, InputType.Up);
+                    ExecuteEvent(action, InputType.Up);
                 }
                 else if (Input.GetKey(mainKey) || (altKey != KeyCode.None && Input.GetKey(altKey)))
                 {
-                    OnKeyEvent?.Invoke(action, InputType.Press);
+                    ExecuteEvent(action, InputType.Press);
                 }
+            }
+        }
+        
+        public void ExecuteEvent(ActionCode action, InputType type)
+        {
+            if (_eventDict.TryGetValue((action, type), out var targetEvent))
+            {
+                targetEvent?.Invoke();
+            }
+        }
+        
+        public static void AddListener(ActionCode action, InputType type, Action callback)
+        {
+            var key = (action, type);
+            _eventDict.TryAdd(key, null);
+            _eventDict[key] += callback;
+        }
+        
+        public static void RemoveListener(ActionCode action, InputType type, Action callback)
+        {
+            var key = (action, type);
+            if (_eventDict.ContainsKey(key))
+            {
+                _eventDict[key] -= callback;
             }
         }
 
