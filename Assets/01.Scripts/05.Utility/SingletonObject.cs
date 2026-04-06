@@ -55,7 +55,6 @@ namespace _01.Scripts._05.Utility
             }
             else if (_instance != this)
             {
-                Debug.LogWarning($"[Singleton] {typeof(T)}: 중복된 인스턴스");
                 Destroy(gameObject);
             }
         }
