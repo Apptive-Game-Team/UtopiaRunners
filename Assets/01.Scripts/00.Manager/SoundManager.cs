@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _01.Scripts._05.Utility;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 namespace _01.Scripts._00.Manager
 {
@@ -35,6 +36,9 @@ namespace _01.Scripts._00.Manager
         private const string MixerSfx = "SfxSound";
 
         [Header("Settings")]
+        [SerializeField] private Slider masterVolumeSlider;
+        [SerializeField] private Slider bgmVolumeSlider;
+        [SerializeField] private Slider sfxVolumeSlider;
         [SerializeField] private int sfxChannels = 20;
         
         private AudioMixer _audioMixer;
@@ -54,6 +58,10 @@ namespace _01.Scripts._00.Manager
             base.Awake();
             
             Init();
+        }
+
+        private void Start()
+        {
             PlayBgm(BGM.Default);
         }
 
@@ -75,6 +83,24 @@ namespace _01.Scripts._00.Manager
                 _sfxPlayers[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("Sfx")[0];
                 _sfxPlayers[i].playOnAwake = false;
             }
+            
+            masterVolumeSlider.onValueChanged.AddListener(val => MasterVolume = val);
+            bgmVolumeSlider.onValueChanged.AddListener(val => BGMVolume = val);
+            sfxVolumeSlider.onValueChanged.AddListener(val => SfxVolume = val);
+        }
+
+        public void SaveSoundData(SoundData soundData)
+        {
+            soundData.masterVolume = MasterVolume;
+            soundData.bgmVolume = BGMVolume;
+            soundData.sfxVolume = SfxVolume;
+        }
+
+        public void LoadSoundData(SoundData soundData)
+        {
+            masterVolumeSlider.value = MasterVolume = soundData.masterVolume;
+            bgmVolumeSlider.value = BGMVolume = soundData.bgmVolume;
+            sfxVolumeSlider.value = SfxVolume = soundData.sfxVolume;
         }
 
         private AudioSource CreatePlayer(string objName, string groupName)

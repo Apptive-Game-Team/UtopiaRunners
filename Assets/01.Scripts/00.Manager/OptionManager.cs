@@ -18,12 +18,17 @@ namespace _01.Scripts._00.Manager
 
         public void OnClickOptionButton()
         {
+            if (optionPanel.activeSelf)
+            {
+                GameManager.Instance.SaveSound();
+            }
+            
             optionPanel.SetActive(!optionPanel.activeSelf);
         }
 
         public void OnClickOutYesButton()
         {
-            // todo : Game Save
+            GameManager.Instance.SaveGame();
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
             #else
