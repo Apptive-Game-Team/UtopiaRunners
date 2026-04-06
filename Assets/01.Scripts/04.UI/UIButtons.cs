@@ -14,5 +14,10 @@ namespace _01.Scripts._04.UI
         {
             SceneManager.LoadScene(0);
         }
+
+        public void StageSelectBackButton()
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

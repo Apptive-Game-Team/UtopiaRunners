@@ -55,6 +55,7 @@ namespace _01.Scripts._02.InGameSystem
                 worldSelectButton.onClick.AddListener(() =>
                 {
                     StageManager.Instance.selectedWorldNum = worldNum;
+                    StageManager.Instance.selectedWorldInfo = worldInfoData.worldInfos[(int)worldNum];
                     SceneManager.LoadScene(2);
                 });
             }
