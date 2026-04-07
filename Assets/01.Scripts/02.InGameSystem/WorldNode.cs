@@ -51,6 +51,7 @@ namespace _01.Scripts._02.InGameSystem
                 worldSelectButton.gameObject.SetActive(true);
                 worldInfoName.text = _worldInfo.worldName;
                 worldInfoDescription.text = _worldInfo.worldDescription;
+                worldSelectButton.gameObject.SetActive(true);
                 worldSelectButton.onClick.RemoveAllListeners();
                 worldSelectButton.onClick.AddListener(() =>
                 {
@@ -63,6 +64,7 @@ namespace _01.Scripts._02.InGameSystem
             {
                 worldInfoName.text = "???";
                 worldInfoDescription.text = "이전 월드가 클리어 되지 않았습니다.";
+                worldSelectButton.gameObject.SetActive(false);
                 worldSelectButton.gameObject.SetActive(false);
             }
         }

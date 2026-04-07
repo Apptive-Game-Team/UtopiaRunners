@@ -25,8 +25,6 @@ namespace _01.Scripts._00.Manager
     
     public class StageManager : SingletonObject<StageManager>
     {
-        [SerializeField] private WorldInfoData worldInfoData;
-        
         public WorldNum currentWorldNum;
         public StageNum currentStageNum;
 
