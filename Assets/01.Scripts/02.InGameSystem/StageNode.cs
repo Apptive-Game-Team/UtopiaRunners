@@ -58,6 +58,7 @@ namespace _01.Scripts._02.InGameSystem
             {
                 return;
             }
+            stageSelectButton.gameObject.SetActive(false);
             
             if (stageNum is StageNum.Stage2 or StageNum.Stage5)
             {
