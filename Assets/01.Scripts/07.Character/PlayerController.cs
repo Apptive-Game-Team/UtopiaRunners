@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ground Check")]
     public Transform groundCheck;
-    public float checkDistance = 0.1f;
+    public float checkDistance = 1f;
     public LayerMask groundLayer;
 
     [Header("Status")]

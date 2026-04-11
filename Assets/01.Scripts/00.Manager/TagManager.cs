@@ -7,15 +7,19 @@ public class TagManager : MonoBehaviour
     public GameObject mainCharacter;
     public GameObject subCharacter;
 
-    private GameObject weapon;
-
     [Header("Tag Option")]
-    public float tagCooldown = 5f;
-    public bool canTag = true;
+    [SerializeField] private float tagCooldown = 5f;
+    private bool canTag = true;
+
+    private GameObject currentCharacter;
+    private GameObject otherCharacter;
+
+    public GameObject weapon;
 
     private void Start()
     {
-        weapon = GameObject.FindWithTag("Weapon");
+        currentCharacter = mainCharacter;
+        otherCharacter = subCharacter;
     }
 
     private void Update()
@@ -29,19 +33,14 @@ public class TagManager : MonoBehaviour
 
     private void Tag()
     {
-        if (GameObject.FindWithTag("Player") == mainCharacter)
-        {
-            mainCharacter.SetActive(false);
-            subCharacter.SetActive(true);
-            weapon.transform.SetParent(subCharacter.transform, false);
-        }
+        currentCharacter.SetActive(false);
+        otherCharacter.SetActive(true);
 
-        else
-        {
-            mainCharacter.SetActive(true);
-            subCharacter.SetActive(false);
-            weapon.transform.SetParent(mainCharacter.transform, false);
-        }
+        GameObject temp = currentCharacter;
+        currentCharacter = otherCharacter;
+        otherCharacter = temp;
+
+        weapon.transform.SetParent(currentCharacter.transform, false);
     }
 
     IEnumerator TagCooldown()

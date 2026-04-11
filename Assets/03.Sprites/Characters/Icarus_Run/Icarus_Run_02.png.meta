@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: d72d6750f7e708044bc403eb8d411c09
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7905970986378738633
+    second: Icarus_Run_02_0
+  - first:
+      213: 5215343039263718317
+    second: Icarus_Run_02_1
+  - first:
+      213: 1238860238670534206
+    second: Icarus_Run_02_2
+  - first:
+      213: -2187696740068037844
+    second: Icarus_Run_02_3
+  - first:
+      213: -2909957071775011015
+    second: Icarus_Run_02_4
+  - first:
+      213: -4763131744515700821
+    second: Icarus_Run_02_5
+  - first:
+      213: 2290886750888135098
+    second: Icarus_Run_02_6
+  - first:
+      213: 2012405471819651242
+    second: Icarus_Run_02_7
+  - first:
+      213: 3331045556409655925
+    second: Icarus_Run_02_8
+  - first:
+      213: -5576179489588435116
+    second: Icarus_Run_02_9
+  - first:
+      213: 3866314531752184471
+    second: Icarus_Run_02_10
+  - first:
+      213: -7210476461360940230
+    second: Icarus_Run_02_11
+  - first:
+      213: 8366010714583377418
+    second: Icarus_Run_02_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Icarus_Run_02_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1563
+        width: 44
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 734c9588649584290800000000000000
+      internalID: -7905970986378738633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 0
+        width: 1079
+        height: 2210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dabbe15bcde906840800000000000000
+      internalID: 5215343039263718317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_2
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 2200
+        width: 35
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e361054c2d0513110800000000000000
+      internalID: 1238860238670534206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_3
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 2191
+        width: 107
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2be6f3e76db3a1e0800000000000000
+      internalID: -2187696740068037844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_4
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 2200
+        width: 69
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93fe639f571cd97d0800000000000000
+      internalID: -2909957071775011015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_5
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 2200
+        width: 47
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba741cd1ae4f5edb0800000000000000
+      internalID: -4763131744515700821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_6
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 2183
+        width: 287
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab9065fbc5ddacf10800000000000000
+      internalID: 2290886750888135098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1443
+        width: 10
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa8dcdb4d108deb10800000000000000
+      internalID: 2012405471819651242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 10
+        height: 1384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572e070f8404a3e20800000000000000
+      internalID: 3331045556409655925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 457234f4c4e6d92b0800000000000000
+      internalID: -5576179489588435116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_10
+      rect:
+        serializedVersion: 2
+        x: 1420
+        y: 23
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79a050ff498e7a530800000000000000
+      internalID: 3866314531752184471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_11
+      rect:
+        serializedVersion: 2
+        x: 1385
+        y: 3
+        width: 24
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3bf3437cdd3feb90800000000000000
+      internalID: -7210476461360940230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icarus_Run_02_12
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 0
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a06aadd7b6a0a1470800000000000000
+      internalID: 8366010714583377418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Icarus_Run_02_0: -7905970986378738633
+      Icarus_Run_02_1: 5215343039263718317
+      Icarus_Run_02_10: 3866314531752184471
+      Icarus_Run_02_11: -7210476461360940230
+      Icarus_Run_02_12: 8366010714583377418
+      Icarus_Run_02_2: 1238860238670534206
+      Icarus_Run_02_3: -2187696740068037844
+      Icarus_Run_02_4: -2909957071775011015
+      Icarus_Run_02_5: -4763131744515700821
+      Icarus_Run_02_6: 2290886750888135098
+      Icarus_Run_02_7: 2012405471819651242
+      Icarus_Run_02_8: 3331045556409655925
+      Icarus_Run_02_9: -5576179489588435116
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
