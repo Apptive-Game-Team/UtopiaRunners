@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
-        slidePressed = Input.GetKeyDown(KeyCode.DownArrow);
+        slidePressed = Input.GetKey(KeyCode.DownArrow);
         skillPressed = Input.GetKeyDown(KeyCode.E);
         tagPressed = Input.GetKeyDown(KeyCode.Q);
     }

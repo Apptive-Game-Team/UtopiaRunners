@@ -43,7 +43,7 @@ public class TagManager : MonoBehaviour
         weapon.transform.SetParent(currentCharacter.transform, false);
     }
 
-    IEnumerator TagCooldown()
+    private IEnumerator TagCooldown()
     {
         canTag = false;
         yield return new WaitForSeconds(tagCooldown);
