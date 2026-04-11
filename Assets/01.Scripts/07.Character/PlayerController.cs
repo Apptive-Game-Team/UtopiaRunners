@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -121,10 +120,10 @@ public class PlayerController : MonoBehaviour
         if (input.jumpPressed)
             Jump();
 
-        if (input.slidePressed && !isJump && !isDoubleJump)
+        if (input.slideHeld && !isJump && !isDoubleJump && !isSliding)
             SlideStart();
 
-        if (isSliding && (!input.slidePressed || isJump))
+        if (isSliding && (!input.slideHeld || isJump))
             EndSlide();
     }
 }
