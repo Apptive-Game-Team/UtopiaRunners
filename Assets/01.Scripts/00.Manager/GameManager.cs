@@ -87,25 +87,24 @@ namespace _01.Scripts._00.Manager
         public void SaveGame()
         {
             UpdatePlayTime();
-            SaveLoadManager.Instance.SaveGame(playerData);
+            SaveLoadManager.Instance.SaveData(playerData);
         }
 
-        public void LoadGame()
+        private void LoadGame()
         {
-            SaveLoadManager.Instance.LoadGame(playerData);
+            SaveLoadManager.Instance.LoadData(playerData);
         }
 
         public void SaveSound()
         {
             SoundManager.Instance.SaveSoundData(soundData);
-            SaveLoadManager.Instance.SaveSound(soundData);
+            SaveLoadManager.Instance.SaveData(soundData);
         }
 
-        public void LoadSound()
+        private void LoadSound()
         {
-            SoundData data = SaveLoadManager.Instance.LoadSound();
-            soundData = data;
-            SoundManager.Instance.LoadSoundData(data);
+            SaveLoadManager.Instance.LoadData(soundData);
+            SoundManager.Instance.LoadSoundData(soundData);
         }
     }
 }
