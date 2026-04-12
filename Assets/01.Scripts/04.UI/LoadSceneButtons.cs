@@ -16,6 +16,16 @@ namespace _01.Scripts._04.UI
             SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.Lobby]);
         }
 
+        public void EnterCharacterInfoButton()
+        {
+            SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterInfo]);
+        }
+
+        public void EnterWeaponInfoButton()
+        {
+            SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.WeaponInfo]);
+        }
+
         public void EnterWorldSelectButton()
         {
             SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.WorldSelect]);

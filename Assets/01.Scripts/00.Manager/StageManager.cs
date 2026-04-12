@@ -41,8 +41,8 @@ namespace _01.Scripts._00.Manager
 
         private void InitialSetting()
         {
-            currentWorldNum = GameManager.Instance.playerData.currentWorld;
-            currentStageNum = GameManager.Instance.playerData.currentStage;
+            currentWorldNum = GameManager.Instance.playData.currentWorld;
+            currentStageNum = GameManager.Instance.playData.currentStage;
         }
         
         

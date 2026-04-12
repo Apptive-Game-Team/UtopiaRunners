@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/00.Scenes/00.TitleScene.unity
     guid: 2fd9748784372a1469ae9c785db51451
   - enabled: 1
-    path: Assets/00.Scenes/01.LobbyScene.unity
+    path: Assets/00.Scenes/01-0.LobbyScene.unity
     guid: 77e5f0a24c1825e40ba1c7c405500193
+  - enabled: 1
+    path: Assets/00.Scenes/01-1.CharacterInfoAndUpgradeScene.unity
+    guid: 21eebf6901d261d468a0b847793c614f
+  - enabled: 1
+    path: Assets/00.Scenes/01-2.WeaponInfoAndUpgradeScene.unity
+    guid: d5085ec299795d548a0f24717368fcf7
   - enabled: 1
     path: Assets/00.Scenes/02.WorldSelectScene.unity
     guid: f4af2e37f8aab334c842b4a7d07ade8d

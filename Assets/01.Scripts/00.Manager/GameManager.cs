@@ -58,15 +58,17 @@ namespace _01.Scripts._00.Manager
     
     public class GameManager : SingletonObject<GameManager>
     {
-        public PlayerData playerData;
+        public PlayerData playData;
         public SoundData soundData;
         private float _sessionStartTime;
+
+        public Action OnCoinChanged;
 
         protected override void Awake()
         {
             base.Awake();
 
-            playerData = new PlayerData();
+            playData = new PlayerData();
             soundData = new SoundData();
             _sessionStartTime = Time.time;
         }
@@ -80,19 +82,19 @@ namespace _01.Scripts._00.Manager
         // 인게임 매니저로 이동 예정
         private void UpdatePlayTime()
         {
-            playerData.playTime += Time.time - _sessionStartTime;
+            playData.playTime += Time.time - _sessionStartTime;
             _sessionStartTime = Time.time;
         }
 
         public void SaveGame()
         {
             UpdatePlayTime();
-            SaveLoadManager.Instance.SaveData(playerData);
+            SaveLoadManager.Instance.SaveData(playData);
         }
 
         private void LoadGame()
         {
-            SaveLoadManager.Instance.LoadData(playerData);
+            SaveLoadManager.Instance.LoadData(playData);
         }
 
         public void SaveSound()
@@ -105,6 +107,13 @@ namespace _01.Scripts._00.Manager
         {
             SaveLoadManager.Instance.LoadData(soundData);
             SoundManager.Instance.LoadSoundData(soundData);
+        }
+
+        public void AddAndUseCoin(int amount)
+        {
+            playData.coin += amount;
+            
+            OnCoinChanged?.Invoke();
         }
     }
 }
