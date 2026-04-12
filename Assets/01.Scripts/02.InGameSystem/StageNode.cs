@@ -89,7 +89,7 @@ namespace _01.Scripts._02.InGameSystem
             stageSelectButton.onClick.AddListener(() =>
             {
                 StageManager.Instance.selectedStageNum = stageNum;
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(4);
             });
         }
     }

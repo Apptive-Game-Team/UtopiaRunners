@@ -12,12 +12,12 @@ namespace _01.Scripts._04.UI
 
         public void WorldSelectBackButton()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         public void StageSelectBackButton()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }

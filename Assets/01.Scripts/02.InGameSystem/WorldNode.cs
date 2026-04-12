@@ -57,7 +57,7 @@ namespace _01.Scripts._02.InGameSystem
                 {
                     StageManager.Instance.selectedWorldNum = worldNum;
                     StageManager.Instance.selectedWorldInfo = worldInfoData.worldInfos[(int)worldNum];
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(3);
                 });
             }
             else
