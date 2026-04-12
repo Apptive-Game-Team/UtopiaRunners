@@ -1062,6 +1062,7 @@ GameObject:
   - component: {fileID: 1760495418}
   - component: {fileID: 1760495417}
   - component: {fileID: 1760495416}
+  - component: {fileID: 1760495419}
   m_Layer: 5
   m_Name: GoToWorldMap
   m_TagString: Untagged
@@ -1085,8 +1086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 619.0982, y: -252}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 582.2, y: -252}
+  m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760495416
 MonoBehaviour:
@@ -1131,7 +1132,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1760495417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1760495419}
+        m_TargetAssemblyTypeName: _01.Scripts._04.UI.UIButtons, Assembly-CSharp
+        m_MethodName: EnterWorldSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1760495417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,6 +1183,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760495414}
   m_CullTransparentMesh: 1
+--- !u!114 &1760495419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760495414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f140af5a9cea447b020d9e85b8710d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1775782393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1461,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 654453316}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

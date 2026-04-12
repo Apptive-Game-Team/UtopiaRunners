@@ -1,4 +1,5 @@
 using _01.Scripts._00.Manager;
+using _01.Scripts._05.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -89,7 +90,7 @@ namespace _01.Scripts._02.InGameSystem
             stageSelectButton.onClick.AddListener(() =>
             {
                 StageManager.Instance.selectedStageNum = stageNum;
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterSelect]);
             });
         }
     }

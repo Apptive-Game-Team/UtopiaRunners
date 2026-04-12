@@ -1,5 +1,6 @@
 using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
+using _01.Scripts._05.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,7 +58,7 @@ namespace _01.Scripts._02.InGameSystem
                 {
                     StageManager.Instance.selectedWorldNum = worldNum;
                     StageManager.Instance.selectedWorldInfo = worldInfoData.worldInfos[(int)worldNum];
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.StageSelect]);
                 });
             }
             else

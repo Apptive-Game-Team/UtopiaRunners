@@ -1155,7 +1155,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401806458}
         m_TargetAssemblyTypeName: _01.Scripts._04.UI.UIButtons, Assembly-CSharp
-        m_MethodName: TitleStartButton
+        m_MethodName: EnterLobbyButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

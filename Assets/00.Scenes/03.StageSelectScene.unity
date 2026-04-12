@@ -281,7 +281,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 58206390}
         m_TargetAssemblyTypeName: _01.Scripts._04.UI.UIButtons, Assembly-CSharp
-        m_MethodName: StageSelectBackButton
+        m_MethodName: EnterWorldSelectButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
