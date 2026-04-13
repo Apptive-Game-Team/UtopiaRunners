@@ -21,7 +21,7 @@ namespace _01.Scripts._04.UI
 
         private void UpdateCoinUI()
         {
-            coinText.text = GameManager.Instance.playData.coin.ToString();
+            coinText.text = GameManager.Instance.playerData.coin.ToString();
         }
     }
 }

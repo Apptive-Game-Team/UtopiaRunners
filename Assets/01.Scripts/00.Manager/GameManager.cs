@@ -15,10 +15,13 @@ namespace _01.Scripts._00.Manager
         public StageNum currentStage = StageNum.Stage0;
         public float playTime = 0f;
         public List<WorldData> clearedStages = new();
+        public int representativeCharacter = 0;
+        public List<int> characterGrade = new();
 
         public PlayerData()
         {
             clearedStages.Clear();
+            characterGrade.Clear();
 
             foreach (WorldNum world in Enum.GetValues(typeof(WorldNum)))
             {
@@ -30,6 +33,11 @@ namespace _01.Scripts._00.Manager
                 }
             
                 clearedStages.Add(newWorld);
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                characterGrade.Add(0);
             }
         }
     }
@@ -58,7 +66,7 @@ namespace _01.Scripts._00.Manager
     
     public class GameManager : SingletonObject<GameManager>
     {
-        public PlayerData playData;
+        public PlayerData playerData;
         public SoundData soundData;
         private float _sessionStartTime;
 
@@ -68,7 +76,7 @@ namespace _01.Scripts._00.Manager
         {
             base.Awake();
 
-            playData = new PlayerData();
+            playerData = new PlayerData();
             soundData = new SoundData();
             _sessionStartTime = Time.time;
         }
@@ -82,19 +90,19 @@ namespace _01.Scripts._00.Manager
         // 인게임 매니저로 이동 예정
         private void UpdatePlayTime()
         {
-            playData.playTime += Time.time - _sessionStartTime;
+            playerData.playTime += Time.time - _sessionStartTime;
             _sessionStartTime = Time.time;
         }
 
         public void SaveGame()
         {
             UpdatePlayTime();
-            SaveLoadManager.Instance.SaveData(playData);
+            SaveLoadManager.Instance.SaveData(playerData);
         }
 
         private void LoadGame()
         {
-            SaveLoadManager.Instance.LoadData(playData);
+            SaveLoadManager.Instance.LoadData(playerData);
         }
 
         public void SaveSound()
@@ -111,7 +119,7 @@ namespace _01.Scripts._00.Manager
 
         public void AddAndUseCoin(int amount)
         {
-            playData.coin += amount;
+            playerData.coin += amount;
             
             OnCoinChanged?.Invoke();
         }

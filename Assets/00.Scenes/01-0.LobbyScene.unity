@@ -2579,7 +2579,7 @@ GameObject:
   - component: {fileID: 2051081388}
   - component: {fileID: 2051081387}
   m_Layer: 5
-  m_Name: RepresantativeCharacterImage
+  m_Name: RepresentativeCharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

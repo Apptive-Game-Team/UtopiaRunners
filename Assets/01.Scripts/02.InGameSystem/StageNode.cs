@@ -29,7 +29,7 @@ namespace _01.Scripts._02.InGameSystem
             GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
             
             _worldNum = StageManager.Instance.selectedWorldNum;
-            _isActivated = stageNum == 0 || GameManager.Instance.playData
+            _isActivated = stageNum == 0 || GameManager.Instance.playerData
                 .clearedStages[(int)_worldNum].stages[Mathf.Max(0, (int)stageNum - 1)].isCleared;
             _image = GetComponent<Image>();
                 
