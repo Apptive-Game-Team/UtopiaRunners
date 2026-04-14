@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BackgroundMovingr : MonoBehaviour
 {
-    [Header("배경 타일")]
+    [Header("Background Tiles")]
     [SerializeField] private Transform[] tiles;
 
-    [Header("이동 속도")]
+    [Header("Move Speed")]
     [SerializeField] private float moveSpeed = 2f;
 
     private float tileWidth;
