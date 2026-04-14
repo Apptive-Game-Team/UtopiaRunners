@@ -1,10 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// 무기 스킬 스크립트 기본 형태
-/// </summary>
-public class WeaponSkill : WeaponSkillBase
+public class DroneLauncherSkill : WeaponSkillBase
 {
     [SerializeField] private float duration = 1f;
 

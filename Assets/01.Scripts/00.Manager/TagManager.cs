@@ -33,14 +33,14 @@ public class TagManager : MonoBehaviour
 
     private void Tag()
     {
-        currentCharacter.SetActive(false);
         otherCharacter.SetActive(true);
+        weapon.transform.SetParent(otherCharacter.transform, false);
+        currentCharacter.SetActive(false);
+
 
         GameObject temp = currentCharacter;
         currentCharacter = otherCharacter;
         otherCharacter = temp;
-
-        weapon.transform.SetParent(currentCharacter.transform, false);
     }
 
     private IEnumerator TagCooldown()
