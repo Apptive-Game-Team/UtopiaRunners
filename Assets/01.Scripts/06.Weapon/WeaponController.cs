@@ -5,6 +5,7 @@ public class WeaponController : MonoBehaviour
 {
     [Header("Components")]
     public WeaponData weaponData;
+    public WeaponSkillBase skill;
     public PlayerInput input;
 
     public GameObject targetEnemy;
@@ -15,6 +16,7 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
+        skill = GetComponent<WeaponSkillBase>();
     }
 
     private void Start()
@@ -29,42 +31,39 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
+        targetEnemy = FindNearestEnemy();
+
         if (skillCooldownTimer > 0f)
             skillCooldownTimer -= Time.deltaTime;
 
-        if (input.skillPressed)
+        if (input.skillPressed && skillCooldownTimer <= 0f)
             UseSkill();
-
-        targetEnemy = FindNearestEnemy();
     }
 
     private IEnumerator AutoAttack()
     {
         while (true)
         {
-            targetEnemy = FindNearestEnemy();
-
             if (targetEnemy != null)
             {
-                Instantiate(
+                GameObject projectile = Instantiate(
                     weaponData.autoAttackProjectile,
                     transform.position,
                     Quaternion.identity
                 );
-            }
 
-            //Projectile projectileScript = projectile.GetComponent<Projectile>();
-            //if (projectileScript != null)
-            //    projectileScript.Init(targetEnemy.transform);
+                AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
+                if (projectileScript != null)
+                    projectileScript.Init(targetEnemy.transform, weaponData.attackDamage);
+            }
 
             yield return new WaitForSeconds(weaponData.attackSpeed);
         }
-
     }
 
     private void UseSkill()
     {
-        weaponSkillObj.SetActive(true);
+        skill.Activate();
     }
 
     private GameObject FindNearestEnemy()
@@ -72,7 +71,7 @@ public class WeaponController : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         GameObject nearestEnemy = null;
-        float nearestDistance = 20f;
+        float nearestDistance = float.MaxValue;
 
         foreach (GameObject enemy in enemies)
         {

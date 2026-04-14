@@ -1,7 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
-public class WeaponSkill : MonoBehaviour
+public class WeaponSkill : WeaponSkillBase
 {
-    public WeaponData weaponData;
+    [SerializeField] private float duration = 1f;
 
+    public override void Activate()
+    {
+        if (IsSkilling) return;
+
+        StartCoroutine(SkillRoutine());
+    }
+
+    private IEnumerator SkillRoutine()
+    {
+        IsSkilling = true;
+
+        yield return new WaitForSeconds(duration);
+
+        IsSkilling = false;
+    }
 }
