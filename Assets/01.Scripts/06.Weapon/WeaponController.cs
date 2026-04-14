@@ -8,7 +8,6 @@ public class WeaponController : MonoBehaviour
     public WeaponSkillBase skill;
     public PlayerInput input;
 
-    public GameObject targetEnemy;
     public GameObject weaponSkillObj;
 
     private float skillCooldownTimer;
@@ -16,7 +15,6 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
-        skill = GetComponent<WeaponSkillBase>();
     }
 
     private void Start()
@@ -26,25 +24,33 @@ public class WeaponController : MonoBehaviour
             transform
             );
 
+        skill = weaponSkillObj.GetComponent<WeaponSkillBase>();
+
+        if (skill != null)
+        {
+            skill.Init(this);
+        }
+
         StartCoroutine(AutoAttack());
     }
 
     private void Update()
     {
-        targetEnemy = FindNearestEnemy();
-
-        if (skillCooldownTimer > 0f)
+        if (skillCooldownTimer > 0f && !skill.isSkilling)
             skillCooldownTimer -= Time.deltaTime;
 
         if (input.skillPressed && skillCooldownTimer <= 0f)
+        {
             UseSkill();
+            skillCooldownTimer = weaponData.cooldown;
+        }
     }
 
     private IEnumerator AutoAttack()
     {
         while (true)
         {
-            if (targetEnemy != null)
+            if (GameObject.FindWithTag("Enemy") != null)
             {
                 GameObject projectile = Instantiate(
                     weaponData.autoAttackProjectile,
@@ -54,7 +60,7 @@ public class WeaponController : MonoBehaviour
 
                 AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
                 if (projectileScript != null)
-                    projectileScript.Init(targetEnemy.transform, weaponData.attackDamage);
+                    projectileScript.Init(weaponData.attackDamage);
             }
 
             yield return new WaitForSeconds(weaponData.attackSpeed);
@@ -64,26 +70,5 @@ public class WeaponController : MonoBehaviour
     private void UseSkill()
     {
         skill.Activate();
-    }
-
-    private GameObject FindNearestEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        GameObject nearestEnemy = null;
-        float nearestDistance = float.MaxValue;
-
-        foreach (GameObject enemy in enemies)
-        {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-
-            if (distance < nearestDistance)
-            {
-                nearestDistance = distance;
-                nearestEnemy = enemy;
-            }
-        }
-
-        return nearestEnemy;
     }
 }

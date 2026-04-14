@@ -4,7 +4,7 @@ public abstract class WeaponSkillBase : MonoBehaviour
 {
     protected WeaponController owner;
 
-    public bool IsSkilling { get; protected set; }
+    public bool isSkilling;
 
     public virtual void Init(WeaponController owner)
     {

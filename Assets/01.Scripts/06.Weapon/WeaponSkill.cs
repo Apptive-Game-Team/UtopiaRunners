@@ -7,17 +7,17 @@ public class WeaponSkill : WeaponSkillBase
 
     public override void Activate()
     {
-        if (IsSkilling) return;
+        if (isSkilling) return;
 
         StartCoroutine(SkillRoutine());
     }
 
     private IEnumerator SkillRoutine()
     {
-        IsSkilling = true;
+        isSkilling = true;
 
         yield return new WaitForSeconds(duration);
 
-        IsSkilling = false;
+        isSkilling = false;
     }
 }

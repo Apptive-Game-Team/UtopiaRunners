@@ -5,27 +5,54 @@ public class AutoAttackProjectile : MonoBehaviour
 {
     public float speed = 10f;
 
-    private Transform target;
+    public GameObject targetEnemy;
     private float damage;
 
-    //private void Start()
-    //{
-    //    StartCoroutine(ProjectileDestroy());
-    //}
-
-    public void Init(Transform target, float damage)
+    public void Init(float damage)
     {
-        this.target = target;
         this.damage = damage;
     }
 
     private void Update()
     {
+        if (targetEnemy == null)
+        {
+            targetEnemy = FindNearestEnemy();
+
+            if (targetEnemy == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         transform.position = Vector2.MoveTowards(
             transform.position,
-            target.position,
+            targetEnemy.transform.position,
             speed * Time.deltaTime
         );
+    }
+    
+
+    private GameObject FindNearestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject nearestEnemy = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+
+        return nearestEnemy;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,14 +63,4 @@ public class AutoAttackProjectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private IEnumerator ProjectileDestroy()
-    //{
-    //    if (target == null)
-    //    {
-    //        yield return new WaitForSeconds(0.1f);
-    //        if (target == null)
-    //            Destroy(gameObject);
-    //    }
-    //}
 }
