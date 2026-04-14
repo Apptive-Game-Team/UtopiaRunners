@@ -17,6 +17,7 @@ namespace _01.Scripts._00.Manager
         public List<WorldData> clearedStages = new();
         public int representativeCharacter = 0;
         public List<int> characterGrade = new();
+        public List<int> weaponGrade = new();
 
         public PlayerData()
         {
@@ -38,6 +39,11 @@ namespace _01.Scripts._00.Manager
             for (int i = 0; i < 6; i++)
             {
                 characterGrade.Add(0);
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                weaponGrade.Add(0);
             }
         }
     }

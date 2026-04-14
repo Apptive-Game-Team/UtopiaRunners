@@ -19,14 +19,14 @@ namespace _01.Scripts._04.UI
         private int _maxCharacterCount;
         private List<bool> _unlockedCharacters;
 
-        private void Start()
+        private void Awake()
         {
             InitialSetting();
         }
 
         private void InitialSetting()
         {
-            _maxCharacterCount = 6;
+            _maxCharacterCount = characterData.characterInfos.Count;
             _unlockedCharacters = new List<bool>();
             for (int i = 0; i < _maxCharacterCount; i++)
             {
@@ -50,6 +50,7 @@ namespace _01.Scripts._04.UI
                     continue;
                 }
                 
+                button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() =>
                 {
                     upgradeUI.representativeCharacterIndex = index;

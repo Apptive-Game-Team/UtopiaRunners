@@ -23,7 +23,8 @@ MonoBehaviour:
       \uC2A4\uD0AC \uCFE8\uD0C0\uC784 5% \uAC10\uC18C\\n\n\uD0DC\uADF8\uB418\uC5B4
       \uD280\uC5B4\uB098\uC62C \uB54C \uC801\uC5D0\uAC8C \uB3CC\uC9C4\uD558\uC5EC
       3\uC758 \uB300\uBBF8\uC9C0\uB97C \uC8FC\uACE0 \uBCF5\uADC0"
-    characterWeapon: {fileID: 21300000, guid: 62de793acd6d10741bb1ed990d8655af, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: 62de793acd6d10741bb1ed990d8655af, type: 3}
   - name: "\uC774\uBE0C"
     sprite: {fileID: 21300000, guid: 6c153b44bfad6ce4f86a1cdc5beb9200, type: 3}
     hpList: 640000006e00000078000000820000008c000000
@@ -33,7 +34,8 @@ MonoBehaviour:
       \uBC1B\uC9C0 \uC54A\uC73C\uBA74 \uC801\uC758 \uACF5\uACA9 \uBC0F \uC7A5\uC560\uBB3C
       \uD53C\uACA9\uC744 1\uD68C \uBC29\uC5B4\uD558\uB294 \uBCF4\uD638\uB9C9 \uC0DD\uC131\\n\n\uBCF4\uD638\uB9C9
       \uC788\uC744 \uB54C \uACF5\uACA9\uB825 20% \uC99D\uAC00"
-    characterWeapon: {fileID: 21300000, guid: 54202521f83b3c141bce8afc83876a7a, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: 54202521f83b3c141bce8afc83876a7a, type: 3}
   - name: "\uD558\uB2C8"
     sprite: {fileID: 21300000, guid: 77ab6370d323e164fafb73bf6d24fe68, type: 3}
     hpList: 640000006e00000078000000820000008c000000
@@ -42,16 +44,18 @@ MonoBehaviour:
     skillDescription: "3\uB2E8 \uC810\uD504\\n\n2\uB2E8 \uC810\uD504\uC2DC \uAC8C\uC774\uC9C0\uAC00
       10 \uC313\uC784\\n\n\uAC8C\uC774\uC9C0 \uD480 \uCC28\uC9D5(100)\uC2DC \uB2E4\uC74C
       \uAE30\uBCF8\uC774 \uC801\uC744 10\uCD08 \uB3D9\uC548 \uAC10\uC804\uC2DC\uD0B4"
-    characterWeapon: {fileID: 21300000, guid: 2b0b47f6303c49d4fa9faaf083414191, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: 79b796c2410178f4298af4588ebc7538, type: 3}
   - name: "\uB9E5"
     sprite: {fileID: 21300000, guid: 948480d69ca544f409cc6597c503b5d1, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
-    story: "\uC774\uB140\uC11D\uC740 \uC8FD\uC2B5\uB2C8\uB2E4."
+    story: "\uC774 \uB140\uC11D\uC740 \uC8FD\uC2B5\uB2C8\uB2E4."
     skillDescription: "\uB85C\uBD07\uD615 \uC801\uC5D0\uAC8C 150% \uCD94\uAC00\uB370\uBBF8\uC9C0\\n\n\uAC10\uC804
       \uC0C1\uD0DC\uC778 \uC801\uC744 \uACF5\uACA9 \uC2DC \uD53C\uD574\uB7C9 10%\uC99D\uAC00
       \uBC0F \uAC10\uC804 \uD6A8\uACFC 10%\uC99D\uAC00"
-    characterWeapon: {fileID: 21300000, guid: 01eba477c26fd464381f286f5b9278e3, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: fcfc47fcf9d77c94aa12abcce65d68ff, type: 3}
   - name: "\uBAA8\uD2B8"
     sprite: {fileID: 21300000, guid: 32e704ff56f51a9468ae7746f061b324, type: 3}
     hpList: 640000006e00000078000000820000008c000000
@@ -60,7 +64,8 @@ MonoBehaviour:
     skillDescription: "\uC2AC\uB77C\uC774\uB4DC \uC2DC \uCD5C\uB300\uCCB4\uB825\uC774
       \uB0AE\uC740 \uC801 \uC6B0\uC120\uD0C0\uACA9\\n\n\uBCF8\uC778\uC774 \uD0DC\uADF8\uB418\uC5B4
       \uC788\uC744 \uB54C \uC801\uC758 \uCD5C\uB300\uCCB4\uB824 10% \uAC10\uC18C"
-    characterWeapon: {fileID: 21300000, guid: fcfc47fcf9d77c94aa12abcce65d68ff, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: 01eba477c26fd464381f286f5b9278e3, type: 3}
   - name: "\uCE74\uB85D"
     sprite: {fileID: 21300000, guid: 499ac21c33aeb4348a2cc9fc60f47944, type: 3}
     hpList: 640000006e00000078000000820000008c000000
@@ -69,4 +74,5 @@ MonoBehaviour:
     skillDescription: "\uCCB4\uB825\uC774 30% \uBBF8\uB9CC\uC77C \uB54C \uACF5\uACA9\uB825\uACFC
       \uACF5\uACA9\uC18D\uB3C4\uAC00 30% \uC99D\uAC00\uD558\uBA70, 20% \uBBF8\uB9CC\uC77C
       \uB54C \uD761\uD608 20%\uB97C \uAC00\uC9D0"
-    characterWeapon: {fileID: 21300000, guid: 79b796c2410178f4298af4588ebc7538, type: 3}
+    skillValue: 0100000002000000030000000400000005000000
+    recommendedWeapon: {fileID: 21300000, guid: 9913ec0b0042496488074788fbfcac44, type: 3}

@@ -57,18 +57,25 @@ namespace _01.Scripts._04.UI
             }
             else
             {
+                characterUpgradeButton.interactable = true;
+                
                 characterUpgradeButton.onClick.RemoveAllListeners();
                 characterUpgradeButton.onClick.AddListener(() =>
                 {
                     playerData.characterGrade[representativeCharacterIndex] = 
                         Mathf.Min(_characterInfo.apList.Count - 1, playerData.characterGrade[representativeCharacterIndex] + 1);
                     UpdateStatText();
+                    
+                    if (playerData.characterGrade[representativeCharacterIndex] >= _characterInfo.apList.Count - 1)
+                    {
+                        characterUpgradeButton.interactable = false;
+                    }
                 });
             }
             
             characterStory.text = _characterInfo.story;
             characterSkillDescription.text = _characterInfo.skillDescription;
-            characterWeapon.sprite = _characterInfo.characterWeapon;
+            characterWeapon.sprite = _characterInfo.recommendedWeapon;
         }
 
         private void UpdateStatText()
