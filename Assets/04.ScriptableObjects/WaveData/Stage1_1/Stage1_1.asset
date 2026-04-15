@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5f58e42b639ab04c9f9033638095d60, type: 3}
-  m_Name: EnemyWaveData
+  m_Script: {fileID: 11500000, guid: 443df75ccac22594991a272f5c267a06, type: 3}
+  m_Name: Stage1_1
   m_EditorClassIdentifier: 
-  startTime: 0
-  waveType: 0
-  prefab: {fileID: 0}
-  spawnCount: 0
-  spawnInterval: 0
+  waveTimelines:
+  - {fileID: 11400000, guid: e88867c2af64e734d89521c74a47adbd, type: 2}
+  - {fileID: 11400000, guid: dfaa222dfef541b4cbe59b0b37b60d08, type: 2}
