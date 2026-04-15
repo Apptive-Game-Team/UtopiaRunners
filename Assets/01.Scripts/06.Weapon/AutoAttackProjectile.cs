@@ -33,7 +33,6 @@ public class AutoAttackProjectile : MonoBehaviour
         );
     }
     
-
     private GameObject FindNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -59,7 +58,7 @@ public class AutoAttackProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            //collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            collision.GetComponent<EnemyHp>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

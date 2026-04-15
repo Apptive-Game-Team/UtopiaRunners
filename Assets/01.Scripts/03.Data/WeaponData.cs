@@ -10,6 +10,7 @@ public class WeaponData : ScriptableObject
     public GameObject autoAttackProjectile;
     public float attackDamage = 1f;
     public float attackSpeed = 0.5f;
+    public float skillStat = 1f;
 
     [Header("Skill")]
     public GameObject weaponSkillPrefab;

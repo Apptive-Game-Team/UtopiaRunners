@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTime: 0
   spawnEvents:
-  - prefab: {fileID: 8644501337786979404, guid: ac59410160754cd4eabc54b5d2cdcbe9, type: 3}
+  - prefab: {fileID: 8644501337786979404, guid: c527ec3ccd81a18408a50684bc93d109, type: 3}
     spawnPointId: Up
     delayFromBaseTime: 0
-  - prefab: {fileID: 8644501337786979404, guid: ac59410160754cd4eabc54b5d2cdcbe9, type: 3}
+  - prefab: {fileID: 8644501337786979404, guid: c527ec3ccd81a18408a50684bc93d109, type: 3}
     spawnPointId: Down
     delayFromBaseTime: 0

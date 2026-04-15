@@ -16,5 +16,6 @@ MonoBehaviour:
   autoAttackProjectile: {fileID: 7668292900833359366, guid: 068ce9ada3b001c489fd76843fe22980, type: 3}
   attackDamage: 1
   attackSpeed: 0.5
+  skillStat: 1
   weaponSkillPrefab: {fileID: 2930945893861991155, guid: 5701405c077df2842a8dcbf2b78e4642, type: 3}
   cooldown: 5
