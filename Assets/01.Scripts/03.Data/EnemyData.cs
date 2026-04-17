@@ -9,4 +9,8 @@ public class EnemyData : ScriptableObject
     [Header("Stats")]
     public float attackDamage;
     public float healthPoint;
+
+    [Header("Pattern")]
+    public GameObject enemyPatternPrefab;
+    public float cooldown;
 }
