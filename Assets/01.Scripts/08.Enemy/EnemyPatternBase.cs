@@ -3,8 +3,7 @@ using UnityEngine;
 public abstract class EnemyPatternBase : MonoBehaviour
 {
     protected EnemyController owner;
-
-    public bool isSkilling;
+    float damage;
 
     public virtual void Init(EnemyController owner, float damage)
     {
@@ -12,5 +11,11 @@ public abstract class EnemyPatternBase : MonoBehaviour
         this.damage = damage;
     }
 
-    public abstract void Activate();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            //collision.GetComponent<playerHp>().TakeDamage();
+        }
+    }
 }

@@ -10,6 +10,7 @@ public class TagManager : MonoBehaviour
     [Header("Tag Option")]
     [SerializeField] private float tagCooldown = 5f;
     private bool canTag = true;
+    private bool isTagTargetDead = false;
 
     private GameObject currentCharacter;
     private GameObject otherCharacter;
@@ -24,11 +25,14 @@ public class TagManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && canTag)
+        if (Input.GetKeyDown(KeyCode.Q) && canTag && !isTagTargetDead)
         {
             Tag();
             StartCoroutine(TagCooldown());
         }
+
+        ForcedTag();
+        DisableTag();
     }
 
     private void Tag()
@@ -49,5 +53,19 @@ public class TagManager : MonoBehaviour
         yield return new WaitForSeconds(tagCooldown);
         canTag = true;
         Debug.Log("태그 가능");
+    }
+
+    private void DisableTag()
+    {
+        PlayerController pc = otherCharacter.GetComponent<PlayerController>();
+        if (pc.isDead)
+            isTagTargetDead = true;
+    }
+
+    private void ForcedTag()
+    {
+        PlayerController pc = currentCharacter.GetComponent<PlayerController>();
+        if (pc.isDead)
+            Tag();
     }
 }
