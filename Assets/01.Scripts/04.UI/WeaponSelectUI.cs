@@ -23,6 +23,7 @@ namespace _01.Scripts._04.UI
 
         private int _maxWeaponCount;
         private List<bool> _unLockedWeapons;
+        private Button _selectedWeaponButton;
 
         private void Awake()
         {
@@ -43,7 +44,7 @@ namespace _01.Scripts._04.UI
                 PlayerData playerData = GameManager.Instance.playerData;
                 
                 Button button = Instantiate(weaponButtonPrefab.gameObject, content.transform).GetComponent<Button>();
-                Image image = button.transform.GetChild(0).GetComponent<Image>();
+                Image image = button.transform.GetChild(1).GetComponent<Image>();
                 int index = i;
 
                 image.sprite = weaponData.weaponInfos[i].sprite;
@@ -74,10 +75,26 @@ namespace _01.Scripts._04.UI
                     selectButton.onClick.RemoveAllListeners();
                     selectButton.onClick.AddListener(() =>
                     {
+                        HighlightButton(button);
                         StageManager.Instance.selectedWeapon = index; 
                     });
                 });
+
+                if (index == StageManager.Instance.selectedWeapon)
+                {
+                    HighlightButton(button);
+                }
             }
+        }
+
+        private void HighlightButton(Button button)
+        {
+            if (_selectedWeaponButton != null)
+            {
+                _selectedWeaponButton.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            _selectedWeaponButton = button;
+            _selectedWeaponButton.transform.GetChild(0).gameObject.SetActive(true);
         }
         
         private void UpdateStatText(int index)

@@ -33,7 +33,7 @@ namespace _01.Scripts._05.Utility
             { SceneName.StageSelect, "03.StageSelectScene" },
             { SceneName.CharacterSelect, "04.CharacterSelectScene" },
             { SceneName.WeaponSelect, "05.WeaponSelectScene" },
-            { SceneName.InGame, "05.InGameScene" },
+            { SceneName.InGame, "05.InGame(Temp)" },
         };
 
         public static readonly Dictionary<SceneName, SceneType> SceneTypes = new()

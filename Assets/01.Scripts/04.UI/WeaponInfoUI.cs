@@ -44,7 +44,7 @@ namespace _01.Scripts._04.UI
                 PlayerData playerData = GameManager.Instance.playerData;
                 
                 Button button = Instantiate(weaponButtonPrefab.gameObject, content.transform).GetComponent<Button>();
-                Image image = button.transform.GetChild(0).GetComponent<Image>();
+                Image image = button.transform.GetChild(1).GetComponent<Image>();
                 int index = i;
 
                 image.sprite = weaponData.weaponInfos[i].sprite;
