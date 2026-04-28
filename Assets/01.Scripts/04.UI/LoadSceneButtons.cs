@@ -41,6 +41,11 @@ namespace _01.Scripts._04.UI
             SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterSelect]);
         }
 
+        public void EnterWeaponSelectButton()
+        {
+            SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.WeaponSelect]);
+        }
+
         public void EnterInGameButton()
         {
             SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.InGame]);

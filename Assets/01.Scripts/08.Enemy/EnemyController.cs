@@ -20,7 +20,8 @@ public class EnemyController : MonoBehaviour
             );
 
             EnemyPatternBase patternScript = pattern.GetComponent<EnemyPatternBase>();
-            if (patternScript != null)
-                patternScript.Init()
+            /*if (patternScript != null)
+                patternScript.Init()*/
+        }
     }
 }

@@ -565,7 +565,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &269956328
 RectTransform:
@@ -4624,7 +4624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696c0d6e4eaa234d98517df6c2b5cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playData:
+  playerData:
     coin: 0
     currentWorld: 0
     currentStage: 0
@@ -4700,6 +4700,9 @@ MonoBehaviour:
         isCleared: 0
       - stageNum: 5
         isCleared: 0
+    representativeCharacter: 0
+    characterGrade: 000000000000000000000000000000000000000000000000
+    weaponGrade: 00000000000000000000000000000000000000000000000000000000
   soundData:
     masterVolume: 0.5
     bgmVolume: 0.5

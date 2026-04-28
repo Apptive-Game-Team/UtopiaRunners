@@ -9,7 +9,7 @@ public abstract class EnemyPatternBase : MonoBehaviour
     public virtual void Init(EnemyController owner, float damage)
     {
         this.owner = owner;
-        this.damage = damage;
+        //this.damage = damage;
     }
 
     public abstract void Activate();

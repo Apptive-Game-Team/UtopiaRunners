@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/00.Scenes/04.CharacterSelectScene.unity
     guid: 5e2365ce16558e1409d66aa8128d4be4
   - enabled: 1
-    path: Assets/00.Scenes/05.UpgradeScene.unity
+    path: Assets/00.Scenes/05.WeaponSelectScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/00.Scenes/05.InGame(Temp).unity

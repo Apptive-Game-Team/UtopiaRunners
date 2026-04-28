@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using CharacterInfo = _01.Scripts._03.Data.CharacterInfo;
 
 namespace _01.Scripts._04.UI
 {
@@ -35,16 +37,31 @@ namespace _01.Scripts._04.UI
             
             // 선택된 캐릭터 관리
             _selectedCharacter = selectedCharacters[0];
-            foreach (SelectedCharacterUI selectedCharacter in selectedCharacters)
+            for (int i = 0; i < selectedCharacters.Length; i++)
             {
-                selectedCharacter.upgradeButton.onClick.AddListener(() =>
+                int index = i;
+                SelectedCharacterUI slot = selectedCharacters[index];
+
+                if (StageManager.Instance.selectedCharacters[i] != -1)
                 {
-                    // 업그레이드 씬 이동 추가? 예정
+                    int characterIndex = StageManager.Instance.selectedCharacters[i];
+                    slot.UpdateUI(characterIndex, characterData.characterInfos[characterIndex].sprite, characterData.characterInfos[characterIndex].name);
+    
+                    CanvasGroup canvasGroup = slot.GetComponentInChildren<CanvasGroup>();
+                    canvasGroup.alpha = 1;
+                    canvasGroup.interactable = true;
+                }
+
+                slot.upgradeButton.onClick.AddListener(() =>
+                {
+                    
                 });
-                selectedCharacter.tagButton.onClick.AddListener(() =>
+
+                slot.tagButton.onClick.AddListener(() =>
                 {
-                    selectedCharacter.transform.SetAsFirstSibling();
-                    _selectedCharacter = selectedCharacter;
+                    slot.transform.SetAsFirstSibling();
+                    int otherIndex = (index + 1) % selectedCharacters.Length;
+                    _selectedCharacter = selectedCharacters[otherIndex];
                 });
             }
             
@@ -57,20 +74,37 @@ namespace _01.Scripts._04.UI
                 TextMeshProUGUI characterName = button.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
                 int index = i;
 
-                characterImage.sprite = characterData.characterInfos[i].sprite;
-                characterName.text = characterData.characterInfos[i].name;
+                CharacterInfo characterInfo = characterData.characterInfos[index];
+                characterImage.sprite = characterInfo.sprite;
+                characterName.text = characterInfo.name;
 
-                if (!_unlockedCharacters[i])
+                if (!_unlockedCharacters[index])
                 {
                     characterImage.sprite = lockedImage;
                     characterName.text = "???";
                     continue;
                 }
 
+                
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() =>
                 {
+                    SelectedCharacterUI otherSlot = selectedCharacters[0] == _selectedCharacter
+                        ? selectedCharacters[1] : selectedCharacters[0];
+                    if (otherSlot.CharacterIndex == index)
+                    {
+                        return;
+                    }
                     
+                    int selectedSlot = _selectedCharacter == selectedCharacters[0] 
+                        ? 0 : 1;
+                    StageManager.Instance.selectedCharacters[selectedSlot] = index;
+                    
+                    _selectedCharacter.UpdateUI(index, characterInfo.sprite, characterInfo.name);
+    
+                    CanvasGroup canvasGroup = _selectedCharacter.GetComponentInChildren<CanvasGroup>();
+                    canvasGroup.alpha = 1;
+                    canvasGroup.interactable = true;
                 });
             }
         }

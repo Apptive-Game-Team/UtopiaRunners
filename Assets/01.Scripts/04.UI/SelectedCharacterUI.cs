@@ -7,10 +7,10 @@ namespace _01.Scripts._04.UI
     public class SelectedCharacterUI : MonoBehaviour
     {
         [SerializeField] private int characterIndex;
+        public int CharacterIndex => characterIndex;
         [SerializeField] private Image characterImage;
         [SerializeField] private TextMeshProUGUI characterName;
-    
-        public SelectedCharacterUI Info { get; private set; }
+        
         public Button upgradeButton;
         public Button tagButton;
 

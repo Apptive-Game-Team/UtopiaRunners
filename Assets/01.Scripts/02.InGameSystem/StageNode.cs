@@ -59,12 +59,11 @@ namespace _01.Scripts._02.InGameSystem
             {
                 return;
             }
-            stageSelectButton.gameObject.SetActive(false);
             
             if (stageNum is StageNum.Stage2 or StageNum.Stage5)
             {
                 transform.parent.GetComponent<Image>().enabled = false;
-            }
+            }                           
             else
             {
                 GetComponent<Image>().sprite = activatedImage;
@@ -76,7 +75,7 @@ namespace _01.Scripts._02.InGameSystem
             if (!_isActivated)
             {
                 stageSelectButton.gameObject.SetActive(false);
-                return;
+                return;                                                             
             }
             stageSelectButton.gameObject.SetActive(true);
             
