@@ -34,6 +34,7 @@ namespace _01.Scripts._00.Manager
         public WorldInfo selectedWorldInfo;
 
         public List<int> selectedCharacters;
+        public int selectedWeapon;
 
         protected override void Awake()
         {
@@ -48,6 +49,7 @@ namespace _01.Scripts._00.Manager
             currentStageNum = GameManager.Instance.playerData.currentStage;
             
             selectedCharacters = new List<int> { -1, -1};
+            selectedWeapon = -1;
             // GameManager에서 데이터 가져오기 및 InGameManager로 이관
         }
         
