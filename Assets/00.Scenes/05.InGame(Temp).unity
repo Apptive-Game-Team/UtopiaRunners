@@ -167,6 +167,7 @@ MonoBehaviour:
   subCharacter: {fileID: 1914462544}
   tagCooldown: 5
   weapon: {fileID: 1530157325}
+  gameOverPrefab: {fileID: 6110438079998667341, guid: 04b1d09716a71f34ebcda19fab5e3581, type: 3}
 --- !u!1 &141515796
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 44216440785314187, guid: b5f732c3c2f5224459293663a92723db, type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9dd5961daa6439f48b38431d0555e164, type: 2}
     - target: {fileID: 4675653978157777589, guid: b5f732c3c2f5224459293663a92723db, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.75
@@ -410,6 +415,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &489949870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489949871}
+  - component: {fileID: 489949872}
+  m_Layer: 0
+  m_Name: ObstacleSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489949871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489949870}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: -1.6, z: 0.037039604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &489949872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489949870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbcd88f165ebb949a0c434a5ceddd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointId: Obstacle
 --- !u!1 &508750886
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +972,7 @@ MonoBehaviour:
   - {fileID: 1293258054}
   - {fileID: 599666072}
   - {fileID: 1204718034}
+  - {fileID: 489949872}
 --- !u!4 &1134438348
 Transform:
   m_ObjectHideFlags: 0
@@ -931,7 +982,7 @@ Transform:
   m_GameObject: {fileID: 1134438346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.681655, y: 2.0933752, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1823,6 +1874,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2739515864498176398, guid: f66b694da13f5d84cb569956de72cc89, type: 3}
+      propertyPath: maxHp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739515864498176398, guid: f66b694da13f5d84cb569956de72cc89, type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 108b1b8905945844b90767b9ee3780e7, type: 2}
     - target: {fileID: 2803526213966021330, guid: f66b694da13f5d84cb569956de72cc89, type: 3}
       propertyPath: m_Name
       value: Eve
@@ -1848,3 +1907,4 @@ SceneRoots:
   - {fileID: 723892502}
   - {fileID: 1134438348}
   - {fileID: 624260619}
+  - {fileID: 489949871}

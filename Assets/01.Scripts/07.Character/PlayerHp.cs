@@ -20,16 +20,21 @@ public class PlayerHp : MonoBehaviour
         currentHp = maxHp;
     }
 
-    public void TakeDamage(float damage)
+    private void Update()
     {
-        currentHp -= damage;
-
         if (currentHp <= 0)
             Die();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (!pc.isInvincible)
+            currentHp -= damage;
     }
 
     public void Die()
     {
         pc.isDead = true;
+        gameObject.SetActive(false);
     }
 }

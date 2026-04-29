@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
     [Header("Components")]
@@ -31,7 +31,10 @@ public class PlayerController : MonoBehaviour
     public bool isDoubleJump;
     public bool isSliding;
     public bool isGrounded;
+    public bool isInvincible;
     public bool isDead;
+
+    public float invincibleTime = 2f;
 
     private void Awake()
     {
@@ -111,6 +114,20 @@ public class PlayerController : MonoBehaviour
             isDoubleJump = false;
             jumpCount = maxJumpCount;
         }
+    }
+
+    public void StartInvincible()
+    {
+        StartCoroutine(InvincibleRoutine());
+    }
+
+    private IEnumerator InvincibleRoutine()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(invincibleTime);
+
+        isInvincible = false;
     }
 
     void HandleInput()

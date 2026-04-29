@@ -17,6 +17,8 @@ public class TagManager : MonoBehaviour
 
     public GameObject weapon;
 
+    public GameObject gameOverPrefab;
+
     private void Start()
     {
         currentCharacter = mainCharacter;
@@ -31,6 +33,7 @@ public class TagManager : MonoBehaviour
             StartCoroutine(TagCooldown());
         }
 
+        GameOver();
         ForcedTag();
         DisableTag();
     }
@@ -40,7 +43,8 @@ public class TagManager : MonoBehaviour
         otherCharacter.SetActive(true);
         weapon.transform.SetParent(otherCharacter.transform, false);
         currentCharacter.SetActive(false);
-
+        PlayerController pc = otherCharacter.GetComponent<PlayerController>();
+        pc.StartInvincible();
 
         GameObject temp = currentCharacter;
         currentCharacter = otherCharacter;
@@ -65,7 +69,19 @@ public class TagManager : MonoBehaviour
     private void ForcedTag()
     {
         PlayerController pc = currentCharacter.GetComponent<PlayerController>();
-        if (pc.isDead)
+        if (pc.isDead && !isTagTargetDead)
             Tag();
+    }
+
+    private void GameOver()
+    {
+        PlayerController pc1 = currentCharacter.GetComponent<PlayerController>();
+        PlayerController pc2 = otherCharacter.GetComponent<PlayerController>();
+        if (pc1.isDead && pc2.isDead)
+        {
+            Instantiate(gameOverPrefab, new Vector2(0,0), Quaternion.identity);
+            currentCharacter.SetActive(false);
+            Time.timeScale = 0f;
+        }
     }
 }

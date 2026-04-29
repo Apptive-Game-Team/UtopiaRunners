@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private float pushDistance = 1.0f;
+    [SerializeField] private float checkRadius = 0.1f;
+    [SerializeField] private LayerMask enemyLayer;
+
     [SerializeField] private StageWaveData stageWaveData;
     [SerializeField] private SpawnPoint[] spawnPoints;
 
@@ -79,13 +83,33 @@ public class WaveManager : MonoBehaviour
     {
         if (!spawnPointMap.TryGetValue(scheduled.spawnPointId, out Transform point))
         {
-            Debug.LogWarning($"SpawnPoint ID를 찾을 수 없음: {scheduled.spawnPointId}");
             return;
         }
 
-        Instantiate(scheduled.prefab, point.position, Quaternion.identity);
+        Vector3 spawnPos = point.position;
+
+        PushEnemiesIfOccupied(spawnPos);
+
+        Instantiate(scheduled.prefab, spawnPos, Quaternion.identity);
     }
 
+    private void PushEnemiesIfOccupied(Vector3 position)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(position, checkRadius, enemyLayer);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (!hit.CompareTag("Enemy")) continue;
+
+            GameObject enemy = hit.gameObject;
+
+            Vector3 nextPosition = enemy.transform.position + Vector3.left * pushDistance;
+
+            PushEnemiesIfOccupied(nextPosition);
+
+            enemy.transform.position = nextPosition;
+        }
+    }
     private class ScheduledSpawn
     {
         public GameObject prefab;

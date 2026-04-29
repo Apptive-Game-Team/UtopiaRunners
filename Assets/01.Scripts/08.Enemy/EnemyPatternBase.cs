@@ -15,7 +15,7 @@ public abstract class EnemyPatternBase : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //collision.GetComponent<playerHp>().TakeDamage();
+            collision.GetComponent<PlayerHp>().TakeDamage(damage);
         }
     }
 }
