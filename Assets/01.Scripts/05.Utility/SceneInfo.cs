@@ -17,6 +17,7 @@ namespace _01.Scripts._05.Utility
         WorldSelect,
         StageSelect,
         CharacterSelect,
+        WeaponSelect,
         InGame,
     }
     
@@ -31,7 +32,8 @@ namespace _01.Scripts._05.Utility
             { SceneName.WorldSelect, "02.WorldSelectScene" },
             { SceneName.StageSelect, "03.StageSelectScene" },
             { SceneName.CharacterSelect, "04.CharacterSelectScene" },
-            { SceneName.InGame, "05.InGameScene" },
+            { SceneName.WeaponSelect, "05.WeaponSelectScene" },
+            { SceneName.InGame, "05.InGame(Temp)" },
         };
 
         public static readonly Dictionary<SceneName, SceneType> SceneTypes = new()
@@ -43,6 +45,7 @@ namespace _01.Scripts._05.Utility
             { SceneName.WorldSelect, SceneType.OutGame },
             { SceneName.StageSelect, SceneType.OutGame },
             { SceneName.CharacterSelect, SceneType.OutGame },
+            { SceneName.WeaponSelect, SceneType.OutGame },
             { SceneName.InGame, SceneType.InGame },
         };
     }

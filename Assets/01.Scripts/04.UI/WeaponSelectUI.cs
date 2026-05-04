@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using _01.Scripts._00.Manager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _01.Scripts._04.UI
 {
-    public class WeaponInfoUI : MonoBehaviour
+    public class WeaponSelectUI : MonoBehaviour
     {
         [SerializeField] private WeaponData weaponData;
         [SerializeField] private Button weaponButtonPrefab;
@@ -20,10 +19,11 @@ namespace _01.Scripts._04.UI
         [SerializeField] private TextMeshProUGUI upgradeStat;
         [SerializeField] private TextMeshProUGUI recommendedCharacter;
         [SerializeField] private GameObject content;
-        [SerializeField] private Button upgradeButton;
+        [SerializeField] private Button selectButton;
 
         private int _maxWeaponCount;
         private List<bool> _unLockedWeapons;
+        private Button _selectedWeaponButton;
 
         private void Awake()
         {
@@ -70,31 +70,31 @@ namespace _01.Scripts._04.UI
                     weaponCharacteristic.text = weaponData.weaponInfos[index].characteristic;
                     weaponSkillDescription.text = weaponData.weaponInfos[index].skillDescription;
                     UpdateStatText(index);
-                    recommendedCharacter.text = $"추천 캐릭터 : {weaponData.weaponInfos[index].recommendedCharacter}"; 
-                    
-                    if (playerData.weaponGrade[index] >= weaponData.weaponInfos[index].apList.Count - 1)
+                    recommendedCharacter.text = $"추천 캐릭터 : {weaponData.weaponInfos[index].recommendedCharacter}";
+
+                    selectButton.onClick.RemoveAllListeners();
+                    selectButton.onClick.AddListener(() =>
                     {
-                        upgradeButton.interactable = false;
-                    }
-                    else
-                    {
-                        upgradeButton.interactable = true;
-                        
-                        upgradeButton.onClick.RemoveAllListeners();
-                        upgradeButton.onClick.AddListener(() =>
-                        {
-                            playerData.weaponGrade[index] = 
-                                Mathf.Min(weaponData.weaponInfos[index].apList.Count - 1, playerData.weaponGrade[index] + 1);
-                            UpdateStatText(index);
-                            
-                            if (playerData.weaponGrade[index] >= weaponData.weaponInfos[index].apList.Count - 1)
-                            {
-                                upgradeButton.interactable = false;
-                            }
-                        });
-                    }
+                        HighlightButton(button);
+                        StageManager.Instance.selectedWeapon = index; 
+                    });
                 });
+
+                if (index == StageManager.Instance.selectedWeapon)
+                {
+                    HighlightButton(button);
+                }
             }
+        }
+
+        private void HighlightButton(Button button)
+        {
+            if (_selectedWeaponButton != null)
+            {
+                _selectedWeaponButton.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            _selectedWeaponButton = button;
+            _selectedWeaponButton.transform.GetChild(0).gameObject.SetActive(true);
         }
         
         private void UpdateStatText(int index)

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace _01.Scripts._02.InGameSystem
 {
-    public class StageNode : MonoBehaviour, ISelectHandler, IDeselectHandler
+    public class StageNode : MonoBehaviour
     {
         [SerializeField] private StageNum stageNum;
         [SerializeField] private Sprite unActivatedImage;
@@ -15,6 +15,8 @@ namespace _01.Scripts._02.InGameSystem
         [SerializeField] private Sprite selectedImage;
         [SerializeField] private Button stageSelectButton;
 
+        private static StageNode _currentSelected;
+        
         private WorldNum _worldNum;
         private bool _isActivated;
         private Image _image;
@@ -36,7 +38,7 @@ namespace _01.Scripts._02.InGameSystem
             _image.sprite = _isActivated ? activatedImage : unActivatedImage;
         }
 
-        public void OnSelect(BaseEventData eventData)
+        /*public void OnSelect(BaseEventData eventData)
         {
             if (!_isActivated)
             {
@@ -59,25 +61,38 @@ namespace _01.Scripts._02.InGameSystem
             {
                 return;
             }
-            stageSelectButton.gameObject.SetActive(false);
+            
+            GameObject clicked = EventSystem.current.currentSelectedGameObject;
+            if (clicked == null || clicked.GetComponent<StageNode>() == null)
+            {
+                return;
+            }
             
             if (stageNum is StageNum.Stage2 or StageNum.Stage5)
             {
                 transform.parent.GetComponent<Image>().enabled = false;
-            }
+            }                           
             else
             {
                 GetComponent<Image>().sprite = activatedImage;
             }
-        }
+        }*/
 
         public void OnButtonClick()
         {
+            if (_currentSelected != null && _currentSelected != this)
+            {
+                _currentSelected.ResetVisual();
+            }
+            _currentSelected = this;
+            SetSelectedVisual();
+            
             if (!_isActivated)
             {
                 stageSelectButton.gameObject.SetActive(false);
-                return;
+                return;                                                             
             }
+            
             stageSelectButton.gameObject.SetActive(true);
             
             if (stageNum is StageNum.Stage2 or StageNum.Stage5)
@@ -92,6 +107,43 @@ namespace _01.Scripts._02.InGameSystem
                 StageManager.Instance.selectedStageNum = stageNum;
                 SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterSelect]);
             });
+        }
+        
+        private void SetSelectedVisual()
+        {
+            if (!_isActivated)
+            {
+                return;
+            }
+            
+            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
+            {
+                transform.parent.GetComponent<Image>().enabled = true;
+                transform.parent.SetAsLastSibling();
+            }
+            else
+            {
+                _image.sprite = selectedImage;
+            }
+
+            transform.SetAsLastSibling();
+        }
+
+        private void ResetVisual()
+        {
+            if (!_isActivated)
+            {
+                return;
+            }
+
+            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
+            {
+                transform.parent.GetComponent<Image>().enabled = false;
+            }
+            else
+            {
+                _image.sprite = activatedImage;
+            }
         }
     }
 }
