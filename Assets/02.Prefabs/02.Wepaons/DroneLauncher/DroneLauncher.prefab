@@ -45,7 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152dbf2893c40de42b85af266291831d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 7f7cc037cd07dc04383f7d4c0595d2c6, type: 2}
+  weaponInfo:
+    id: 0
+    name: 
+    sprite: {fileID: 0}
+    apList: 
+    skillValue: 
+    coolTime: 0
+    attackSpeed: 0
+    attackPrefab: {fileID: 0}
+    skillPrefab: {fileID: 0}
+    characteristic: 
+    skillDescription: 
+    recommendedCharacter: 
+  weaponId: 1
   skill: {fileID: 0}
   input: {fileID: 0}
   weaponSkillObj: {fileID: 0}

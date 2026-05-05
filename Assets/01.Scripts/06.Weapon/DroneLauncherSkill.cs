@@ -16,7 +16,7 @@ public class DroneLauncherSkill : WeaponSkillBase
     {
         if (isSkilling) return;
 
-        Debug.Log("½ºÅ³ »ç¿ë!");
+        Debug.Log("ë“œë¡  ëŸ°ì²˜ ìŠ¤í‚¬ ë°œë™!");
         StartCoroutine(SkillRoutine());
     }
 
@@ -24,10 +24,10 @@ public class DroneLauncherSkill : WeaponSkillBase
     {
         isSkilling = true;
 
-        wc.weaponData.attackSpeed /= 1.5f;
+        wc.weaponInfo.attackSpeed /= 1.5f;
 
         yield return new WaitForSeconds(duration);
-        wc.weaponData.attackSpeed *= 1.5f;
+        wc.weaponInfo.attackSpeed *= 1.5f;
 
         isSkilling = false;
     }

@@ -1,28 +1,31 @@
+using System;
 using System.Collections;
+using _01.Scripts._00.Manager;
+using _01.Scripts._04.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WeaponController : MonoBehaviour
 {
     [Header("Components")]
-    public WeaponData weaponData;
+    public WeaponInfo weaponInfo;
+    public int weaponId;
     public WeaponSkillBase skill;
-    public PlayerInput input;
-
     public GameObject weaponSkillObj;
-
-    private float skillCooldownTimer;
-
-    private void Awake()
-    {
-        input = GetComponent<PlayerInput>();
-    }
+    
+    private float _skillCooldownTimer;
 
     private void Start()
     {
+        InputManager.AddListener(ActionCode.Skill, InputType.Down, SkillInput);
+    }
+
+    public void Initialize()
+    {
         weaponSkillObj = Instantiate(
-            weaponData.weaponSkillPrefab, 
+            weaponInfo.skillPrefab, 
             transform
-            );
+        );
 
         skill = weaponSkillObj.GetComponent<WeaponSkillBase>();
 
@@ -34,15 +37,12 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(AutoAttack());
     }
 
-    private void Update()
+    private void SkillInput()
     {
-        if (skillCooldownTimer > 0f && !skill.isSkilling)
-            skillCooldownTimer -= Time.deltaTime;
-
-        if (input.skillPressed && skillCooldownTimer <= 0f)
+        if (Time.time - _skillCooldownTimer > weaponInfo.coolTime)
         {
-            UseSkill();
-            skillCooldownTimer = weaponData.cooldown;
+            skill.Activate();
+            _skillCooldownTimer = Time.time;
         }
     }
 
@@ -53,22 +53,22 @@ public class WeaponController : MonoBehaviour
             if (GameObject.FindWithTag("Enemy") != null)
             {
                 GameObject projectile = Instantiate(
-                    weaponData.autoAttackProjectile,
+                    weaponInfo.attackPrefab,
                     transform.position,
                     Quaternion.identity
                 );
 
                 AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
                 if (projectileScript != null)
-                    projectileScript.Init(weaponData.attackDamage);
+                    projectileScript.Init(weaponInfo.apList[0]);
             }
 
-            yield return new WaitForSeconds(weaponData.attackSpeed);
+            yield return new WaitForSeconds(weaponInfo.attackSpeed);
         }
     }
 
-    private void UseSkill()
+    private void OnDestroy()
     {
-        skill.Activate();
+        InputManager.RemoveListener(ActionCode.Skill, InputType.Down, SkillInput);
     }
 }
