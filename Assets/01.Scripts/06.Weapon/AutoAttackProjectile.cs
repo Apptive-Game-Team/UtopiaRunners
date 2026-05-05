@@ -6,6 +6,7 @@ namespace _01.Scripts._06.Weapon
     {
         [SerializeField] private float speed = 10f;
         private GameObject _targetEnemy;
+        private Vector3 _targetDirection;
         
         protected float Damage;
 
@@ -25,13 +26,11 @@ namespace _01.Scripts._06.Weapon
                     Destroy(gameObject);
                     return;
                 }
+                
+                _targetDirection = (_targetEnemy.transform.position - transform.position).normalized;
             }
-
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                _targetEnemy.transform.position,
-                speed * Time.deltaTime
-            );
+            
+            transform.Translate(_targetDirection * (speed * Time.deltaTime));
         }
     
         private GameObject FindNearestEnemy()
