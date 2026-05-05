@@ -1,3 +1,4 @@
+using _01.Scripts._07.Character;
 using UnityEngine;
 
 public class IcarusAbility : MonoBehaviour

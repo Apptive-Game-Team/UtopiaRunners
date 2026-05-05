@@ -1,53 +1,60 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class TagManager : MonoBehaviour
+namespace _01.Scripts._00.Manager
 {
-    [Header("Characters")]
-    public GameObject mainCharacter;
-    public GameObject subCharacter;
-
-    [Header("Tag Option")]
-    [SerializeField] private float tagCooldown = 5f;
-    private bool canTag = true;
-
-    private GameObject currentCharacter;
-    private GameObject otherCharacter;
-
-    public GameObject weapon;
-
-    private void Start()
+    public class TagManager : MonoBehaviour
     {
-        currentCharacter = mainCharacter;
-        otherCharacter = subCharacter;
-    }
+        [Header("Characters")]
+        public GameObject mainCharacter;
+        public GameObject subCharacter;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q) && canTag)
+        [Header("Tag Option")]
+        [SerializeField] private float tagCooldown = 5f;
+        private bool _canTag = true;
+
+        private GameObject _currentCharacter;
+        private GameObject _otherCharacter;
+
+        public GameObject weapon;
+
+        private void Start()
         {
-            Tag();
-            StartCoroutine(TagCooldown());
+            _currentCharacter = mainCharacter;
+            _otherCharacter = subCharacter;
+            
+            InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
         }
-    }
 
-    private void Tag()
-    {
-        otherCharacter.SetActive(true);
-        weapon.transform.SetParent(otherCharacter.transform, false);
-        currentCharacter.SetActive(false);
+        private void TagInput()
+        {
+            if (_canTag)
+            {
+                Tag();
+                StartCoroutine(TagCooldown());
+            }
+        }
 
+        private void Tag()
+        {
+            _otherCharacter.SetActive(true);
+            weapon.transform.SetParent(_otherCharacter.transform, false);
+            _currentCharacter.SetActive(false);
+            
+            (_currentCharacter, _otherCharacter) = (_otherCharacter, _currentCharacter);
+        }
 
-        GameObject temp = currentCharacter;
-        currentCharacter = otherCharacter;
-        otherCharacter = temp;
-    }
+        private IEnumerator TagCooldown()
+        {
+            _canTag = false;
+            yield return new WaitForSeconds(tagCooldown);
+            _canTag = true;
+        }
 
-    private IEnumerator TagCooldown()
-    {
-        canTag = false;
-        yield return new WaitForSeconds(tagCooldown);
-        canTag = true;
-        Debug.Log("태그 가능");
+        private void OnDestroy()
+        {
+            InputManager.RemoveListener(ActionCode.Tag, InputType.Down, TagInput);
+        }
     }
 }
