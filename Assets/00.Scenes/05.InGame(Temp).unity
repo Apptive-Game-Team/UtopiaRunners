@@ -173,6 +173,7 @@ MonoBehaviour:
   - {fileID: 8126271443251588313, guid: 1016dc8d5bd91c44590228e714807d89, type: 3}
   - {fileID: 8126271443251588313, guid: 2b2486ea2315bc049bf8a435f35febf4, type: 3}
   weapons:
+  - {fileID: 5564881241307096138, guid: 4966b1a8cfb13d44abdd17bffdf9d8b3, type: 3}
   - {fileID: 5564881241307096138, guid: f0abf282e0d01054bbc50d2ad40ddcd0, type: 3}
   startPosition: {x: -5.75, y: -1.180006}
   tagCooldown: 5

@@ -17,10 +17,6 @@ namespace _01.Scripts._04.UI
         public List<int> skillValue;
         public float coolTime;
         public float attackSpeed;
-
-        [Header("Prefab")] 
-        public GameObject attackPrefab;
-        public GameObject skillPrefab;
         
         [Header("Script")]
         [TextArea] public string characteristic;
@@ -38,8 +34,6 @@ namespace _01.Scripts._04.UI
                 skillValue = new List<int>(skillValue),
                 coolTime = coolTime,
                 attackSpeed = attackSpeed,
-                attackPrefab = attackPrefab,
-                skillPrefab = skillPrefab,
                 characteristic = characteristic,
                 skillDescription = skillDescription,
                 recommendedCharacter = recommendedCharacter

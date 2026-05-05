@@ -4,6 +4,7 @@ using System.Linq;
 using _01.Scripts._03.Data;
 using _01.Scripts._07.Character;
 using _01.Scripts._04.UI;
+using _01.Scripts._06.Weapon;
 using Unity.VisualScripting;
 using UnityEngine;
 

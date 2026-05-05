@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1186231344446282217}
-  - component: {fileID: 1975711201344580913}
+  - component: {fileID: -1176516044903650116}
   m_Layer: 0
-  m_Name: DroneLauncher
+  m_Name: PlasmaGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1975711201344580913
+--- !u!114 &-1176516044903650116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564881241307096138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad60c516aceb2c745a471bf280685a69, type: 3}
+  m_Script: {fileID: 11500000, guid: 152dbf2893c40de42b85af266291831d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponInfo:
@@ -55,7 +55,6 @@ MonoBehaviour:
     characteristic: 
     skillDescription: 
     recommendedCharacter: 
-  weaponId: 1
-  attackPrefab: {fileID: 7668292900833359366, guid: 068ce9ada3b001c489fd76843fe22980, type: 3}
-  skillPrefab: {fileID: 2930945893861991155, guid: 5701405c077df2842a8dcbf2b78e4642, type: 3}
-  enhancedAttackCount: 5
+  weaponId: 0
+  attackPrefab: {fileID: 7668292900833359366, guid: e6932816358294043bb3bd245ecca234, type: 3}
+  skillPrefab: {fileID: 2930945893861991155, guid: c359af35558d4ed4c825b0977ed3fdc6, type: 3}
