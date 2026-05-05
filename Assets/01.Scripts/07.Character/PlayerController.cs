@@ -9,6 +9,9 @@ namespace _01.Scripts._07.Character
         private static readonly int IsDoubleJump = Animator.StringToHash("isDoubleJump");
         private static readonly int IsSliding = Animator.StringToHash("isSliding");
 
+        [Header("Info")] 
+        public int id;
+        
         [Header("Ground Check")]
         public Transform groundCheck;
         public float checkDistance = 1f;

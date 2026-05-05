@@ -8,6 +8,7 @@ namespace _01.Scripts._03.Data
     [Serializable]
     public class CharacterInfo
     {
+        public int id;
         public string name;
         public Sprite sprite;
         public List<int> hpList;
