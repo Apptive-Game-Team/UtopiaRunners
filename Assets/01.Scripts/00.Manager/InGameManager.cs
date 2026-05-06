@@ -5,6 +5,7 @@ using _01.Scripts._03.Data;
 using _01.Scripts._07.Character;
 using _01.Scripts._06.Weapon;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _01.Scripts._00.Manager
 {
@@ -21,9 +22,9 @@ namespace _01.Scripts._00.Manager
         [SerializeField] private float tagCooldown = 5f;
         private bool _canTag = true;
 
-        private GameObject _currentCharacter;
-        private GameObject _otherCharacter;
-        private GameObject _weapon;
+        public GameObject currentCharacter;
+        public GameObject otherCharacter;
+        public GameObject weapon;
 
         private void Start()
         {
@@ -32,15 +33,18 @@ namespace _01.Scripts._00.Manager
             GameObject subCharacter = characters.First(go => go.GetComponent<PlayerController>().id == characterIds[1]);
 
             var weaponId = StageManager.Instance.selectedWeapon;
-            GameObject weapon = weapons.First(go => go.GetComponent<WeaponController>().weaponId == weaponId);
+            GameObject wp = weapons.First(go => go.GetComponent<WeaponController>().weaponId == weaponId);
             
-            _currentCharacter = Instantiate(mainCharacter, startPosition, Quaternion.identity);
-            _otherCharacter = Instantiate(subCharacter, startPosition, Quaternion.identity);
-            _otherCharacter.SetActive(false);
+            currentCharacter = Instantiate(mainCharacter, startPosition, Quaternion.identity);
+            otherCharacter = Instantiate(subCharacter, startPosition, Quaternion.identity);
+            otherCharacter.SetActive(false);
+            currentCharacter.GetComponent<PlayerController>().Init();
+            otherCharacter.GetComponent<PlayerController>().Init();
+            
 
-            _weapon = Instantiate(weapon, _currentCharacter.transform);
-            _weapon.GetComponent<WeaponController>().weaponInfo = weaponData.weaponInfos[weaponId].Clone();
-            _weapon.GetComponent<WeaponController>().Initialize();
+            weapon = Instantiate(wp, currentCharacter.transform);
+            weapon.GetComponent<WeaponController>().weaponInfo = weaponData.weaponInfos[weaponId].Clone();
+            weapon.GetComponent<WeaponController>().Initialize();
             
             InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
         }
@@ -56,11 +60,11 @@ namespace _01.Scripts._00.Manager
 
         private void Tag()
         {
-            _otherCharacter.SetActive(true);
-            _weapon.transform.SetParent(_otherCharacter.transform, false);
-            _currentCharacter.SetActive(false);
+            otherCharacter.SetActive(true);
+            weapon.transform.SetParent(otherCharacter.transform, false);
+            currentCharacter.SetActive(false);
             
-            (_currentCharacter, _otherCharacter) = (_otherCharacter, _currentCharacter);
+            (currentCharacter, otherCharacter) = (otherCharacter, currentCharacter);
         }
 
         private IEnumerator TagCooldown()

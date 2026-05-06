@@ -37,6 +37,8 @@ namespace _01.Scripts._07.Character
         [SerializeField] private Vector2 slideSize;
         [SerializeField] private Vector2 slideOffset;
         
+        protected bool IsSet;
+        
         private Rigidbody2D _rb;
         private Animator _anim;
         private BoxCollider2D _boxCol;
@@ -44,7 +46,7 @@ namespace _01.Scripts._07.Character
         private Vector2 _normalOffset;
         
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
@@ -56,12 +58,12 @@ namespace _01.Scripts._07.Character
             _normalOffset = _boxCol.offset;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             HandleInput();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             CheckGround();
 
@@ -73,6 +75,11 @@ namespace _01.Scripts._07.Character
         private void FixedUpdate()
         {
             CheckLanding();
+        }
+
+        public virtual void Init()
+        {
+            IsSet = true;
         }
 
         private void Jump()
