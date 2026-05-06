@@ -5,9 +5,20 @@ using _01.Scripts._05.Utility;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using _01.Scripts._05.SO;
+using UnityEngine.SceneManagement;
 
 namespace _01.Scripts._00.Manager
 {
+    public enum ButtonSoundType
+    {
+        Click,
+        Enter,
+        Exit,
+        Confirm,
+        Cancel,
+    }
+    
     public enum BGM
     {
         Default,
@@ -18,6 +29,8 @@ namespace _01.Scripts._00.Manager
         Nostalgia,
         SomethingHappen,
         Urban,
+        Title_SurveillancePulse2,
+        Lobby_SpawnScreen2
     }
     
     public enum Sfx
@@ -31,6 +44,8 @@ namespace _01.Scripts._00.Manager
     
     public class SoundManager : SingletonObject<SoundManager>
     {
+        [SerializeField] private SoundConfigSO soundConfig;
+        
         private const string MixerMaster = "MasterSound";
         private const string MixerBGM = "BGMSound";
         private const string MixerSfx = "SfxSound";
@@ -59,10 +74,23 @@ namespace _01.Scripts._00.Manager
             
             Init();
         }
-
         private void Start()
         {
-            PlayBgm(BGM.Default);
+            PlayBgmByScene(SceneManager.GetActiveScene().name);
+        }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            PlayBgmByScene(scene.name);
         }
 
         private void Init()
@@ -123,11 +151,21 @@ namespace _01.Scripts._00.Manager
             }
             return clip;
         }
-        
-        public void PlayBgm(BGM bgm, float fadeTime = 1.0f)
+
+        #region 재생 근원 함수
+
+        private BGM? _currentBgm;
+        public void PlayBgm(BGM bgm, float fadeTime = 1.0f, bool forceRestart = false)
         {
+            if (!forceRestart && _currentBgm.HasValue && _currentBgm.Value == bgm)
+            {
+                return;
+            }
+            
             AudioClip clip = GetOrLoadClip(bgm, "BGM");
             if (clip == null) return;
+            
+            _currentBgm = bgm;
 
             if (_bgmPlayer.isPlaying)
             {
@@ -165,6 +203,70 @@ namespace _01.Scripts._00.Manager
                 }
             }
         }
+
+        #endregion
+
+        #region Config를 통한 사운드 자동 재생
+
+        public void PlayButtonSfx(ButtonSoundType type)
+        {
+            if (soundConfig == null)
+            {
+                PlaySfx(Sfx.Click);
+                return;
+            }
+
+            PlaySfx(soundConfig.GetButtonSfx(type));
+        }
+
+        private void PlayBgmByScene(string loadedSceneName)
+        {
+            if (soundConfig == null)
+            {
+                return;
+            }
+
+            SceneName sceneName = GetSceneName(loadedSceneName);
+
+            if (sceneName == SceneName.InGame)
+            {
+                PlayStageBgm();
+                return;
+            }
+
+            PlayBgm(soundConfig.GetSceneBgm(sceneName));
+        }
+
+        private void PlayStageBgm()
+        {
+            if (StageManager.Instance == null)
+            {
+                PlayBgm(soundConfig.GetSceneBgm(SceneName.InGame));
+                return;
+            }
+
+            BGM bgm = soundConfig.GetStageBgm(
+                StageManager.Instance.selectedWorldNum,
+                StageManager.Instance.selectedStageNum
+            );
+
+            PlayBgm(bgm);
+        }
+
+        private SceneName GetSceneName(string loadedSceneName)
+        {
+            foreach (var pair in SceneInfo.SceneNames)
+            {
+                if (pair.Value == loadedSceneName)
+                {
+                    return pair.Key;
+                }
+            }
+
+            return SceneName.Title;
+        }
+
+        #endregion
         
         private IEnumerator CoFade(AudioSource source, float targetVol, float duration, bool stopOnComplete)
         {

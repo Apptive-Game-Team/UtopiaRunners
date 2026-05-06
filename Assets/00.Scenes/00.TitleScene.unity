@@ -4174,6 +4174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21f0656ce441b148a0a37c5c7ff490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundConfig: {fileID: 11400000, guid: 7642cbdfe3434f44ebb1653209fefd38, type: 2}
   masterVolumeSlider: {fileID: 19565692}
   bgmVolumeSlider: {fileID: 1569967270}
   sfxVolumeSlider: {fileID: 1189604621}
