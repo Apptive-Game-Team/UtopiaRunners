@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: dea7651d3d2428d46931b83edc9e2a21
+guid: 75580d4ca0a3bd54e9c448146cfbf533
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4908326323206892623
-    second: MeleeDronePattern_0
+      213: -3900421524636025166
+    second: SecurityRobot_0
+  - first:
+      213: -7194055744502120006
+    second: SecurityRobot_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MeleeDronePattern_0
+      name: SecurityRobot_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 962
-        height: 979
+        width: 511
+        height: 581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f4c227819c0ed1440800000000000000
-      internalID: 4908326323206892623
+      spriteID: 2be38c5e94beed9c0800000000000000
+      internalID: -3900421524636025166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SecurityRobot_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab1c7968a64992c90800000000000000
+      internalID: -7194055744502120006
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SecurityRobot_0: -3900421524636025166
+      SecurityRobot_1: -7194055744502120006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
