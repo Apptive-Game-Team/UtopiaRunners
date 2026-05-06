@@ -38,13 +38,13 @@ namespace _01.Scripts._00.Manager
             currentCharacter = Instantiate(mainCharacter, startPosition, Quaternion.identity);
             otherCharacter = Instantiate(subCharacter, startPosition, Quaternion.identity);
             otherCharacter.SetActive(false);
-            currentCharacter.GetComponent<PlayerController>().Init();
-            otherCharacter.GetComponent<PlayerController>().Init();
             
-
             weapon = Instantiate(wp, currentCharacter.transform);
             weapon.GetComponent<WeaponController>().weaponInfo = weaponData.weaponInfos[weaponId].Clone();
             weapon.GetComponent<WeaponController>().Initialize();
+            
+            currentCharacter.GetComponent<PlayerController>().Init();
+            otherCharacter.GetComponent<PlayerController>().Init();
             
             InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
         }

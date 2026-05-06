@@ -44,7 +44,14 @@ namespace _01.Scripts._07.Character
         public override void Init()
         {
             _inGameManager = FindAnyObjectByType<InGameManager>();
-            _otherPlayer = _inGameManager.otherCharacter.GetComponent<PlayerController>();
+            _otherPlayer = (_inGameManager.currentCharacter == gameObject ?
+                _inGameManager.otherCharacter : _inGameManager.currentCharacter).GetComponent<PlayerController>();
+            if (gameObject.activeSelf)
+            {
+                _hillCoroutine = StartCoroutine(HillAlly());
+            
+                SetEnemyHp(false);
+            }
             base.Init();
         }
 
