@@ -29,7 +29,8 @@ namespace _01.Scripts._00.Manager
         Nostalgia,
         SomethingHappen,
         Urban,
-        Title_SurveillancePulse2
+        Title_SurveillancePulse2,
+        Lobby_SpawnScreen2
     }
     
     public enum Sfx

@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c450b3db0796b4db4e05dfab0720bf, type: 3}
   m_Name: SoundConfig
   m_EditorClassIdentifier: 
-  defaultBgm: 0
-  sceneBgms: []
+  defaultBgm: 9
+  sceneBgms:
+  - sceneName: 0
+    bgm: 8
+  - sceneName: 1
+    bgm: 9
   stageBgms: []
   defaultButtonSfx: 1
-  buttonSfxSettings: []
+  buttonSfxSettings:
+  - type: 0
+    sfx: 1
+  - type: 1
+    sfx: 2
+  - type: 2
+    sfx: 3
