@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6005610904939799756}
-  - component: {fileID: 9220441479856136638}
+  - component: {fileID: 6418189673884232298}
   m_Layer: 0
-  m_Name: SniperGunSkillPrefab
+  m_Name: MissilePodSkillPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9220441479856136638
+--- !u!114 &6418189673884232298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2930945893861991155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bead965d98319d147bf2c468636b6ec9, type: 3}
+  m_Script: {fileID: 11500000, guid: da34e5107ee46724c8e3ec772ec455c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isSkilling: 0
+  missilePrefab: {fileID: 7668292900833359366, guid: df7c1531275431d4690af367980d7138, type: 3}

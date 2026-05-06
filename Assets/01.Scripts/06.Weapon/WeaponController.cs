@@ -19,7 +19,7 @@ namespace _01.Scripts._06.Weapon
     
         private float _skillCooldownTimer;
 
-        private void Start()
+        protected virtual void Start()
         {
             InputManager.AddListener(ActionCode.Skill, InputType.Down, SkillInput);
             attackDamage = weaponInfo.apList[0];

@@ -1,3 +1,4 @@
+using System;
 using _01.Scripts._00.Manager;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ namespace _01.Scripts._07.Character
         private static readonly int IsJump = Animator.StringToHash("isJump");
         private static readonly int IsDoubleJump = Animator.StringToHash("isDoubleJump");
         private static readonly int IsSliding = Animator.StringToHash("isSliding");
+
+        public Action OnJumpDetected;
+        public Action OnSlideDetected;
 
         [Header("Info")] 
         public int id;
@@ -95,12 +99,14 @@ namespace _01.Scripts._07.Character
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
+            OnJumpDetected?.Invoke();
             jumpCount--;
         }
 
         private void SlideStart()
         {
             isSliding = true;
+            OnSlideDetected?.Invoke();
             _boxCol.size = slideSize;
             _boxCol.offset = slideOffset;
         }

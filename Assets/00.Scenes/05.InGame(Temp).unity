@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 5564881241307096138, guid: 4966b1a8cfb13d44abdd17bffdf9d8b3, type: 3}
   - {fileID: 5564881241307096138, guid: f0abf282e0d01054bbc50d2ad40ddcd0, type: 3}
   - {fileID: 5564881241307096138, guid: f98b50606295baa43acd3e3a4df3282c, type: 3}
+  - {fileID: 5564881241307096138, guid: 7f7358c0b8dcf9c43893869f727d2b72, type: 3}
   startPosition: {x: -5.75, y: -1.180006}
   tagCooldown: 5
 --- !u!1 &141515796
