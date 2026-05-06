@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace _01.Scripts._06.Weapon.PlasmaGun
+namespace _01.Scripts._06.Weapon.RPG
 {
-    public class PlasmaGunAutoAttackProjectile : AutoAttackProjectile
+    public class RpgAutoAttackProjectile : AutoAttackProjectile
     {
         [SerializeField] private float explosionRange;
         
@@ -22,7 +22,7 @@ namespace _01.Scripts._06.Weapon.PlasmaGun
                         {
                             continue;
                         }
-                        enemy.GetComponent<EnemyHp>().TakeDamage(Damage / 5f);
+                        enemy.GetComponent<EnemyHp>().TakeDamage(Damage / 5);
                     }
                 }
                 

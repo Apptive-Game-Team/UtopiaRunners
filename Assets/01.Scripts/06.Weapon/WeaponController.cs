@@ -16,7 +16,6 @@ namespace _01.Scripts._06.Weapon
         public float skillDamage;
     
         private WeaponSkillBase _skill;
-    
         private float _skillCooldownTimer;
 
         protected virtual void Start()
