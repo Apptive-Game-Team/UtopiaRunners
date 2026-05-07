@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 69f7e3fb6a65069469f4f9ff539a1fec
+guid: 88f74b29ec52cde4b94dcabdc1abec86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4903047673368869325
-    second: EdenMidBoss_0
+      213: -6323441379336542689
+    second: SuzakuShield_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EdenMidBoss_0
+      name: SuzakuShield_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 15
-        width: 396
-        height: 609
+        x: 5
+        y: 6
+        width: 548
+        height: 543
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc9f4f7a1ef1b0440800000000000000
-      internalID: 4903047673368869325
+      spriteID: f16a3aa819f9e38a0800000000000000
+      internalID: -6323441379336542689
       vertices: []
       indices: 
       edges: []

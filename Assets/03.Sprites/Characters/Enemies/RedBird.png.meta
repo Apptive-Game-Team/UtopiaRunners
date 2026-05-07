@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 50a1510ea01dbc740b70ec02191f16bf
+guid: e6e286d9ec8b7f74ebc87ba29ecd15d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8391128709411469100
-    second: EdenMidBossLaserPatternReady_0
+      213: -2733201037768693288
+    second: RedBird_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EdenMidBossLaserPatternReady_0
+      name: RedBird_0
       rect:
         serializedVersion: 2
-        x: 113
-        y: 67
-        width: 374
-        height: 465
+        x: 22
+        y: 3
+        width: 710
+        height: 778
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d882fa95e8bc8b80800000000000000
-      internalID: -8391128709411469100
+      spriteID: 8d961142328b11ad0800000000000000
+      internalID: -2733201037768693288
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RedBird_0: -2733201037768693288
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

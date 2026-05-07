@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9819ef96b15645d4ebab645a31dae6ee, type: 3}
-  m_Name: Stage1_1C
+  m_Script: {fileID: 11500000, guid: d53c8a4d543b4a84b8e5149fab30dd54, type: 3}
+  m_Name: SuzakuShieldData
   m_EditorClassIdentifier: 
-  baseTime: 0
-  spawnEvents:
-  - prefab: {fileID: 0}
-    spawnPointId: Obstacle
-    delayFromBaseTime: 0
+  enemyName: "\uC8FC\uC791 \uBC29\uC5B4\uB9C9"
+  attackDamage: 0
+  healthPoint: 20
+  attackType: 0
+  enemyPatternPrefab: {fileID: 0}
+  cooldown: 0
