@@ -149,7 +149,7 @@ MonoBehaviour:
   maxHp: 0
   hp: 0
   damage: 0
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 7069116934268959870}
   checkDistance: 1
   groundLayer:
     serializedVersion: 2
