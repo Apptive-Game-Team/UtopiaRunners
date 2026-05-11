@@ -53,6 +53,9 @@ namespace _01.Scripts._00.Manager
             otherCharacter.GetComponent<PlayerController>().Init();
             
             weapon.GetComponent<WeaponController>().Initialize(currentChar.damage);
+            
+            currentCharacter.GetComponent<PlayerController>().AfterInit();
+            otherCharacter.GetComponent<PlayerController>().AfterInit();
         }
 
         private void TagInput()

@@ -36,13 +36,14 @@ namespace _01.Scripts._07.Character
 
         public override void Init()
         {
+            base.Init();
+            
             _wc = FindAnyObjectByType<WeaponController>();
             if (gameObject.activeSelf)
             {
                 OnJumpDetected += CoolDownSkill;
                 OnSlideDetected += CoolDownSkill;
             }
-            base.Init();
         }
     }
 }

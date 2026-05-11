@@ -60,13 +60,14 @@ namespace _01.Scripts._07.Character
         
         public override void Init()
         {
+            base.Init();
+            
             _originDamage = damage;
             if (gameObject.activeSelf)
             {
                 OnJumpDetected += ResetEnhancement;
                 OnSlideDetected += ResetEnhancement;
             }
-            base.Init();
         }
     }
 }

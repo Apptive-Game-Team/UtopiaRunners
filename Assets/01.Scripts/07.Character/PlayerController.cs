@@ -13,10 +13,13 @@ namespace _01.Scripts._07.Character
 
         public Action OnJumpDetected;
         public Action OnSlideDetected;
+        public Action OnHpChanged;
 
         [Header("Info")] 
         public _03.Data.CharacterInfo characterInfo;
         public int id;
+        public float maxHp;
+        public float hp;
         public float damage;
         
         [Header("Ground Check")]
@@ -84,7 +87,14 @@ namespace _01.Scripts._07.Character
         {
             IsSet = true;
 
+            maxHp = characterInfo.hpList[0];
+            hp = maxHp;
             damage = characterInfo.apList[0];
+        }
+
+        public virtual void AfterInit()
+        {
+            
         }
 
         private void Jump()
