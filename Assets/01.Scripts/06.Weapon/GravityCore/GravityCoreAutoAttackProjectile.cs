@@ -8,7 +8,7 @@ namespace _01.Scripts._06.Weapon.GravityCore
         {
             if (collision.CompareTag("Enemy"))
             {
-                collision.GetComponent<EnemyHp>().TakeDamage(Damage);
+                ApplyHit(collision.gameObject);
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * 7f, ForceMode2D.Impulse);
                 Destroy(gameObject);
             }

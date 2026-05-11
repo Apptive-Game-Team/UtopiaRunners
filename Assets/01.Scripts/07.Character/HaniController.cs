@@ -1,7 +1,72 @@
+using System.Collections;
+using _01.Scripts._06.Weapon;
+using UnityEngine;
+
 namespace _01.Scripts._07.Character
 {
     public class HaniController : PlayerController
     {
+        private WeaponController _wc;
+        private int _doubleJumpCount;
         
+        protected override void Awake()
+        {
+            base.Awake();
+            maxJumpCount = 3;
+        }
+
+        private void OnEnable()
+        {
+            if (!IsSet)
+            {
+                return;
+            }
+            
+            OnJumpDetected += SetDoubleJumpEffect;
+        }
+
+        private void OnDisable()
+        {
+            if (!IsSet)
+            {
+                return;
+            }
+            
+            OnJumpDetected -= SetDoubleJumpEffect;
+        }
+
+        public override void Init()
+        {
+            _wc = FindAnyObjectByType<WeaponController>();
+            if (gameObject.activeSelf)
+            {
+                OnJumpDetected += SetDoubleJumpEffect;
+            }
+            base.Init();
+        }
+
+        private void SetDoubleJumpEffect()
+        {
+            if (jumpCount == 2) // 더블 점프 일때만?
+            {
+                _doubleJumpCount++;
+            }
+
+            if (_doubleJumpCount >= 10)
+            {
+                _wc.AddAttackEffect(1, (e, f) =>
+                {
+                    _wc.StartCoroutine(SetEnemySlow(e, f));
+                });
+                _doubleJumpCount = 0;
+            }
+        }
+
+        private IEnumerator SetEnemySlow(GameObject enemy, float time)
+        {
+            // todo : 적 슬로우 유발 enemy.GetComponent<EnemyController>().
+            yield return new WaitForSeconds(time);
+            // todo : 적 속도 정상화
+        }
     }
 }

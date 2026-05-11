@@ -1,5 +1,6 @@
 using System;
 using _01.Scripts._00.Manager;
+using _01.Scripts._03.Data;
 using UnityEngine;
 
 namespace _01.Scripts._07.Character
@@ -14,7 +15,9 @@ namespace _01.Scripts._07.Character
         public Action OnSlideDetected;
 
         [Header("Info")] 
+        public _03.Data.CharacterInfo characterInfo;
         public int id;
+        public float damage;
         
         [Header("Ground Check")]
         public Transform groundCheck;
@@ -80,6 +83,8 @@ namespace _01.Scripts._07.Character
         public virtual void Init()
         {
             IsSet = true;
+
+            damage = characterInfo.apList[0];
         }
 
         private void Jump()

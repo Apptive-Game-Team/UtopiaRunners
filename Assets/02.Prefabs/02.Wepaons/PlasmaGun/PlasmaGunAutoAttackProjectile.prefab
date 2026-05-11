@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4951989511697002552}
   - component: {fileID: 6020836446085865704}
   - component: {fileID: 5535796652834730747}
-  - component: {fileID: 914006628537199783}
+  - component: {fileID: 188238659491223223}
   m_Layer: 0
   m_Name: PlasmaGunAutoAttackProjectile
   m_TagString: Untagged
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 8, y: 2.5}
   m_EdgeRadius: 0
---- !u!114 &914006628537199783
+--- !u!114 &188238659491223223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7668292900833359366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c58c87aa5298446409339af41f7062f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9eb60de3236469a4e840c29c8b45d201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  explosionRange: 10

@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using _01.Scripts._00.Manager;
 using _01.Scripts._04.UI;
 using UnityEngine;
@@ -7,6 +10,18 @@ namespace _01.Scripts._06.Weapon
 {
     public class WeaponController : MonoBehaviour
     {
+        public class AttackEffectInstance
+        {
+            public Action<GameObject, float> Effect;
+            public int RemainingCount;
+
+            public AttackEffectInstance(int count, Action<GameObject, float> effect)
+            {
+                RemainingCount = count;
+                Effect = effect;
+            }
+        }
+        
         [Header("Components")]
         public WeaponInfo weaponInfo;
         public int weaponId;
@@ -18,16 +33,20 @@ namespace _01.Scripts._06.Weapon
         private WeaponSkillBase _skill;
         private float _skillCooldownTimer;
         private float _currentCooldown;
+        
+        protected Action<GameObject, float> PendingEffect;
+        protected int EffectCount;
+        protected List<AttackEffectInstance> ActiveEffectInstances = new();
 
         protected virtual void Start()
         {
             InputManager.AddListener(ActionCode.Skill, InputType.Down, SkillInput);
-            attackDamage = weaponInfo.apList[0];
-            skillDamage = weaponInfo.skillValue[0];
         }
 
-        public void Initialize()
+        public void Initialize(float characterDamage)
         {
+            SetDamage(characterDamage);
+            
             _skill = Instantiate(skillPrefab, transform).GetComponent<WeaponSkillBase>();
 
             if (_skill != null)
@@ -36,6 +55,12 @@ namespace _01.Scripts._06.Weapon
             }
 
             StartCoroutine(AutoAttack());
+        }
+
+        public void SetDamage(float characterDamage)
+        {
+            attackDamage = weaponInfo.apList[0] * characterDamage;
+            skillDamage = weaponInfo.skillValue[0] * characterDamage;
         }
 
         private void Update()
@@ -65,6 +90,20 @@ namespace _01.Scripts._06.Weapon
                 _currentCooldown = 0;
             }
         }
+        
+        public void AddAttackEffect(int count, Action<GameObject, float> effect)
+        {
+            var existingInstance = ActiveEffectInstances.Find(instance => instance.Effect == effect);
+
+            if (existingInstance != null)
+            {
+                existingInstance.RemainingCount += count;
+            }
+            else
+            {
+                ActiveEffectInstances.Add(new AttackEffectInstance(count, effect));
+            }
+        }
 
         protected virtual IEnumerator AutoAttack()
         {
@@ -72,16 +111,35 @@ namespace _01.Scripts._06.Weapon
             {
                 if (GameObject.FindWithTag("Enemy") != null)
                 {
-                    GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
-
-                    AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
-                    if (projectileScript != null)
-                    {
-                        projectileScript.Init(attackDamage);
-                    }
+                    AutoAttackProjectile projectileScript = SetAttackProjectile();
+                    SetAttackEffect(projectileScript);
                 }
 
                 yield return new WaitForSeconds(weaponInfo.attackSpeed);
+            }
+        }
+
+        protected virtual AutoAttackProjectile SetAttackProjectile()
+        {
+            GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+            AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
+
+            projectileScript.Init(attackDamage);
+            
+            return projectileScript;
+        }
+
+        protected virtual void SetAttackEffect(AutoAttackProjectile projectileScript)
+        {
+            foreach (var effect in ActiveEffectInstances.ToList())
+            {
+                projectileScript.AddEffect(effect.Effect);
+                effect.RemainingCount--;
+                        
+                if (effect.RemainingCount <= 0)
+                {
+                    ActiveEffectInstances.Remove(effect);
+                }
             }
         }
 

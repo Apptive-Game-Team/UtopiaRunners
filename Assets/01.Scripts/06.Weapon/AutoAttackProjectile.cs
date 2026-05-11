@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _01.Scripts._06.Weapon
@@ -8,11 +10,17 @@ namespace _01.Scripts._06.Weapon
         private GameObject _targetEnemy;
         private Vector3 _targetDirection;
         
+        protected Action<GameObject, float> OnHitEffects;
         protected float Damage;
 
         public void Init(float damage)
         {
             Damage = damage;
+        }
+        
+        public void AddEffect(Action<GameObject, float> effect)
+        {
+            OnHitEffects += effect;
         }
 
         private void Update()
@@ -58,9 +66,19 @@ namespace _01.Scripts._06.Weapon
         {
             if (collision.CompareTag("Enemy"))
             {
-                collision.GetComponent<EnemyHp>().TakeDamage(Damage);
+                ApplyHit(collision.gameObject);
                 Destroy(gameObject);
             }
         }
+
+        protected virtual void ApplyHit(GameObject enemy)
+        {
+            float damage = CalculateDamage();
+            enemy.GetComponent<EnemyHp>().TakeDamage(damage);
+            
+            OnHitEffects?.Invoke(enemy, damage);
+        }
+        
+        protected virtual float CalculateDamage() => Damage;
     }
 }

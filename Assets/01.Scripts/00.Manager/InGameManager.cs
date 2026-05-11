@@ -36,15 +36,21 @@ namespace _01.Scripts._00.Manager
             GameObject wp = weapons.First(go => go.GetComponent<WeaponController>().weaponId == weaponId);
             
             currentCharacter = Instantiate(mainCharacter, startPosition, Quaternion.identity);
+            PlayerController currentChar = currentCharacter.GetComponent<PlayerController>();
+            currentChar.characterInfo = characterData.characterInfos.First(info => info.id == currentChar.id);
+            
             otherCharacter = Instantiate(subCharacter, startPosition, Quaternion.identity);
+            PlayerController subChar = otherCharacter.GetComponent<PlayerController>();
+            subChar.characterInfo = characterData.characterInfos.First(info => info.id == subChar.id);
             otherCharacter.SetActive(false);
             
             weapon = Instantiate(wp, currentCharacter.transform);
             weapon.GetComponent<WeaponController>().weaponInfo = weaponData.weaponInfos[weaponId].Clone();
-            weapon.GetComponent<WeaponController>().Initialize();
             
             currentCharacter.GetComponent<PlayerController>().Init();
             otherCharacter.GetComponent<PlayerController>().Init();
+            
+            weapon.GetComponent<WeaponController>().Initialize(currentChar.damage);
             
             InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
         }
@@ -65,6 +71,8 @@ namespace _01.Scripts._00.Manager
             currentCharacter.SetActive(false);
             
             (currentCharacter, otherCharacter) = (otherCharacter, currentCharacter);
+            
+            weapon.GetComponent<WeaponController>().SetDamage(currentCharacter.GetComponent<PlayerController>().damage);
         }
 
         private IEnumerator TagCooldown()

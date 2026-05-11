@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace _01.Scripts._06.Weapon.DroneLauncher
@@ -7,32 +9,27 @@ namespace _01.Scripts._06.Weapon.DroneLauncher
     {
         [SerializeField] private int enhancedAttackCount;
         private int _attackCount;
-        
-        protected override IEnumerator AutoAttack()
+
+        protected override AutoAttackProjectile SetAttackProjectile()
         {
-            while (true)
+            GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+
+            _attackCount++;
+
+            AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
+                    
+            if (projectileScript != null)
             {
-                if (GameObject.FindWithTag("Enemy") != null)
+                bool isEnhanced = (_attackCount == enhancedAttackCount);
+                projectileScript.Init(weaponInfo.apList[0] * (isEnhanced ? 2 : 1));
+                if (isEnhanced)
                 {
-                    GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
-
-                    _attackCount++;
-
-                    AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
-                    if (projectileScript != null)
-                    {
-                        bool isEnhanced = (_attackCount == enhancedAttackCount);
-                        projectileScript.Init(weaponInfo.apList[0] * (isEnhanced ? 2 : 1));
-                        if (isEnhanced)
-                        {
-                            projectile.GetComponent<SpriteRenderer>().color = Color.red;
-                            _attackCount = 0;
-                        }
-                    }
+                    projectile.GetComponent<SpriteRenderer>().color = Color.red;
+                    _attackCount = 0;
                 }
-
-                yield return new WaitForSeconds(weaponInfo.attackSpeed);
             }
+
+            return projectileScript;
         }
     }
 }

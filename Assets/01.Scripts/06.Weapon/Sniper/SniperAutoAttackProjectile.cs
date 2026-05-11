@@ -14,11 +14,19 @@ namespace _01.Scripts._06.Weapon.Sniper
         {
             _character = character;
         }
-
-        private float MultipliedDamage()
+        
+        protected override float CalculateDamage()
         {
-            float t = Mathf.InverseLerp(5f, 10f, Vector3.Distance(transform.position, _character.transform.position));
-            return Mathf.Lerp(1f, 1.5f, t);
+            float dist = Vector3.Distance(transform.position, _character.transform.position);
+            float t = Mathf.InverseLerp(5f, 10f, dist);
+            float multiplier = Mathf.Lerp(1f, 1.5f, t);
+        
+            if (!isSkillUsed)
+            {
+                return Damage * multiplier;
+            }
+            
+            return _isFirstTarget ? (Damage * multiplier * 2) : (Damage * multiplier / 2);
         }
 
         public void DelayedDestroy(float time)
@@ -30,22 +38,15 @@ namespace _01.Scripts._06.Weapon.Sniper
         {
             if (collision.CompareTag("Enemy"))
             {
+                ApplyHit(collision.gameObject);
+
                 if (!isSkillUsed)
                 {
-                    collision.GetComponent<EnemyHp>().TakeDamage(Damage * MultipliedDamage());
                     Destroy(gameObject);
                 }
-                else
+                else if (_isFirstTarget)
                 {
-                    if (_isFirstTarget)
-                    {
-                        collision.GetComponent<EnemyHp>().TakeDamage(Damage * MultipliedDamage() * 2);
-                        _isFirstTarget = false;
-                    }
-                    else
-                    {
-                        collision.GetComponent<EnemyHp>().TakeDamage(Damage * MultipliedDamage() / 2);
-                    }
+                    _isFirstTarget = false;
                 }
             }
         }
