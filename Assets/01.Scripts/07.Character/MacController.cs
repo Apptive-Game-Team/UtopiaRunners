@@ -8,6 +8,7 @@ namespace _01.Scripts._07.Character
         [Header("Shield Skill Settings")]
         [SerializeField] private float shieldGenDelay = 5f;
         [SerializeField] private GameObject shieldPrefab;
+        private GameObject _shieldObject;
 
         private float _originDamage;
         //private bool _hasShield;
@@ -50,8 +51,17 @@ namespace _01.Scripts._07.Character
 
         private void CreateShield()
         {
-            //_hasShield = true;
-            if (shieldPrefab != null) shieldPrefab.SetActive(true);
+            /*if (_hasShield)
+            {
+                return;
+            }
+            _hasShield = true;*/
+            
+            if (_shieldObject == null)
+            {
+                _shieldObject = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+            }
+            shieldPrefab.SetActive(true);
             
             ApplyAttackBuff(1.2f);
         }
@@ -59,7 +69,10 @@ namespace _01.Scripts._07.Character
         private void BreakShield()
         {
             //_hasShield = false;
-            if (shieldPrefab != null) shieldPrefab.SetActive(false);
+            if (_shieldObject != null)
+            {
+                shieldPrefab.SetActive(false);
+            }
             
             ApplyAttackBuff(1.0f);
         }

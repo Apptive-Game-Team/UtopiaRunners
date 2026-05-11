@@ -165,7 +165,7 @@ MonoBehaviour:
   slideSize: {x: 22, y: 9}
   slideOffset: {x: 0, y: -6}
   shieldGenDelay: 5
-  shieldPrefab: {fileID: 0}
+  shieldPrefab: {fileID: 3743841744912574229, guid: f950044f8814e934fa9f9a6dd3349fb4, type: 3}
 --- !u!50 &3206093306151288092
 Rigidbody2D:
   serializedVersion: 5
