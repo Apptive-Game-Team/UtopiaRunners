@@ -28,6 +28,8 @@ namespace _01.Scripts._00.Manager
 
         private void Start()
         {
+            InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
+            
             var characterIds = StageManager.Instance.selectedCharacters;
             GameObject mainCharacter = characters.First(go => go.GetComponent<PlayerController>().id == characterIds[0]);
             GameObject subCharacter = characters.First(go => go.GetComponent<PlayerController>().id == characterIds[1]);
@@ -51,8 +53,6 @@ namespace _01.Scripts._00.Manager
             otherCharacter.GetComponent<PlayerController>().Init();
             
             weapon.GetComponent<WeaponController>().Initialize(currentChar.damage);
-            
-            InputManager.AddListener(ActionCode.Tag, InputType.Down, TagInput);
         }
 
         private void TagInput()
