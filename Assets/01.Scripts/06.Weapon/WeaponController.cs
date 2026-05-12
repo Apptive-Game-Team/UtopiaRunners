@@ -1,74 +1,151 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using _01.Scripts._00.Manager;
+using _01.Scripts._04.UI;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+namespace _01.Scripts._06.Weapon
 {
-    [Header("Components")]
-    public WeaponData weaponData;
-    public WeaponSkillBase skill;
-    public PlayerInput input;
-
-    public GameObject weaponSkillObj;
-
-    private float skillCooldownTimer;
-
-    private void Awake()
+    public class WeaponController : MonoBehaviour
     {
-        input = GetComponent<PlayerInput>();
-    }
-
-    private void Start()
-    {
-        weaponSkillObj = Instantiate(
-            weaponData.weaponSkillPrefab, 
-            transform
-            );
-
-        skill = weaponSkillObj.GetComponent<WeaponSkillBase>();
-
-        if (skill != null)
+        public class AttackEffectInstance
         {
-            skill.Init(this);
-        }
+            public Action<GameObject, float> Effect;
+            public int RemainingCount;
 
-        StartCoroutine(AutoAttack());
-    }
-
-    private void Update()
-    {
-        if (skillCooldownTimer > 0f && !skill.isSkilling)
-            skillCooldownTimer -= Time.deltaTime;
-
-        if (input.skillPressed && skillCooldownTimer <= 0f)
-        {
-            UseSkill();
-            skillCooldownTimer = weaponData.cooldown;
-        }
-    }
-
-    private IEnumerator AutoAttack()
-    {
-        while (true)
-        {
-            if (GameObject.FindWithTag("Enemy") != null)
+            public AttackEffectInstance(int count, Action<GameObject, float> effect)
             {
-                GameObject projectile = Instantiate(
-                    weaponData.autoAttackProjectile,
-                    transform.position,
-                    Quaternion.identity
-                );
+                RemainingCount = count;
+                Effect = effect;
+            }
+        }
+        
+        [Header("Components")]
+        public WeaponInfo weaponInfo;
+        public int weaponId;
+        public GameObject attackPrefab;
+        public GameObject skillPrefab;
+        public float attackDamage;
+        public float skillDamage;
+    
+        private WeaponSkillBase _skill;
+        private float _skillCooldownTimer;
+        private float _currentCooldown;
+        
+        protected Action<GameObject, float> PendingEffect;
+        protected int EffectCount;
+        protected List<AttackEffectInstance> ActiveEffectInstances = new();
 
-                AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
-                if (projectileScript != null)
-                    projectileScript.Init(weaponData.attackDamage);
+        protected virtual void Start()
+        {
+            InputManager.AddListener(ActionCode.Skill, InputType.Down, SkillInput);
+        }
+
+        public void Initialize(float characterDamage)
+        {
+            SetDamage(characterDamage);
+            
+            _skill = Instantiate(skillPrefab, transform).GetComponent<WeaponSkillBase>();
+
+            if (_skill != null)
+            {
+                _skill.Init(this);
             }
 
-            yield return new WaitForSeconds(weaponData.attackSpeed);
+            StartCoroutine(AutoAttack());
         }
-    }
 
-    private void UseSkill()
-    {
-        skill.Activate();
+        public void SetDamage(float characterDamage)
+        {
+            attackDamage = weaponInfo.apList[0] * characterDamage;
+            skillDamage = weaponInfo.skillValue[0] * characterDamage;
+        }
+
+        private void Update()
+        {
+            if (_currentCooldown > 0)
+            {
+                _currentCooldown -= Time.deltaTime;
+            }
+        }
+
+        private void SkillInput()
+        {
+            if (_currentCooldown <= 0)
+            {
+                _skill.Activate();
+                _currentCooldown = weaponInfo.coolTime;
+            }
+        }
+        
+        public void ReduceCooldown(float percent)
+        {
+            float reduction = weaponInfo.coolTime * (percent / 100f);
+            _currentCooldown -= reduction;
+
+            if (_currentCooldown < 0)
+            {
+                _currentCooldown = 0;
+            }
+        }
+        
+        public void AddAttackEffect(int count, Action<GameObject, float> effect)
+        {
+            var existingInstance = ActiveEffectInstances.Find(instance => instance.Effect == effect);
+
+            if (existingInstance != null)
+            {
+                existingInstance.RemainingCount += count;
+            }
+            else
+            {
+                ActiveEffectInstances.Add(new AttackEffectInstance(count, effect));
+            }
+        }
+
+        protected virtual IEnumerator AutoAttack()
+        {
+            while (true)
+            {
+                if (GameObject.FindWithTag("Enemy") != null)
+                {
+                    AutoAttackProjectile projectileScript = SetAttackProjectile();
+                    SetAttackEffect(projectileScript);
+                }
+
+                yield return new WaitForSeconds(weaponInfo.attackSpeed);
+            }
+        }
+
+        protected virtual AutoAttackProjectile SetAttackProjectile()
+        {
+            GameObject projectile = Instantiate(attackPrefab, transform.position, Quaternion.identity);
+            AutoAttackProjectile projectileScript = projectile.GetComponent<AutoAttackProjectile>();
+
+            projectileScript.Init(attackDamage);
+            
+            return projectileScript;
+        }
+
+        protected virtual void SetAttackEffect(AutoAttackProjectile projectileScript)
+        {
+            foreach (var effect in ActiveEffectInstances.ToList())
+            {
+                projectileScript.AddEffect(effect.Effect);
+                effect.RemainingCount--;
+                        
+                if (effect.RemainingCount <= 0)
+                {
+                    ActiveEffectInstances.Remove(effect);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            InputManager.RemoveListener(ActionCode.Skill, InputType.Down, SkillInput);
+        }
     }
 }

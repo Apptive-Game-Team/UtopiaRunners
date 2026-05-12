@@ -41,8 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4675653978157777589}
   - component: {fileID: 9096714001434915210}
-  - component: {fileID: 5509079640243020975}
-  - component: {fileID: 1881418989277709234}
+  - component: {fileID: 6228136119696808314}
   - component: {fileID: 3206093306151288092}
   - component: {fileID: 7972624572107121339}
   - component: {fileID: 7312007895889884830}
@@ -124,7 +123,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5509079640243020975
+--- !u!114 &6228136119696808314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,14 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8126271443251588313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df03c090dd75ac54497ec8c083c313b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 219d4e98028e60741b20b5ddf42707cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 17.5
-  maxJumpCount: 2
-  jumpCount: 0
-  slideSize: {x: 22, y: 9}
-  slideOffset: {x: 0, y: -6}
+  id: 0
   groundCheck: {fileID: 7069116934268959870}
   checkDistance: 1
   groundLayer:
@@ -151,22 +146,11 @@ MonoBehaviour:
   isSliding: 0
   isGrounded: 0
   isDead: 0
---- !u!114 &1881418989277709234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8126271443251588313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aa23ed5a20ea5408ab0538f90cae72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpPressed: 0
-  slideHeld: 0
-  skillPressed: 0
-  tagPressed: 0
+  jumpForce: 17.5
+  maxJumpCount: 2
+  jumpCount: 0
+  slideSize: {x: 22, y: 9}
+  slideOffset: {x: 0, y: -6}
 --- !u!50 &3206093306151288092
 Rigidbody2D:
   serializedVersion: 5

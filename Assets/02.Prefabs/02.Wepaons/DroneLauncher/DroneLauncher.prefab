@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1186231344446282217}
-  - component: {fileID: 7886853990070990970}
-  - component: {fileID: -2680070881328059314}
+  - component: {fileID: 1975711201344580913}
   m_Layer: 0
   m_Name: DroneLauncher
   m_TagString: Untagged
@@ -33,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7886853990070990970
+--- !u!114 &1975711201344580913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,26 +41,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564881241307096138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 152dbf2893c40de42b85af266291831d, type: 3}
+  m_Script: {fileID: 11500000, guid: ad60c516aceb2c745a471bf280685a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 7f7cc037cd07dc04383f7d4c0595d2c6, type: 2}
-  skill: {fileID: 0}
-  input: {fileID: 0}
-  weaponSkillObj: {fileID: 0}
---- !u!114 &-2680070881328059314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5564881241307096138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aa23ed5a20ea5408ab0538f90cae72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpPressed: 0
-  slideHeld: 0
-  skillPressed: 0
-  tagPressed: 0
+  weaponInfo:
+    id: 0
+    name: 
+    sprite: {fileID: 0}
+    apList: 
+    skillValue: 
+    coolTime: 0
+    attackSpeed: 0
+    characteristic: 
+    skillDescription: 
+    recommendedCharacter: 
+  weaponId: 1
+  attackPrefab: {fileID: 7668292900833359366, guid: 068ce9ada3b001c489fd76843fe22980, type: 3}
+  skillPrefab: {fileID: 2930945893861991155, guid: 5701405c077df2842a8dcbf2b78e4642, type: 3}
+  enhancedAttackCount: 5

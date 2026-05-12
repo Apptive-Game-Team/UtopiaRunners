@@ -8,6 +8,7 @@ namespace _01.Scripts._03.Data
     [Serializable]
     public class CharacterInfo
     {
+        public int id;
         public string name;
         public Sprite sprite;
         public List<int> hpList;
@@ -16,6 +17,22 @@ namespace _01.Scripts._03.Data
         [TextArea] public string skillDescription;
         public List<int> skillValue;
         public Sprite recommendedWeapon;
+
+        public CharacterInfo Clone()
+        {
+            return new CharacterInfo()
+            {
+                id = id,
+                name = name,
+                sprite = sprite,
+                hpList = new List<int>(hpList),
+                apList = new List<int>(apList),
+                story = story,
+                skillDescription = skillDescription,
+                skillValue = new List<int>(skillValue),
+                recommendedWeapon = recommendedWeapon
+            };
+        }
     }
     
     [CreateAssetMenu(fileName = "CharacterData", menuName = "ScriptableObject/CharacterData")]

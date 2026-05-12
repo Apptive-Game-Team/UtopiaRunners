@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public abstract class WeaponSkillBase : MonoBehaviour
+namespace _01.Scripts._06.Weapon
 {
-    protected WeaponController owner;
-
-    public bool isSkilling;
-
-    public virtual void Init(WeaponController owner)
+    public abstract class WeaponSkillBase : MonoBehaviour
     {
-        this.owner = owner;
-    }
+        protected WeaponController Owner;
 
-    public abstract void Activate();
+        public bool isSkilling;
+
+        public virtual void Init(WeaponController owner)
+        {
+            Owner = owner;
+        }
+
+        public abstract void Activate();
+    }
 }

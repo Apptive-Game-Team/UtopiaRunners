@@ -1,129 +1,223 @@
+using System;
+using _01.Scripts._00.Manager;
+using _01.Scripts._03.Data;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace _01.Scripts._07.Character
 {
-    [Header("Components")]
-    private Rigidbody2D rb;
-    private PlayerInput input;
-    private Animator anim;
-    private BoxCollider2D boxCol;
-
-    [Header("Jump")]
-    public float jumpForce = 10f;
-    public int maxJumpCount = 2;
-    public int jumpCount;
-
-    [Header("Collider")]
-    private Vector2 normalSize;
-    private Vector2 normalOffset;
-
-    [SerializeField] private Vector2 slideSize;
-    [SerializeField] private Vector2 slideOffset;
-
-
-    [Header("Ground Check")]
-    public Transform groundCheck;
-    public float checkDistance = 1f;
-    public LayerMask groundLayer;
-
-    [Header("Status")]
-    public bool isJump;
-    public bool isDoubleJump;
-    public bool isSliding;
-    public bool isGrounded;
-    public bool isDead;
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-        input = GetComponent<PlayerInput>();
-        anim = GetComponent<Animator>();
-        boxCol = GetComponent<BoxCollider2D>();
+        private static readonly int IsJump = Animator.StringToHash("isJump");
+        private static readonly int IsDoubleJump = Animator.StringToHash("isDoubleJump");
+        private static readonly int IsSliding = Animator.StringToHash("isSliding");
 
-        jumpCount = maxJumpCount;
+        public Action OnJumpDetected;
+        public Action OnSlideDetected;
+        public Action OnHpChanged;
 
-        normalSize = boxCol.size;
-        normalOffset = boxCol.offset;
-    }
+        [Header("Info")] 
+        public _03.Data.CharacterInfo characterInfo;
+        public int id;
+        public float maxHp;
+        public float hp;
+        public float damage;
+        
+        [Header("Ground Check")]
+        public Transform groundCheck;
+        public float checkDistance = 1f;
+        public LayerMask groundLayer;
 
-    void Update()
-    {
-        CheckGround();
-        CheckLanding();
-        HandleInput();
+        [Header("Status")]
+        public bool isJump;
+        public bool isDoubleJump;
+        public bool isSliding;
+        public bool isGrounded;
+        public bool isDead;
+        
+        [Header("Jump")]
+        public float jumpForce = 10f;
+        public int maxJumpCount = 2;
+        public int jumpCount;
+        
+        [Header("Slide")]
+        [SerializeField] private Vector2 slideSize;
+        [SerializeField] private Vector2 slideOffset;
+        
+        protected bool IsSet;
+        
+        private Rigidbody2D _rb;
+        private Animator _anim;
+        private BoxCollider2D _boxCol;
+        private Vector2 _normalSize;
+        private Vector2 _normalOffset;
+        
 
-        anim.SetBool("isJump", isJump);
-        anim.SetBool("isDoubleJump", isDoubleJump);
-        anim.SetBool("isSliding", isSliding);
-    }
-
-    public void Jump()
-    {
-        if (jumpCount == 0) return;
-        if (isDead) return;
-
-        if (jumpCount == maxJumpCount)
-            isJump = true;
-
-        else
+        protected virtual void Awake()
         {
-            isJump = false;
-            isDoubleJump = true;
-        }
+            _rb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
+            _boxCol = GetComponent<BoxCollider2D>();
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-        jumpCount--;
-    }
-
-    public void SlideStart()
-    {
-        isSliding = true;
-        boxCol.size = slideSize;
-        boxCol.offset = slideOffset;
-    }
-
-    public void EndSlide()
-    {
-        isSliding = false;
-        boxCol.size = normalSize;
-        boxCol.offset = normalOffset;
-    }
-
-    private void CheckGround()
-    {
-        isGrounded = Physics2D.Raycast(
-            groundCheck.position,
-            Vector2.down,
-            checkDistance,
-            groundLayer
-        );
-    }
-
-    private void CheckLanding()
-    {
-        if (rb.linearVelocityY > 0.01f) return;
-
-        if (isGrounded)
-        {
-            isJump = false;
-            isDoubleJump = false;
             jumpCount = maxJumpCount;
+
+            _normalSize = _boxCol.size;
+            _normalOffset = _boxCol.offset;
         }
-    }
 
-    void HandleInput()
-    {
-        if (isDead) return;
+        protected virtual void Start()
+        {
+            HandleInput();
+        }
 
-        if (input.jumpPressed)
+        protected virtual void Update()
+        {
+            CheckGround();
+
+            _anim.SetBool(IsJump, isJump);
+            _anim.SetBool(IsDoubleJump, isDoubleJump);
+            _anim.SetBool(IsSliding, isSliding);
+        }
+
+        private void FixedUpdate()
+        {
+            CheckLanding();
+        }
+
+        public virtual void Init()
+        {
+            IsSet = true;
+
+            maxHp = characterInfo.hpList[0];
+            hp = maxHp;
+            damage = characterInfo.apList[0];
+        }
+
+        public virtual void AfterInit()
+        {
+            
+        }
+
+        private void Jump()
+        {
+            if (jumpCount == 0)
+            {
+                return;
+            }
+            if (isDead)
+            {
+                return;
+            }
+
+            if (jumpCount == maxJumpCount)
+            {
+                isJump = true;
+            }
+            else
+            {
+                isJump = false;
+                isDoubleJump = true;
+            }
+
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+            _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            OnJumpDetected?.Invoke();
+            jumpCount--;
+        }
+
+        private void SlideStart()
+        {
+            isSliding = true;
+            OnSlideDetected?.Invoke();
+            _boxCol.size = slideSize;
+            _boxCol.offset = slideOffset;
+        }
+
+        private void EndSlide()
+        {
+            isSliding = false;
+            _boxCol.size = _normalSize;
+            _boxCol.offset = _normalOffset;
+        }
+
+        private void CheckGround()
+        {
+            isGrounded = Physics2D.Raycast(
+                groundCheck.position,
+                Vector2.down,
+                checkDistance,
+                groundLayer
+            );
+        }
+
+        private void CheckLanding()
+        {
+            if (_rb.linearVelocityY > 0.01f)
+            {
+                return;
+            }
+
+            if (isGrounded)
+            {
+                isJump = false;
+                isDoubleJump = false;
+                jumpCount = maxJumpCount;
+            }
+        }
+
+        private void HandleInput()
+        {
+            InputManager.AddListener(ActionCode.Jump, InputType.Down, JumpInput);
+            InputManager.AddListener(ActionCode.Slide, InputType.Press, SlideInput);
+            InputManager.AddListener(ActionCode.Slide, InputType.Up, SlideEndInput);
+        }
+
+        private void OnDestroy()
+        {
+            InputManager.RemoveListener(ActionCode.Jump, InputType.Down, JumpInput);
+            InputManager.RemoveListener(ActionCode.Slide, InputType.Press, SlideInput);
+            InputManager.RemoveListener(ActionCode.Slide, InputType.Up, SlideEndInput);
+        }
+
+        private void JumpInput()
+        {
+            if (isDead)
+            {
+                return;
+            }
+                
             Jump();
 
-        if (input.slideHeld && !isJump && !isDoubleJump && !isSliding)
-            SlideStart();
+            if (isSliding)
+            {
+                EndSlide();
+            }
+        }
 
-        if (isSliding && (!input.slideHeld || isJump))
-            EndSlide();
+        private void SlideInput()
+        {
+            if (isDead)
+            {
+                return;
+            }
+                
+            if (!isJump && !isDoubleJump && !isSliding)
+            {
+                SlideStart();
+            }
+        }
+
+        private void SlideEndInput()
+        {
+            if (isDead)
+            {
+                return;
+            }
+                
+            if (isSliding)
+            {
+                EndSlide();
+            }
+        }
     }
 }

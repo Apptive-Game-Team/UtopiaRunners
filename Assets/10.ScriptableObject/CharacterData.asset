@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CharacterData
   m_EditorClassIdentifier: 
   characterInfos:
-  - name: "\uC774\uCE74\uB8E8\uC2A4"
+  - id: 0
+    name: "\uC774\uCE74\uB8E8\uC2A4"
     sprite: {fileID: 21300000, guid: f500f783385552549b0a7c9941507de2, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
@@ -25,7 +26,8 @@ MonoBehaviour:
       3\uC758 \uB300\uBBF8\uC9C0\uB97C \uC8FC\uACE0 \uBCF5\uADC0"
     skillValue: 0100000002000000030000000400000005000000
     recommendedWeapon: {fileID: 21300000, guid: 62de793acd6d10741bb1ed990d8655af, type: 3}
-  - name: "\uC774\uBE0C"
+  - id: 1
+    name: "\uC774\uBE0C"
     sprite: {fileID: 21300000, guid: 6c153b44bfad6ce4f86a1cdc5beb9200, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
@@ -36,7 +38,8 @@ MonoBehaviour:
       \uC788\uC744 \uB54C \uACF5\uACA9\uB825 20% \uC99D\uAC00"
     skillValue: 0100000002000000030000000400000005000000
     recommendedWeapon: {fileID: 21300000, guid: 54202521f83b3c141bce8afc83876a7a, type: 3}
-  - name: "\uD558\uB2C8"
+  - id: 2
+    name: "\uD558\uB2C8"
     sprite: {fileID: 21300000, guid: 77ab6370d323e164fafb73bf6d24fe68, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
@@ -46,7 +49,8 @@ MonoBehaviour:
       \uAE30\uBCF8\uC774 \uC801\uC744 10\uCD08 \uB3D9\uC548 \uAC10\uC804\uC2DC\uD0B4"
     skillValue: 0100000002000000030000000400000005000000
     recommendedWeapon: {fileID: 21300000, guid: 79b796c2410178f4298af4588ebc7538, type: 3}
-  - name: "\uB9E5"
+  - id: 3
+    name: "\uB9E5"
     sprite: {fileID: 21300000, guid: 948480d69ca544f409cc6597c503b5d1, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
@@ -56,7 +60,8 @@ MonoBehaviour:
       \uBC0F \uAC10\uC804 \uD6A8\uACFC 10%\uC99D\uAC00"
     skillValue: 0100000002000000030000000400000005000000
     recommendedWeapon: {fileID: 21300000, guid: fcfc47fcf9d77c94aa12abcce65d68ff, type: 3}
-  - name: "\uBAA8\uD2B8"
+  - id: 4
+    name: "\uBAA8\uD2B8"
     sprite: {fileID: 21300000, guid: 32e704ff56f51a9468ae7746f061b324, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
@@ -66,7 +71,8 @@ MonoBehaviour:
       \uC788\uC744 \uB54C \uC801\uC758 \uCD5C\uB300\uCCB4\uB824 10% \uAC10\uC18C"
     skillValue: 0100000002000000030000000400000005000000
     recommendedWeapon: {fileID: 21300000, guid: 01eba477c26fd464381f286f5b9278e3, type: 3}
-  - name: "\uCE74\uB85D"
+  - id: 5
+    name: "\uCE74\uB85D"
     sprite: {fileID: 21300000, guid: 499ac21c33aeb4348a2cc9fc60f47944, type: 3}
     hpList: 640000006e00000078000000820000008c000000
     apList: 0100000002000000030000000400000005000000
