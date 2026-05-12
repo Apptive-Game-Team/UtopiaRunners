@@ -29,6 +29,8 @@ namespace _01.Scripts._06.Weapon
         public GameObject skillPrefab;
         public float attackDamage;
         public float skillDamage;
+
+        public Action<float, float> OnCoolDownChanged;
     
         private WeaponSkillBase _skill;
         private float _skillCooldownTimer;
@@ -68,6 +70,7 @@ namespace _01.Scripts._06.Weapon
             if (_currentCooldown > 0)
             {
                 _currentCooldown -= Time.deltaTime;
+                OnCoolDownChanged?.Invoke(_currentCooldown, weaponInfo.coolTime);
             }
         }
 
@@ -77,6 +80,7 @@ namespace _01.Scripts._06.Weapon
             {
                 _skill.Activate();
                 _currentCooldown = weaponInfo.coolTime;
+                OnCoolDownChanged?.Invoke(_currentCooldown, weaponInfo.coolTime);
             }
         }
         
@@ -89,6 +93,8 @@ namespace _01.Scripts._06.Weapon
             {
                 _currentCooldown = 0;
             }
+            
+            OnCoolDownChanged?.Invoke(_currentCooldown, weaponInfo.coolTime);
         }
         
         public void AddAttackEffect(int count, Action<GameObject, float> effect)
