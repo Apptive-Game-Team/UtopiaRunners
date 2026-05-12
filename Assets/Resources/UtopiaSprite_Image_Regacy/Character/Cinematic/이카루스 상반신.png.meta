@@ -120,6 +120,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -334,7 +360,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_0": -5110203441139477994
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_1": 1729659132943818064
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_2": 8368900262143850071
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_3": -8807627219846727669
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_4": 6528831806716768793
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_5": 2537206039328017357
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_6": 7063660312100457552
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_7": 2703786217005220094
+      "\u110B\u1175\u110F\u1161\u1105\u116E\u1109\u1173 \u1109\u1161\u11BC\u1107\u1161\u11AB\u1109\u1175\u11AB_8": -7120402692410459494
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

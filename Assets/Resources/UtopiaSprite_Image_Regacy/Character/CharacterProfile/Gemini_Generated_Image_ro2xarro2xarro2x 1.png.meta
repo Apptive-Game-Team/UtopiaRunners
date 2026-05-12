@@ -126,6 +126,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -384,7 +410,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_0: 366703839176930369
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_1: -6431541508590874391
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_10: 5917391930298227308
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_2: -4417215575235469945
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_3: -7152032991726447463
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_4: -2879111035255401400
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_5: 6902468779045785715
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_6: -2479434923342545874
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_7: -4632723122415705509
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_8: -5717353298515474369
+      Gemini_Generated_Image_ro2xarro2xarro2x 1_9: 3801184153569034276
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

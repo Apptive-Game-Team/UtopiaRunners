@@ -149,6 +149,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -487,7 +513,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_0": -2685413504337039247
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_1": 2737091561196804816
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_10": -4109897589708549038
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_11": -2827618499598316773
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_12": -6208112546136984580
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_13": -2778582029798698974
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_2": 4848067938840165548
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_3": -9210687235560943045
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_4": 2338005188889308819
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_5": 2747406411141342726
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_6": -2062311329356052151
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_7": -2205782417419795917
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_8": 341256782029015577
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.35.53 1_9": -5799844770687129622
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
