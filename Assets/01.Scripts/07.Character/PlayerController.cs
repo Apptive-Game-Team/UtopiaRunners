@@ -13,7 +13,7 @@ namespace _01.Scripts._07.Character
 
         public Action OnJumpDetected;
         public Action OnSlideDetected;
-        public Action OnHpChanged;
+        public Action<float, float> OnHpChanged;
 
         [Header("Info")] 
         public _03.Data.CharacterInfo characterInfo;
@@ -92,9 +92,29 @@ namespace _01.Scripts._07.Character
             damage = characterInfo.apList[0];
         }
 
+        // 무기 Init 이후 추가 작업
         public virtual void AfterInit()
         {
             
+        }
+
+        public virtual void TakeDamage(float d)
+        {
+            hp -= d;
+            
+            OnHpChanged?.Invoke(hp, maxHp);
+
+            if (hp <= 0)
+            {
+                // todo : 사망
+            }
+        }
+
+        public virtual void Heal(float amount)
+        {
+            hp = Mathf.Clamp(hp + amount, 0f, maxHp);
+            
+            OnHpChanged?.Invoke(hp, maxHp);
         }
 
         private void Jump()
