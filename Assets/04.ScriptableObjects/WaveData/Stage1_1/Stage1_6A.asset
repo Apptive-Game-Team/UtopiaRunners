@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9819ef96b15645d4ebab645a31dae6ee, type: 3}
-  m_Name: Stage1_1C
+  m_Name: Stage1_6A
   m_EditorClassIdentifier: 
-  baseTime: 15
+  baseTime: 0
   spawnEvents:
-  - prefab: {fileID: 8424516164726684195, guid: 3e7816e5f177658408263d849086991d, type: 3}
-    spawnPointId: Down
+  - prefab: {fileID: 1354361046449845958, guid: 4639d2bd696d9ee468e51ce638192dc3, type: 3}
+    spawnPointId: Mid
     delayFromBaseTime: 0
