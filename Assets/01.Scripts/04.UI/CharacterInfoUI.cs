@@ -15,6 +15,8 @@ namespace _01.Scripts._04.UI
         [SerializeField] private Button characterButton;
         [SerializeField] private Sprite lockedImage;
         [SerializeField] private GameObject content;
+        [SerializeField] private UIOpen uiOpen;
+        private enum UIOpen { V, H, VAndH }
         
         private int _maxCharacterCount;
         private List<bool> _unlockedCharacters;
@@ -65,15 +67,43 @@ namespace _01.Scripts._04.UI
             CanvasGroup cg = ui.GetComponentInChildren<CanvasGroup>();
             RectTransform rt = ui.GetComponent<RectTransform>();
 
-            cg.alpha = 0;
-            rt.localScale = new Vector3(0.01f, 1f, 1f);
-            rt.anchoredPosition = new Vector2(0, -1080f);
-            ui.SetActive(true);
+            switch (uiOpen)
+            {
+                case UIOpen.V:
+                    cg.alpha = 0;
+                    rt.localScale = new Vector3(1f, 0.01f, 1f);
+                    rt.anchoredPosition = new Vector2(0, -1080f);
+                    ui.SetActive(true);
             
-            Sequence seq =  DOTween.Sequence();
-            seq.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
-            seq.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
-            seq.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
+                    Sequence seq1 =  DOTween.Sequence();
+                    seq1.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
+                    seq1.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
+                    seq1.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
+                    break;
+                case UIOpen.H:
+                    cg.alpha = 0;
+                    rt.localScale = new Vector3(0.01f, 1f, 1f);
+                    rt.anchoredPosition = new Vector2(0, -1080f);
+                    ui.SetActive(true);
+            
+                    Sequence seq2 =  DOTween.Sequence();
+                    seq2.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
+                    seq2.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
+                    seq2.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
+                    break;
+                case UIOpen.VAndH:
+                    cg.alpha = 0;
+                    rt.localScale = new Vector3(0.01f, 0.01f, 1f);
+                    rt.anchoredPosition = new Vector2(0, -1080f);
+                    ui.SetActive(true);
+            
+                    Sequence seq3 =  DOTween.Sequence();
+                    seq3.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
+                    seq3.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
+                    seq3.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
+                    break;
+            }
+            
         }
     }
 }
