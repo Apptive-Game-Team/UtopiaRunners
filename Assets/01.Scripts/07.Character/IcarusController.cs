@@ -5,7 +5,10 @@ namespace _01.Scripts._07.Character
 {
     public class IcarusController : PlayerController
     {
+        [SerializeField] private float coolTime;
+        
         private WeaponController _wc;
+        private float _timeCounter = -99f;
         
         private void OnEnable()
         {
@@ -31,7 +34,13 @@ namespace _01.Scripts._07.Character
 
         private void CoolDownSkill()
         {
+            if (Time.time - _timeCounter < coolTime)
+            {
+                return;
+            }
+            
             _wc.ReduceCooldown(10f);
+            _timeCounter = Time.time;
         }
 
         public override void Init()
