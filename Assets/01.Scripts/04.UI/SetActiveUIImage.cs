@@ -45,7 +45,7 @@ namespace _01.Scripts._04.UI
 
             Sequence seq =  DOTween.Sequence();
             seq.Append(cg.DOFade(0, 0.1f).SetEase(Ease.OutCubic));
-            seq.Append(rt.DOScale(new Vector3(0.01f, 1f, 1f), 0.2f).SetEase(Ease.OutCubic));
+            seq.Append(rt.DOScale(new Vector3(1f, 0.01f, 1f), 0.2f).SetEase(Ease.OutCubic));
             seq.Append(rt.DOAnchorPos(new Vector2(0, -1080f), 0.2f).SetEase(Ease.OutCubic));
              
             yield return seq.WaitForCompletion();
