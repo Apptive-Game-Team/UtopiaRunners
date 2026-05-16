@@ -1,8 +1,9 @@
 using System.Collections;
+using _01.Scripts._06.Weapon;
 using UnityEngine;
 
 /// <summary>
-/// ¹«±â ½ºÅ³ ½ºÅ©¸³Æ® ±âº» ÇüÅÂ
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½âº» ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class WeaponSkill : WeaponSkillBase
 {

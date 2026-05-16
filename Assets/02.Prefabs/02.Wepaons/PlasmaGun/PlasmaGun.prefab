@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5564881241307096138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186231344446282217}
+  - component: {fileID: -7971979400390625480}
+  m_Layer: 0
+  m_Name: PlasmaGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186231344446282217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564881241307096138}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.75, y: -1.180006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7971979400390625480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564881241307096138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43888497144aca47bd3590b67fe28b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponInfo:
+    id: 0
+    name: 
+    sprite: {fileID: 0}
+    apList: 
+    skillValue: 
+    coolTime: 0
+    attackSpeed: 0
+    characteristic: 
+    skillDescription: 
+    recommendedCharacter: 
+  weaponId: 0
+  attackPrefab: {fileID: 7668292900833359366, guid: e6932816358294043bb3bd245ecca234, type: 3}
+  skillPrefab: {fileID: 2930945893861991155, guid: c359af35558d4ed4c825b0977ed3fdc6, type: 3}
+  attackDamage: 0
+  skillDamage: 0
+  explosionRange: 5

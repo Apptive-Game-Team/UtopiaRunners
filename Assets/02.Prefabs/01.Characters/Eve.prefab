@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481125564490918373}
   - component: {fileID: 4384565825837508728}
-  - component: {fileID: 3707617843044324674}
-  - component: {fileID: 2739515864498176398}
-  - component: {fileID: 2700064191546260908}
+  - component: {fileID: 5598496239521704737}
   - component: {fileID: 895115462007694991}
   - component: {fileID: 3309061083887682456}
   - component: {fileID: 6085201427233241002}
@@ -22,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &481125564490918373
 Transform:
   m_ObjectHideFlags: 0
@@ -94,7 +92,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3707617843044324674
+--- !u!114 &5598496239521704737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,55 +101,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 2803526213966021330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df03c090dd75ac54497ec8c083c313b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eb4dc05e0a8320428a8be4b205dec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 17.5
-  maxJumpCount: 2
-  jumpCount: 0
-  slideSize: {x: 14, y: 8}
-  slideOffset: {x: 0, y: -3.5}
+  characterInfo:
+    id: 0
+    name: 
+    sprite: {fileID: 0}
+    hpList: 
+    apList: 
+    story: 
+    skillDescription: 
+    skillValue: 
+    recommendedWeapon: {fileID: 0}
+  id: 1
+  maxHp: 0
+  hp: 0
+  damage: 0
   groundCheck: {fileID: 2745445967739496769}
   checkDistance: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   isJump: 0
   isDoubleJump: 0
   isSliding: 0
   isGrounded: 0
   isDead: 0
---- !u!114 &2739515864498176398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2803526213966021330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beaa207af6d1ef04391184fd0caf6f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 0}
-  maxHp: 0
-  currentHp: 0
---- !u!114 &2700064191546260908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2803526213966021330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aa23ed5a20ea5408ab0538f90cae72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpPressed: 0
-  slideHeld: 0
-  skillPressed: 0
-  tagPressed: 0
+  jumpForce: 17.5
+  maxJumpCount: 2
+  jumpCount: 0
+  slideSize: {x: 14, y: 8}
+  slideOffset: {x: 0, y: -3.5}
+  enemyData:
+  - {fileID: 11400000, guid: 71dc15487ef7c2848a4897b675a2a1ca, type: 2}
 --- !u!50 &895115462007694991
 Rigidbody2D:
   serializedVersion: 5

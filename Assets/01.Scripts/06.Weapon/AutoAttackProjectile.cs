@@ -1,65 +1,84 @@
-using System.Collections;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoAttackProjectile : MonoBehaviour
+namespace _01.Scripts._06.Weapon
 {
-    public float speed = 10f;
-
-    public GameObject targetEnemy;
-    private float damage;
-
-    public void Init(float damage)
+    public class AutoAttackProjectile : MonoBehaviour
     {
-        this.damage = damage;
-    }
+        [SerializeField] private float speed = 10f;
+        private GameObject _targetEnemy;
+        private Vector3 _targetDirection;
+        
+        protected Action<GameObject, float> OnHitEffects;
+        protected float Damage;
 
-    private void Update()
-    {
-        if (targetEnemy == null)
+        public void Init(float damage)
         {
-            targetEnemy = FindNearestEnemy();
-
-            if (targetEnemy == null)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            Damage = damage;
+        }
+        
+        public void AddEffect(Action<GameObject, float> effect)
+        {
+            OnHitEffects += effect;
         }
 
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            targetEnemy.transform.position,
-            speed * Time.deltaTime
-        );
-    }
+        private void Update()
+        {
+            if (_targetEnemy == null)
+            {
+                _targetEnemy = FindNearestEnemy();
+
+                if (_targetEnemy == null)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+                
+                _targetDirection = (_targetEnemy.transform.position - transform.position).normalized;
+            }
+            
+            transform.Translate(_targetDirection * (speed * Time.deltaTime));
+        }
     
-    private GameObject FindNearestEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        GameObject nearestEnemy = null;
-        float nearestDistance = float.MaxValue;
-
-        foreach (GameObject enemy in enemies)
+        private GameObject FindNearestEnemy()
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-            if (distance < nearestDistance)
+            GameObject nearestEnemy = null;
+            float nearestDistance = float.MaxValue;
+
+            foreach (GameObject enemy in enemies)
             {
-                nearestDistance = distance;
-                nearestEnemy = enemy;
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestEnemy = enemy;
+                }
+            }
+
+            return nearestEnemy;
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                ApplyHit(collision.gameObject);
+                Destroy(gameObject);
             }
         }
 
-        return nearestEnemy;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
+        protected virtual void ApplyHit(GameObject enemy)
         {
-            collision.GetComponent<EnemyHp>().TakeDamage(damage);
-            Destroy(gameObject);
+            float damage = CalculateDamage();
+            enemy.GetComponent<EnemyHp>().TakeDamage(damage);
+            
+            OnHitEffects?.Invoke(enemy, damage);
         }
+        
+        protected virtual float CalculateDamage() => Damage;
     }
 }
