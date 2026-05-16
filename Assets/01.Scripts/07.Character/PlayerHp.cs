@@ -1,3 +1,4 @@
+using _01.Scripts._07.Character;
 using UnityEngine;
 
 public class PlayerHp : MonoBehaviour
@@ -28,8 +29,8 @@ public class PlayerHp : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!pc.isInvincible)
-            currentHp -= damage;
+        /*if (!pc.isInvincible)
+            currentHp -= damage;*/
     }
 
     public void Die()

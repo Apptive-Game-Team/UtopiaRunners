@@ -1,3 +1,4 @@
+using _01.Scripts._07.Character;
 using UnityEngine;
 
 public abstract class EnemyPatternBase : MonoBehaviour
@@ -17,7 +18,7 @@ public abstract class EnemyPatternBase : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHp>().TakeDamage(damage);
+            collision.GetComponent<PlayerController>().TakeDamage(damage);
 
             if (attackType == EnemyAttackType.Bullet)
                 Destroy(gameObject);

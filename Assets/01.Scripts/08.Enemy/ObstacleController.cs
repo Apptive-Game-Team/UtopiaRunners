@@ -1,3 +1,4 @@
+using _01.Scripts._07.Character;
 using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
@@ -14,7 +15,7 @@ public class ObstacleController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHp playerHp = collision.GetComponent<PlayerHp>();
+            PlayerController playerHp = collision.GetComponent<PlayerController>();
 
             if (playerHp != null)
                 playerHp.TakeDamage(9999f);

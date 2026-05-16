@@ -4,6 +4,7 @@ using System.Linq;
 using _01.Scripts._03.Data;
 using _01.Scripts._07.Character;
 using _01.Scripts._06.Weapon;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -14,14 +15,11 @@ namespace _01.Scripts._00.Manager
     {
         [Header("In Game Setting")] 
         [SerializeField] private CharacterData characterData;
+        [SerializeField] private GameObject gameOverPrefab;
         [SerializeField] private _04.UI.WeaponData weaponData;
         [SerializeField] private GameObject[] characters;
         [SerializeField] private GameObject[] weapons;
         [SerializeField] private Vector2 startPosition;
-        [SerializeField] private Slider mainCharacterHp;
-        [SerializeField] private Slider subCharacterHp;
-        [SerializeField] private Image weaponImage;
-        [SerializeField] private Slider skillCoolTimeSlider;
 
         [Header("Tag Option")]
         [SerializeField] private float tagCooldown = 5f;
@@ -30,6 +28,26 @@ namespace _01.Scripts._00.Manager
         public PlayerController mainCharacter;
         public PlayerController subCharacter;
         public WeaponController weapon;
+        
+        private Slider _mainCharacterHp;
+        private Slider _subCharacterHp;
+        private Image _weaponImage;
+        private Slider _skillCoolTimeSlider;
+
+        private void Awake()
+        {
+            InitialCaching();
+        }
+
+        private void InitialCaching()
+        {
+            GameObject inGameUI = GameObject.Find("InGameUI");
+
+            _mainCharacterHp = inGameUI.transform.GetChild(0).GetComponent<Slider>();
+            _subCharacterHp = inGameUI.transform.GetChild(1).GetComponent<Slider>();
+            _weaponImage = inGameUI.transform.GetChild(2).GetComponent<Image>();
+            _skillCoolTimeSlider = inGameUI.transform.GetChild(3).GetComponent<Slider>();
+        }
 
         private void Start()
         {
@@ -61,28 +79,33 @@ namespace _01.Scripts._00.Manager
             subCharacter.Init();
             
             weapon.Initialize(mainCharacter.damage);
-            weaponImage.sprite = weapon.weaponInfo.sprite;
+            _weaponImage.sprite = weapon.weaponInfo.sprite;
             
             mainCharacter.AfterInit();
             subCharacter.AfterInit();
 
-            mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
-            mainCharacter.OnHpChanged += (cur, max) => SetCharacterHp(mainCharacterHp, cur, max); 
-            subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
-            subCharacter.OnHpChanged += (cur, max) => SetCharacterHp(subCharacterHp, cur, max);
+            _mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
+            _subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
+
+            mainCharacter.OnHpChanged += UpdateHpUI;
+            subCharacter.OnHpChanged += UpdateHpUI;
+
+            mainCharacter.OnDead += CheckDead;
+            subCharacter.OnDead += CheckDead;
+            
             weapon.OnCoolDownChanged += SetSkillCoolTime;
         }
         
-        private void SetCharacterHp(Slider hpSlider, float currentHp, float maxHp)
+        private void UpdateHpUI()
         {
-            float ratio = currentHp / maxHp;
-            hpSlider.value = ratio;
+            _mainCharacterHp.value = mainCharacter.hp / mainCharacter.maxHp;
+            _subCharacterHp.value = subCharacter.hp / subCharacter.maxHp;
         }
 
         private void SetSkillCoolTime(float current, float max)
         {
             float ratio = (max - current) / max;
-            skillCoolTimeSlider.value = ratio;
+            _skillCoolTimeSlider.value = ratio;
 
             if (current == 0)
             {
@@ -105,18 +128,12 @@ namespace _01.Scripts._00.Manager
             weapon.transform.SetParent(subCharacter.transform, false);
             mainCharacter.gameObject.SetActive(false);
             
-            mainCharacter.OnHpChanged -= (cur, max) => SetCharacterHp(mainCharacterHp, cur, max); 
-            subCharacter.OnHpChanged -= (cur, max) => SetCharacterHp(subCharacterHp, cur, max);
-            
             (mainCharacter, subCharacter) = (subCharacter, mainCharacter);
             
-            mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
-            mainCharacter.OnHpChanged += (cur, max) => SetCharacterHp(mainCharacterHp, cur, max); 
-            subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
-            subCharacter.OnHpChanged += (cur, max) => SetCharacterHp(subCharacterHp, cur, max);
+            _mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
+            _subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
             
-            mainCharacter.TakeDamage(0);
-            subCharacter.TakeDamage(0);
+            UpdateHpUI();
             
             weapon.SetDamage(mainCharacter.GetComponent<PlayerController>().damage);
         }
@@ -126,6 +143,20 @@ namespace _01.Scripts._00.Manager
             _canTag = false;
             yield return new WaitForSeconds(tagCooldown);
             _canTag = true;
+        }
+
+        private void CheckDead()
+        {
+            if (!subCharacter.isDead)
+            {
+                Tag();
+            }
+            else
+            {
+                mainCharacter.gameObject.SetActive(false);
+                Instantiate(gameOverPrefab);
+                Time.timeScale = 0;
+            }
         }
 
         private void OnDestroy()

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1003993477626062602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4207013342704234338}
+  - component: {fileID: 799148027979435834}
+  m_Layer: 0
+  m_Name: InGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4207013342704234338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003993477626062602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: -0.01, z: 0.017361166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &799148027979435834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003993477626062602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1fd06bfbbe30e4ba3be44fb3c21b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 07b4952ee83f24041bfeb716b1952f5b, type: 2}
+  gameOverPrefab: {fileID: 6110438079998667341, guid: 04b1d09716a71f34ebcda19fab5e3581, type: 3}
+  weaponData: {fileID: 11400000, guid: 06ec343dc3fb5164c95a420c69890645, type: 2}
+  characters:
+  - {fileID: 8126271443251588313, guid: b5f732c3c2f5224459293663a92723db, type: 3}
+  - {fileID: 2803526213966021330, guid: f66b694da13f5d84cb569956de72cc89, type: 3}
+  - {fileID: 8126271443251588313, guid: afaa246b9e9bf06479dea1505bb297a2, type: 3}
+  - {fileID: 8126271443251588313, guid: 885cc5046b09af4469656de96a772cd3, type: 3}
+  - {fileID: 8126271443251588313, guid: 1016dc8d5bd91c44590228e714807d89, type: 3}
+  - {fileID: 8126271443251588313, guid: 2b2486ea2315bc049bf8a435f35febf4, type: 3}
+  weapons:
+  - {fileID: 5564881241307096138, guid: 4966b1a8cfb13d44abdd17bffdf9d8b3, type: 3}
+  - {fileID: 5564881241307096138, guid: f0abf282e0d01054bbc50d2ad40ddcd0, type: 3}
+  - {fileID: 5564881241307096138, guid: f98b50606295baa43acd3e3a4df3282c, type: 3}
+  - {fileID: 5564881241307096138, guid: 7f7358c0b8dcf9c43893869f727d2b72, type: 3}
+  - {fileID: 5564881241307096138, guid: 6143fffea30830e49a43d193c4b80d96, type: 3}
+  - {fileID: 5564881241307096138, guid: d224b93651c4f0640954e1da98e1b933, type: 3}
+  startPosition: {x: -5.75, y: -1.180006}
+  mainCharacterHp: {fileID: 0}
+  subCharacterHp: {fileID: 0}
+  weaponImage: {fileID: 0}
+  skillCoolTimeSlider: {fileID: 0}
+  tagCooldown: 5
+  mainCharacter: {fileID: 0}
+  subCharacter: {fileID: 0}
+  weapon: {fileID: 0}
