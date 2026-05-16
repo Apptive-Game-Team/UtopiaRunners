@@ -6,9 +6,13 @@ public class EnemyController : MonoBehaviour
     [Header("Components")]
     public EnemyData enemyData;
 
-    GameObject firePoint;
+    public GameObject firePoint;
 
-    
+    private void Start()
+    {
+        StartCoroutine(EnemyPattern());
+    }
+
     private IEnumerator EnemyPattern()
     {
         while (true)
@@ -20,8 +24,10 @@ public class EnemyController : MonoBehaviour
             );
 
             EnemyPatternBase patternScript = pattern.GetComponent<EnemyPatternBase>();
-            /*if (patternScript != null)
-                patternScript.Init()*/
+            if (patternScript != null)
+                patternScript.Init(this, enemyData.attackDamage, enemyData.attackType);
+
+            yield return new WaitForSeconds(enemyData.cooldown);
         }
     }
 }
