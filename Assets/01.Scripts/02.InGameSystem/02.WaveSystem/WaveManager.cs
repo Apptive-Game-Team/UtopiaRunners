@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Push Option")]
-    [SerializeField] private float pushDistance = 1.0f;
-    [SerializeField] private float checkRadius = 0.1f;
-    [SerializeField] private LayerMask enemyLayer;
-
     [Header("Wave Data")]
     [SerializeField] private StageWaveData stageWaveData;
     [SerializeField] private SpawnPoint[] spawnPoints;
@@ -105,29 +100,11 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        Vector3 spawnPos = point.position;
-
-        PushEnemiesIfOccupied(spawnPos);
-
-        Instantiate(scheduled.prefab, spawnPos, Quaternion.identity);
-    }
-
-    private void PushEnemiesIfOccupied(Vector3 position)
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(position, checkRadius, enemyLayer);
-
-        foreach (Collider2D hit in hits)
-        {
-            if (!hit.CompareTag("Enemy")) continue;
-
-            GameObject enemy = hit.gameObject;
-
-            Vector3 nextPosition = enemy.transform.position + Vector3.left * pushDistance;
-
-            PushEnemiesIfOccupied(nextPosition);
-
-            enemy.transform.position = nextPosition;
-        }
+        Instantiate(
+            scheduled.prefab,
+            point.position,
+            Quaternion.identity
+        );
     }
 
     private void CheckStageClear()
@@ -184,7 +161,9 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log("게임 오버");
 
-        gameOverUI.SetActive(true);
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
         Time.timeScale = 0f;
     }
 
