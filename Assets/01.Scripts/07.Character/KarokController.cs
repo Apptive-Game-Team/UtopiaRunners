@@ -8,27 +8,19 @@ namespace _01.Scripts._07.Character
         private WeaponController _wc;
         private float _originDamage;
         private float _originWeaponAttackSpeed;
-        
-        private void OnEnable()
+
+        public override void TakeDamage(float d)
         {
-            if (!IsSet)
-            {
-                return;
-            }
-            
-            OnHpChanged += AttackEffect;
-            OnHpChanged += DrainEffect;
+            base.TakeDamage(d);
+            AttackEffect();
+            DrainEffect();
         }
 
-        private void OnDisable()
+        public override void Heal(float d)
         {
-            if (!IsSet)
-            {
-                return;
-            }
-            
-            OnHpChanged -= AttackEffect;
-            OnHpChanged -= DrainEffect;
+            base.Heal(d);
+            AttackEffect();
+            DrainEffect();
         }
 
         private void AttackEffect()
@@ -71,12 +63,6 @@ namespace _01.Scripts._07.Character
         {
             _wc = FindAnyObjectByType<WeaponController>();
             _originWeaponAttackSpeed = _wc.weaponInfo.attackSpeed;
-            
-            if (gameObject.activeSelf)
-            {
-                OnHpChanged += AttackEffect;
-                OnHpChanged += DrainEffect;
-            }
         }
     }
 }

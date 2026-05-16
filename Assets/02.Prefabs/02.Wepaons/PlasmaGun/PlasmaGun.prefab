@@ -57,7 +57,7 @@ MonoBehaviour:
     recommendedCharacter: 
   weaponId: 0
   attackPrefab: {fileID: 7668292900833359366, guid: e6932816358294043bb3bd245ecca234, type: 3}
-  skillPrefab: {fileID: 7668292900833359366, guid: bbb7f72c7024f134bb0a888a95dd424c, type: 3}
+  skillPrefab: {fileID: 2930945893861991155, guid: c359af35558d4ed4c825b0977ed3fdc6, type: 3}
   attackDamage: 0
   skillDamage: 0
   explosionRange: 5

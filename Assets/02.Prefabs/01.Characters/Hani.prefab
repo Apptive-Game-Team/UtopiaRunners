@@ -145,7 +145,7 @@ MonoBehaviour:
     skillDescription: 
     skillValue: 
     recommendedWeapon: {fileID: 0}
-  id: 0
+  id: 2
   maxHp: 0
   hp: 0
   damage: 0

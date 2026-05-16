@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using _01.Scripts._03.Data;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,9 +54,26 @@ namespace _01.Scripts._04.UI
                 button.onClick.AddListener(() =>
                 {
                     upgradeUI.representativeCharacterIndex = index;
-                    upgradeUI.gameObject.SetActive(true);
+                    //upgradeUI.gameObject.SetActive(true);
+                    UIOpenEffect(upgradeUI.gameObject);
                 });
             }
+        }
+
+        private void UIOpenEffect(GameObject ui)
+        {
+            CanvasGroup cg = ui.GetComponentInChildren<CanvasGroup>();
+            RectTransform rt = ui.GetComponent<RectTransform>();
+
+            cg.alpha = 0;
+            rt.localScale = new Vector3(1f, 0.01f, 1f);
+            rt.anchoredPosition = new Vector2(0, -1080f);
+            ui.SetActive(true);
+            
+            Sequence seq1 =  DOTween.Sequence();
+            seq1.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
+            seq1.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
+            seq1.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
         }
     }
 }

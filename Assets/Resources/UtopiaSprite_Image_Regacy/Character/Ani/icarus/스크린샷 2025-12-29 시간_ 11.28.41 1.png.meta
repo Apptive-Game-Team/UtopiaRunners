@@ -129,6 +129,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -352,7 +378,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_0": 3501472987723392973
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_1": -855700580577598062
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_2": -764434490567268560
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_3": 2390343227304366102
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_4": -4771164608176977492
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_5": 5980733585408923449
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_6": -1703113784490870336
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_7": 7720068544316572154
+      "\u1109\u1173\u110F\u1173\u1105\u1175\u11AB\u1109\u1163\u11BA 2025-12-29 \u1109\u1175\u1100\u1161\u11AB_ 11.28.41 1_8": -3762704162244047085
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
