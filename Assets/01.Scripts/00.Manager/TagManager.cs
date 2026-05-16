@@ -1,4 +1,5 @@
 using System.Collections;
+using _01.Scripts._07.Character;
 using UnityEngine;
 
 public class TagManager : MonoBehaviour
@@ -44,11 +45,9 @@ public class TagManager : MonoBehaviour
         weapon.transform.SetParent(otherCharacter.transform, false);
         currentCharacter.SetActive(false);
         PlayerController pc = otherCharacter.GetComponent<PlayerController>();
-        pc.StartInvincible();
+        //pc.StartInvincible();
 
-        GameObject temp = currentCharacter;
-        currentCharacter = otherCharacter;
-        otherCharacter = temp;
+        (currentCharacter, otherCharacter) = (otherCharacter, currentCharacter);
     }
 
     private IEnumerator TagCooldown()

@@ -14,9 +14,8 @@ namespace _01.Scripts._07.Character
         //private bool _hasShield;
         private Coroutine _shieldCoroutine;
 
-        protected override void Start()
+        private void Start()
         {
-            base.Start();
             _originDamage = damage;
         }
 

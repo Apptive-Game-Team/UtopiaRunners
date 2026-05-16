@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 07b4952ee83f24041bfeb716b1952f5b, type: 2}
+  gameOverPrefab: {fileID: 6110438079998667341, guid: 04b1d09716a71f34ebcda19fab5e3581, type: 3}
   weaponData: {fileID: 11400000, guid: 06ec343dc3fb5164c95a420c69890645, type: 2}
   characters:
   - {fileID: 8126271443251588313, guid: b5f732c3c2f5224459293663a92723db, type: 3}

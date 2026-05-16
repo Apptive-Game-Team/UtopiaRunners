@@ -13,7 +13,8 @@ namespace _01.Scripts._07.Character
 
         public Action OnJumpDetected;
         public Action OnSlideDetected;
-        public Action<float, float> OnHpChanged;
+        public Action OnHpChanged;
+        public Action OnDead;
 
         [Header("Info")] 
         public _03.Data.CharacterInfo characterInfo;
@@ -62,13 +63,10 @@ namespace _01.Scripts._07.Character
 
             _normalSize = _boxCol.size;
             _normalOffset = _boxCol.offset;
-        }
-
-        protected virtual void Start()
-        {
+            
             HandleInput();
         }
-
+        
         protected virtual void Update()
         {
             CheckGround();
@@ -102,19 +100,20 @@ namespace _01.Scripts._07.Character
         {
             hp -= d;
             
-            OnHpChanged?.Invoke(hp, maxHp);
+            OnHpChanged?.Invoke();
 
             if (hp <= 0)
             {
-                // todo : 사망
+                isDead = true;
+                OnDead?.Invoke();
             }
         }
-
+        
         public virtual void Heal(float amount)
         {
             hp = Mathf.Clamp(hp + amount, 0f, maxHp);
             
-            OnHpChanged?.Invoke(hp, maxHp);
+            OnHpChanged?.Invoke();
         }
 
         private void Jump()
