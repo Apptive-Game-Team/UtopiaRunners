@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [Header("Wave Data")]
     [SerializeField] private StageWaveData stageWaveData;
     [SerializeField] private SpawnPoint[] spawnPoints;
+
+    [Header("Game Over Option")]
+    public float gameOverX = -8f;
+    [SerializeField] private GameObject gameOverUI;
 
     private Dictionary<string, Transform> spawnPointMap = new Dictionary<string, Transform>();
     private List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
@@ -12,6 +17,8 @@ public class WaveManager : MonoBehaviour
     private float elapsedTime;
     private int currentSpawnIndex;
     private bool isPlaying;
+    private bool isClearChecked;
+    private bool isGameOver;
 
     private void Awake()
     {
@@ -42,13 +49,24 @@ public class WaveManager : MonoBehaviour
             Spawn(scheduledSpawns[currentSpawnIndex]);
             currentSpawnIndex++;
         }
+
+        CheckEnemyOverflow();
+        CheckStageClear();
     }
 
     public void StartStage()
     {
         elapsedTime = 0f;
         currentSpawnIndex = 0;
+
         isPlaying = true;
+        isClearChecked = false;
+        isGameOver = false;
+
+        if (GoldManager.Instance != null)
+        {
+            GoldManager.Instance.ResetStageGold();
+        }
     }
 
     private void BuildSchedule()
@@ -79,11 +97,74 @@ public class WaveManager : MonoBehaviour
     {
         if (!spawnPointMap.TryGetValue(scheduled.spawnPointId, out Transform point))
         {
-            Debug.LogWarning($"SpawnPoint ID를 찾을 수 없음: {scheduled.spawnPointId}");
             return;
         }
 
-        Instantiate(scheduled.prefab, point.position, Quaternion.identity);
+        Instantiate(
+            scheduled.prefab,
+            point.position,
+            Quaternion.identity
+        );
+    }
+
+    private void CheckStageClear()
+    {
+        if (isClearChecked) return;
+        if (isGameOver) return;
+
+        bool allWavesSpawned = currentSpawnIndex >= scheduledSpawns.Count;
+
+        if (!allWavesSpawned) return;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length == 0)
+        {
+            StageClear();
+        }
+    }
+
+    private void StageClear()
+    {
+        isClearChecked = true;
+        isPlaying = false;
+
+        if (GoldManager.Instance != null)
+        {
+            GoldManager.Instance.ApplyClearGold();
+        }
+
+        Debug.Log("게임 클리어");
+    }
+
+    private void CheckEnemyOverflow()
+    {
+        if (isGameOver) return;
+        if (isClearChecked) return;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy.transform.position.x <= gameOverX)
+            {
+                GameOver();
+                return;
+            }
+        }
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+        isPlaying = false;
+
+        Debug.Log("게임 오버");
+
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
+        Time.timeScale = 0f;
     }
 
     private class ScheduledSpawn

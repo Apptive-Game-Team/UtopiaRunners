@@ -15,3 +15,4 @@ MonoBehaviour:
   waveTimelines:
   - {fileID: 11400000, guid: e88867c2af64e734d89521c74a47adbd, type: 2}
   - {fileID: 11400000, guid: dfaa222dfef541b4cbe59b0b37b60d08, type: 2}
+  - {fileID: 11400000, guid: 77304b606ffadd04fb646f863ed30bca, type: 2}

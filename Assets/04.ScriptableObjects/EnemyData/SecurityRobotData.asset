@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d53c8a4d543b4a84b8e5149fab30dd54, type: 3}
-  m_Name: MeleeDroneData
+  m_Name: SecurityRobotData
   m_EditorClassIdentifier: 
-  enemyName: MeleeDrone
-  attackDamage: 1
-  healthPoint: 5
+  enemyName: "\uBCF4\uC548 \uB85C\uBD07"
+  attackDamage: 6
+  healthPoint: 6
+  enemyPatternPrefab: {fileID: 7735932227129044953, guid: c45b76d085d63814895c655e9bc991df, type: 3}
+  cooldown: 3
