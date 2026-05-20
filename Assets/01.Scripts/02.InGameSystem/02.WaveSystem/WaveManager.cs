@@ -5,13 +5,14 @@ public class WaveManager : MonoBehaviour
 {
     [Header("Wave Data")]
     [SerializeField] private StageWaveData stageWaveData;
-    [SerializeField] private SpawnPoint[] spawnPoints;
+
+    [Header("Systems")]
+    [SerializeField] private EnemySlotManager enemySlotManager;
 
     [Header("Game Over Option")]
     public float gameOverX = -8f;
     [SerializeField] private GameObject gameOverUI;
 
-    private Dictionary<string, Transform> spawnPointMap = new Dictionary<string, Transform>();
     private List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
 
     private float elapsedTime;
@@ -19,17 +20,6 @@ public class WaveManager : MonoBehaviour
     private bool isPlaying;
     private bool isClearChecked;
     private bool isGameOver;
-
-    private void Awake()
-    {
-        foreach (SpawnPoint point in spawnPoints)
-        {
-            if (point == null) continue;
-
-            if (!spawnPointMap.ContainsKey(point.pointId))
-                spawnPointMap.Add(point.pointId, point.transform);
-        }
-    }
 
     private void Start()
     {
@@ -73,6 +63,8 @@ public class WaveManager : MonoBehaviour
     {
         scheduledSpawns.Clear();
 
+        if (stageWaveData == null) return;
+
         foreach (WaveTimelineData timeline in stageWaveData.waveTimelines)
         {
             if (timeline == null) continue;
@@ -84,7 +76,7 @@ public class WaveManager : MonoBehaviour
                 scheduledSpawns.Add(new ScheduledSpawn
                 {
                     prefab = spawnEvent.prefab,
-                    spawnPointId = spawnEvent.spawnPointId,
+                    lane = spawnEvent.lane,
                     spawnTime = timeline.baseTime + spawnEvent.delayFromBaseTime
                 });
             }
@@ -95,15 +87,11 @@ public class WaveManager : MonoBehaviour
 
     private void Spawn(ScheduledSpawn scheduled)
     {
-        if (!spawnPointMap.TryGetValue(scheduled.spawnPointId, out Transform point))
-        {
-            return;
-        }
+        if (enemySlotManager == null) return;
 
-        Instantiate(
+        enemySlotManager.SpawnEnemy(
             scheduled.prefab,
-            point.position,
-            Quaternion.identity
+            scheduled.lane
         );
     }
 
@@ -170,7 +158,7 @@ public class WaveManager : MonoBehaviour
     private class ScheduledSpawn
     {
         public GameObject prefab;
-        public string spawnPointId;
+        public EnemyLane lane;
         public float spawnTime;
     }
 }
