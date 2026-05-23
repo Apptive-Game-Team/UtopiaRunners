@@ -2416,7 +2416,7 @@ GameObject:
   - component: {fileID: 1522011290}
   - component: {fileID: 1522011289}
   m_Layer: 5
-  m_Name: RepresentativeCharacterImage
+  m_Name: CharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2572,12 +2572,12 @@ MonoBehaviour:
   characterNameText: {fileID: 1597302178}
   characterImage: {fileID: 1522011289}
   upgradeStat: {fileID: 441774365}
-  representativeCharacterSelectButton: {fileID: 1884441043}
+  characterSelectButton: {fileID: 1884441043}
   characterUpgradeButton: {fileID: 1410755785}
   characterStory: {fileID: 1997827281}
   characterSkillDescription: {fileID: 2144748937}
   characterWeapon: {fileID: 7183230}
-  representativeCharacterIndex: 0
+  characterIndex: 0
 --- !u!1 &1597302176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2877,7 @@ GameObject:
   - component: {fileID: 1884441044}
   - component: {fileID: 1884441043}
   m_Layer: 5
-  m_Name: RepresentativeCharacterSelectButton
+  m_Name: CharacterSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

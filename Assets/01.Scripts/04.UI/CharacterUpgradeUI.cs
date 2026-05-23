@@ -2,6 +2,7 @@ using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _01.Scripts._04.UI
@@ -12,13 +13,13 @@ namespace _01.Scripts._04.UI
         [SerializeField] private TextMeshProUGUI characterNameText;
         [SerializeField] private Image characterImage;
         [SerializeField] private TextMeshProUGUI upgradeStat;
-        [SerializeField] private Button representativeCharacterSelectButton;
+        [SerializeField] private Button characterSelectButton;
         [SerializeField] private Button characterUpgradeButton;
         [SerializeField] private TextMeshProUGUI characterStory;
         [SerializeField] private TextMeshProUGUI characterSkillDescription;
         [SerializeField] private Image characterWeapon;
         
-        public int representativeCharacterIndex;
+        public int characterIndex;
         
         private _03.Data.CharacterInfo _characterInfo;
         
@@ -27,31 +28,32 @@ namespace _01.Scripts._04.UI
         {
             PlayerData playerData = GameManager.Instance.playerData;
             
-            _characterInfo = characterData.characterInfos[representativeCharacterIndex];
+            _characterInfo = characterData.characterInfos[characterIndex];
             
             characterImage.sprite = _characterInfo.sprite;
             characterNameText.text = _characterInfo.name;
             UpdateStatText();
 
             
-            representativeCharacterSelectButton.interactable = true;
+            characterSelectButton.interactable = true;
             characterUpgradeButton.interactable = true;
+
+            int otherCharacterIdx = StageManager.Instance.selectedCharacterIdx == 0 ? 1 : 0;
             
-            if (playerData.representativeCharacter == representativeCharacterIndex)
+            if (StageManager.Instance.selectedCharacters[otherCharacterIdx] == characterIndex)
             {
-                representativeCharacterSelectButton.interactable = false;
+                characterSelectButton.interactable = false;
             }
             else
             {
-                representativeCharacterSelectButton.onClick.RemoveAllListeners();
-                representativeCharacterSelectButton.onClick.AddListener(() =>
+                characterSelectButton.onClick.RemoveAllListeners();
+                characterSelectButton.onClick.AddListener(() =>
                 {
-                    playerData.representativeCharacter = representativeCharacterIndex;
-                    representativeCharacterSelectButton.interactable = false;
+                    StageManager.Instance.selectedCharacters[StageManager.Instance.selectedCharacterIdx] = characterIndex;
                 });
             }
 
-            if (playerData.characterGrade[representativeCharacterIndex] >= _characterInfo.apList.Count - 1)
+            if (playerData.characterGrade[characterIndex] >= _characterInfo.apList.Count - 1)
             {
                 characterUpgradeButton.interactable = false;
             }
@@ -62,11 +64,11 @@ namespace _01.Scripts._04.UI
                 characterUpgradeButton.onClick.RemoveAllListeners();
                 characterUpgradeButton.onClick.AddListener(() =>
                 {
-                    playerData.characterGrade[representativeCharacterIndex] = 
-                        Mathf.Min(_characterInfo.apList.Count - 1, playerData.characterGrade[representativeCharacterIndex] + 1);
+                    playerData.characterGrade[characterIndex] = 
+                        Mathf.Min(_characterInfo.apList.Count - 1, playerData.characterGrade[characterIndex] + 1);
                     UpdateStatText();
                     
-                    if (playerData.characterGrade[representativeCharacterIndex] >= _characterInfo.apList.Count - 1)
+                    if (playerData.characterGrade[characterIndex] >= _characterInfo.apList.Count - 1)
                     {
                         characterUpgradeButton.interactable = false;
                     }
@@ -82,15 +84,15 @@ namespace _01.Scripts._04.UI
         {
             PlayerData playerData = GameManager.Instance.playerData;
             
-            upgradeStat.text = $"Hp : {_characterInfo.hpList[playerData.characterGrade[representativeCharacterIndex]]}";
-            if (playerData.characterGrade[representativeCharacterIndex] < _characterInfo.apList.Count - 1)
+            upgradeStat.text = $"Hp : {_characterInfo.hpList[playerData.characterGrade[characterIndex]]}";
+            if (playerData.characterGrade[characterIndex] < _characterInfo.apList.Count - 1)
             {
-                upgradeStat.text += $"<color=grey>({_characterInfo.hpList[playerData.characterGrade[representativeCharacterIndex] + 1]})</color>";
+                upgradeStat.text += $"<color=grey>({_characterInfo.hpList[playerData.characterGrade[characterIndex] + 1]})</color>";
             }
-            upgradeStat.text += $" / Ap : {_characterInfo.apList[playerData.characterGrade[representativeCharacterIndex]]}";
-            if (playerData.characterGrade[representativeCharacterIndex] < _characterInfo.apList.Count - 1)
+            upgradeStat.text += $" / Ap : {_characterInfo.apList[playerData.characterGrade[characterIndex]]}";
+            if (playerData.characterGrade[characterIndex] < _characterInfo.apList.Count - 1)
             {
-                upgradeStat.text += $"<color=grey>({_characterInfo.apList[playerData.characterGrade[representativeCharacterIndex] + 1]})</color>";
+                upgradeStat.text += $"<color=grey>({_characterInfo.apList[playerData.characterGrade[characterIndex] + 1]})</color>";
             }
         }
     }
