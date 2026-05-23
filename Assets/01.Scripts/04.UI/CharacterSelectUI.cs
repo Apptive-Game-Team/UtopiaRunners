@@ -63,16 +63,14 @@ namespace _01.Scripts._04.UI
                     canvasGroup.interactable = true;
                 }
 
-                slot.upgradeButton.onClick.AddListener(() =>
-                {
-                    
-                });
-
                 slot.tagButton.onClick.AddListener(() =>
                 {
-                    slot.transform.SetAsFirstSibling();
-                    int otherIndex = (index + 1) % selectedCharacters.Length;
-                    _selectedCharacter = selectedCharacters[otherIndex];
+                    if (DG.Tweening.DOTween.IsTweening(slot.transform))
+                    {
+                        return;
+                    }
+                    
+                    SwitchCard();
                 });
             }
             
@@ -119,11 +117,30 @@ namespace _01.Scripts._04.UI
                 });
             }
         }
+        
+        private void SwitchCard()
+        {
+            SelectedCharacterUI currentFront = _selectedCharacter;
+            SelectedCharacterUI currentBack = selectedCharacters.First(sc => sc != _selectedCharacter);
+            
+            currentBack.AnimateToForward(() =>
+            {
+                currentBack.transform.SetAsLastSibling(); 
+            });
+            
+            currentFront.AnimateToBackward();
+            
+            _selectedCharacter = currentBack;
+        }
 
         private void RegisterTag()
         {
-            _selectedCharacter.transform.SetAsFirstSibling();
-            _selectedCharacter = selectedCharacters.First(sc => sc != _selectedCharacter);
+            if (DG.Tweening.DOTween.IsTweening(_selectedCharacter.transform))
+            {
+                return;
+            }
+            
+            SwitchCard();
         }
     }
 }
