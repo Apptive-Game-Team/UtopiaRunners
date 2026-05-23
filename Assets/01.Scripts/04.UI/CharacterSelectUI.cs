@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using TMPro;
@@ -23,6 +24,16 @@ namespace _01.Scripts._04.UI
         private void Awake()
         {
             InitialSetting();
+        }
+
+        private void OnEnable()
+        {
+            InputManager.AddListener(ActionCode.Tag, InputType.Down, RegisterTag);
+        }
+
+        private void OnDisable()
+        {
+            InputManager.RemoveListener(ActionCode.Tag, InputType.Down, RegisterTag);
         }
 
         private void InitialSetting()
@@ -107,6 +118,12 @@ namespace _01.Scripts._04.UI
                     canvasGroup.interactable = true;
                 });
             }
+        }
+
+        private void RegisterTag()
+        {
+            _selectedCharacter.transform.SetAsFirstSibling();
+            _selectedCharacter = selectedCharacters.First(sc => sc != _selectedCharacter);
         }
     }
 }
