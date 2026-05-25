@@ -6,11 +6,6 @@ using UnityEngine;
 
 namespace _01.Scripts._05.SO
 {
-    public enum CinematicName
-    {
-
-    }
-
     [Serializable]
     public class CinematicSoundData
     {

@@ -283,13 +283,16 @@ namespace _01.Scripts._00.Manager
 
             while (timer < duration)
             {
-                timer += Time.deltaTime;
+                timer += Time.unscaledDeltaTime;
                 source.volume = Mathf.Lerp(startVol, targetVol, timer / duration);
                 yield return null;
             }
 
             source.volume = targetVol;
-            if (stopOnComplete) source.Stop();
+            if (stopOnComplete)
+            {
+                source.Stop();
+            }
         }
 
         private float GetVolume(string param)
