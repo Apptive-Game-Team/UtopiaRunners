@@ -25,6 +25,11 @@ public class PlayerHp : MonoBehaviour
     {
         if (currentHp <= 0)
             Die();
+
+        if (EveMemoryManager.Instance != null)
+        {
+            EveMemoryManager.Instance.RecordCharacterRetired();
+        }
     }
 
     public void TakeDamage(float damage)

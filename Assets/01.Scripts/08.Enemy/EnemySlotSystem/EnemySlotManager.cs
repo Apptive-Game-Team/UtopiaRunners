@@ -94,6 +94,11 @@ public class EnemySlotManager : MonoBehaviour
         slotEnemy.Init(this, lane, spawnIndex);
         laneEnemies[spawnIndex] = slotEnemy;
 
+        if (EveMemoryManager.Instance != null)
+        {
+            EveMemoryManager.Instance.UpdateAccumulatedMonsterCount(GetMaxLaneEnemyCount());
+        }
+
         return enemyObj;
     }
 
@@ -187,5 +192,30 @@ public class EnemySlotManager : MonoBehaviour
         {
             enemyMap[lane][index] = null;
         }
+    }
+
+    public int GetMaxLaneEnemyCount()
+    {
+        int maxCount = 0;
+
+        foreach (EnemyLane lane in enemyMap.Keys)
+        {
+            int count = 0;
+
+            foreach (SlotEnemy enemy in enemyMap[lane])
+            {
+                if (enemy != null)
+                {
+                    count++;
+                }
+            }
+
+            if (count > maxCount)
+            {
+                maxCount = count;
+            }
+        }
+
+        return maxCount;
     }
 }

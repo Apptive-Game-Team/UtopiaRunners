@@ -57,6 +57,11 @@ public class WaveManager : MonoBehaviour
         {
             GoldManager.Instance.ResetStageGold();
         }
+
+        if (EveMemoryManager.Instance != null)
+        {
+            EveMemoryManager.Instance.ResetStageRecord();
+        }
     }
 
     private void BuildSchedule()
@@ -120,6 +125,11 @@ public class WaveManager : MonoBehaviour
         if (GoldManager.Instance != null)
         {
             GoldManager.Instance.ApplyClearGold();
+        }
+
+        if (EveMemoryManager.Instance != null)
+        {
+            EveMemoryManager.Instance.ApplyStageClearMemory();
         }
 
         Debug.Log("게임 클리어");
