@@ -49,10 +49,9 @@ namespace _01.Scripts._00.Manager
         {
             currentWorldNum = GameManager.Instance.playerData.currentWorld;
             currentStageNum = GameManager.Instance.playerData.currentStage;
-            
-            selectedCharacters = new List<int> { 0, 1 };
-            selectedWeapon = 0;
-            // GameManager에서 데이터 가져오기 및 InGameManager로 이관
+
+            selectedCharacters = GameManager.Instance.selectedData.selectedCharacters;
+            selectedWeapon = GameManager.Instance.selectedData.selectedWeapon;
         }
 
         public int GetSelectedCharacterIdx()

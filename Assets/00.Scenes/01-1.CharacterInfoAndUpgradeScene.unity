@@ -1817,7 +1817,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 586961814}
         m_TargetAssemblyTypeName: _01.Scripts._04.UI.OpenUIButton, Assembly-CSharp
-        m_MethodName: OpenCanvas
+        m_MethodName: OpenUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1877,9 +1877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d3fcde53ce76a4e83888f6716d9d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openCanvas: {fileID: 437841598}
+  openCanvas: {fileID: 437841595}
   closeCanvases:
-  - {fileID: 928784364}
+  - {fileID: 928784360}
 --- !u!1 &594819044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,7 +1966,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 594819050}
         m_TargetAssemblyTypeName: _01.Scripts._04.UI.OpenUIButton, Assembly-CSharp
-        m_MethodName: OpenCanvas
+        m_MethodName: OpenUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2026,9 +2026,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d3fcde53ce76a4e83888f6716d9d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openCanvas: {fileID: 928784364}
+  openCanvas: {fileID: 928784360}
   closeCanvases:
-  - {fileID: 437841598}
+  - {fileID: 437841595}
 --- !u!1 &632839815
 GameObject:
   m_ObjectHideFlags: 0

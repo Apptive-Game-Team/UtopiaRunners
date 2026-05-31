@@ -105,6 +105,7 @@ namespace _01.Scripts._02.InGameSystem
             stageSelectButton.onClick.AddListener(() =>
             {
                 StageManager.Instance.selectedStageNum = stageNum;
+                GameManager.Instance.SaveSelected();
                 SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.InGame]);
             });
         }

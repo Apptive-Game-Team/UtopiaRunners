@@ -4,16 +4,16 @@ namespace _01.Scripts._04.UI
 {
     public class OpenUIButton : MonoBehaviour
     {
-        [SerializeField] private Canvas openCanvas;
-        [SerializeField] private Canvas[] closeCanvases;
-
-        public void OpenCanvas()
+        [SerializeField] private GameObject openCanvas;
+        [SerializeField] private GameObject[] closeCanvases;
+        
+        public void OpenUI()
         {
-            openCanvas.gameObject.SetActive(true);
+            openCanvas.SetActive(true);
 
             foreach (var canvas in closeCanvases)
             {
-                canvas.gameObject.SetActive(false);
+                canvas.SetActive(false);
             }
         }
     }
