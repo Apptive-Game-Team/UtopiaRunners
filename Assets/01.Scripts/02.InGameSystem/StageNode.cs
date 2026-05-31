@@ -10,12 +10,15 @@ namespace _01.Scripts._02.InGameSystem
     public class StageNode : MonoBehaviour
     {
         [SerializeField] private StageNum stageNum;
+        [SerializeField] private Sprite activatedImage;
+        [SerializeField] private Sprite unActivatedImage;
         [SerializeField] private Button stageSelectButton;
 
         private static StageNode _currentSelected;
         
         private WorldNum _worldNum;
         private bool _isActivated;
+        private Image _image;
         
         private void Awake()
         {
@@ -29,6 +32,9 @@ namespace _01.Scripts._02.InGameSystem
             _worldNum = StageManager.Instance.selectedWorldNum;
             _isActivated = stageNum == 0 || GameManager.Instance.playerData
                 .clearedStages[(int)_worldNum].stages[Mathf.Max(0, (int)stageNum - 1)].isCleared;
+            
+            _image = GetComponent<Image>();
+            _image.sprite = _isActivated ? activatedImage : unActivatedImage;
         }
 
         public void OnButtonClick()

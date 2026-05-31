@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 1
+  activatedImage: {fileID: 1651933582, guid: 4515cff0008c1d24ea7b8e533157de88, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &14920021
 MonoBehaviour:
@@ -1035,6 +1037,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 5
+  activatedImage: {fileID: -946789702, guid: f28d0886af0467648a88aedb9e1d199d, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &378926975
 MonoBehaviour:
@@ -1678,6 +1682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 4
+  activatedImage: {fileID: 1651933582, guid: 4515cff0008c1d24ea7b8e533157de88, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &626493993
 MonoBehaviour:
@@ -3839,6 +3845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 3
+  activatedImage: {fileID: 1651933582, guid: 4515cff0008c1d24ea7b8e533157de88, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &1321785239
 MonoBehaviour:
@@ -4343,6 +4351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 2
+  activatedImage: {fileID: -946789702, guid: f28d0886af0467648a88aedb9e1d199d, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &1482242933
 MonoBehaviour:
@@ -5574,6 +5584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageNum: 0
+  activatedImage: {fileID: 1651933582, guid: 4515cff0008c1d24ea7b8e533157de88, type: 3}
+  unActivatedImage: {fileID: 1519721523, guid: 0596e0009f8b547469097efc6ab63aee, type: 3}
   stageSelectButton: {fileID: 1730399550}
 --- !u!114 &1883010483
 MonoBehaviour:
