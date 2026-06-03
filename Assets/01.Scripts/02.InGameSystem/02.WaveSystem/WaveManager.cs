@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -9,9 +10,10 @@ public class WaveManager : MonoBehaviour
     [Header("Systems")]
     [SerializeField] private EnemySlotManager enemySlotManager;
 
-    [Header("Game Over Option")]
-    public float gameOverX = -8f;
-    [SerializeField] private GameObject gameOverUI;
+    [Header("Clear UI")]
+    [SerializeField] private GameObject clearPanel;
+    [SerializeField] private TMP_Text earnedGoldText;
+    [SerializeField] private TMP_Text earnedEveMemoryText;
 
     private List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
 
@@ -40,7 +42,6 @@ public class WaveManager : MonoBehaviour
             currentSpawnIndex++;
         }
 
-        CheckEnemyOverflow();
         CheckStageClear();
     }
 
@@ -53,6 +54,11 @@ public class WaveManager : MonoBehaviour
         isClearChecked = false;
         isGameOver = false;
 
+        if (clearPanel != null)
+        {
+            clearPanel.SetActive(false);
+        }
+
         if (GoldManager.Instance != null)
         {
             GoldManager.Instance.ResetStageGold();
@@ -62,6 +68,8 @@ public class WaveManager : MonoBehaviour
         {
             EveMemoryManager.Instance.ResetStageRecord();
         }
+
+        Time.timeScale = 1f;
     }
 
     private void BuildSchedule()
@@ -103,7 +111,6 @@ public class WaveManager : MonoBehaviour
     private void CheckStageClear()
     {
         if (isClearChecked) return;
-        if (isGameOver) return;
 
         bool allWavesSpawned = currentSpawnIndex >= scheduledSpawns.Count;
 
@@ -122,45 +129,42 @@ public class WaveManager : MonoBehaviour
         isClearChecked = true;
         isPlaying = false;
 
+        Time.timeScale = 0f;
+
+        int earnedGold = 0;
+        int earnedEveMemory = 0;
+
         if (GoldManager.Instance != null)
         {
-            GoldManager.Instance.ApplyClearGold();
+            earnedGold = GoldManager.Instance.ApplyClearGold();
         }
 
         if (EveMemoryManager.Instance != null)
         {
-            EveMemoryManager.Instance.ApplyStageClearMemory();
+            earnedEveMemory = EveMemoryManager.Instance.ApplyStageClearMemory();
         }
+
+        ShowClearPanel(earnedGold, earnedEveMemory);
 
         Debug.Log("°ÔÀÓ Å¬¸®¾î");
     }
 
-    private void CheckEnemyOverflow()
+    private void ShowClearPanel(int earnedGold, int earnedEveMemory)
     {
-        if (isGameOver) return;
-        if (isClearChecked) return;
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
+        if (clearPanel != null)
         {
-            if (enemy.transform.position.x <= gameOverX)
-            {
-                GameOver();
-                return;
-            }
+            clearPanel.SetActive(true);
         }
-    }
 
-    private void GameOver()
-    {
-        isGameOver = true;
-        isPlaying = false;
+        if (earnedGoldText != null)
+        {
+            earnedGoldText.text = $"È¹µæ °ñµå: {earnedGold}";
+        }
 
-        Debug.Log("°ÔÀÓ ¿À¹ö");
-
-        if (gameOverUI != null)
-            gameOverUI.SetActive(true);
+        if (earnedEveMemoryText != null)
+        {
+            earnedEveMemoryText.text = $"È¹µæ ÀÌºêÀÇ ±â¾ï: {earnedEveMemory}";
+        }
 
         Time.timeScale = 0f;
     }
