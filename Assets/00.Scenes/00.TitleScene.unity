@@ -2579,7 +2579,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1333090997
 MonoBehaviour:
@@ -4746,9 +4746,11 @@ MonoBehaviour:
         isCleared: 0
       - stageNum: 5
         isCleared: 0
-    representativeCharacter: 0
     characterGrade: 000000000000000000000000000000000000000000000000
     weaponGrade: 00000000000000000000000000000000000000000000000000000000
+  selectedData:
+    selectedCharacters: 0000000001000000
+    selectedWeapon: 0
   soundData:
     masterVolume: 0.5
     bgmVolume: 0.5
