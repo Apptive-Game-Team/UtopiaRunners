@@ -45,6 +45,7 @@ namespace _01.Scripts._00.Manager
     public class SoundManager : SingletonObject<SoundManager>
     {
         [SerializeField] private SoundConfigSO soundConfig;
+        [SerializeField] private CinematicSoundConfigSO cinematicSoundConfig;
         
         private const string MixerMaster = "MasterSound";
         private const string MixerBGM = "BGMSound";
@@ -237,6 +238,13 @@ namespace _01.Scripts._00.Manager
             PlayBgm(soundConfig.GetSceneBgm(sceneName));
         }
 
+        public void PlayBgmByCinematic(CinematicName cinematicName, int index = 0)
+        {
+            CinematicSoundData soundData = cinematicSoundConfig.GetSoundData(cinematicName);
+            
+            PlayBgm(soundData.bgmList[index]);
+        }
+
         private void PlayStageBgm()
         {
             if (StageManager.Instance == null)
@@ -275,13 +283,16 @@ namespace _01.Scripts._00.Manager
 
             while (timer < duration)
             {
-                timer += Time.deltaTime;
+                timer += Time.unscaledDeltaTime;
                 source.volume = Mathf.Lerp(startVol, targetVol, timer / duration);
                 yield return null;
             }
 
             source.volume = targetVol;
-            if (stopOnComplete) source.Stop();
+            if (stopOnComplete)
+            {
+                source.Stop();
+            }
         }
 
         private float GetVolume(string param)
