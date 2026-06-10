@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using _01.Scripts._00.Manager;
 using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Wave Data")]
+    [Header("Wave Database")]
+    [SerializeField] private StageWaveDatabase stageWaveDatabase;
+
+    [Header("Runtime Wave Data")]
     [SerializeField] private StageWaveData stageWaveData;
 
     [Header("Systems")]
@@ -25,6 +29,8 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        LoadSelectedStageWaveData();
+
         BuildSchedule();
         StartStage();
     }
@@ -43,6 +49,34 @@ public class WaveManager : MonoBehaviour
         }
 
         CheckStageClear();
+    }
+
+    private void LoadSelectedStageWaveData()
+    {
+        if (stageWaveDatabase == null)
+        {
+            Debug.LogError("StageWaveDatabase가 WaveManager에 연결되지 않았습니다.");
+            return;
+        }
+
+        if (StageManager.Instance == null)
+        {
+            Debug.LogError("StageManager.Instance가 없습니다.");
+            return;
+        }
+
+        WorldNum selectedWorldNum = StageManager.Instance.selectedWorldNum;
+        StageNum selectedStageNum = StageManager.Instance.selectedStageNum;
+
+        stageWaveData = stageWaveDatabase.GetWaveData(selectedWorldNum, selectedStageNum);
+
+        if (stageWaveData == null)
+        {
+            Debug.LogError($"StageWaveData 로드 실패. World: {selectedWorldNum}, Stage: {selectedStageNum}");
+            return;
+        }
+
+        Debug.Log($"StageWaveData 로드 성공. World: {selectedWorldNum}, Stage: {selectedStageNum}, Data: {stageWaveData.name}");
     }
 
     public void StartStage()
@@ -76,7 +110,11 @@ public class WaveManager : MonoBehaviour
     {
         scheduledSpawns.Clear();
 
-        if (stageWaveData == null) return;
+        if (stageWaveData == null)
+        {
+            Debug.LogError("StageWaveData가 없습니다. 웨이브를 생성할 수 없습니다.");
+            return;
+        }
 
         foreach (WaveTimelineData timeline in stageWaveData.waveTimelines)
         {
@@ -100,7 +138,11 @@ public class WaveManager : MonoBehaviour
 
     private void Spawn(ScheduledSpawn scheduled)
     {
-        if (enemySlotManager == null) return;
+        if (enemySlotManager == null)
+        {
+            Debug.LogError("EnemySlotManager가 연결되지 않았습니다.");
+            return;
+        }
 
         enemySlotManager.SpawnEnemy(
             scheduled.prefab,
@@ -129,8 +171,6 @@ public class WaveManager : MonoBehaviour
         isClearChecked = true;
         isPlaying = false;
 
-        Time.timeScale = 0f;
-
         int earnedGold = 0;
         int earnedEveMemory = 0;
 
@@ -154,6 +194,7 @@ public class WaveManager : MonoBehaviour
         if (clearPanel != null)
         {
             clearPanel.SetActive(true);
+            clearPanel.transform.SetAsLastSibling();
         }
 
         if (earnedGoldText != null)

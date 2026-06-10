@@ -1449,7 +1449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed4e0bc23d44f548a1364749deb40c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageWaveData: {fileID: 11400000, guid: 6c29d0f33cc1c5843856ed7f0dc64b18, type: 2}
+  stageWaveDatabase: {fileID: 11400000, guid: 9fb213e6c99bb07419d03ee6196d7683, type: 2}
+  stageWaveData: {fileID: 0}
   enemySlotManager: {fileID: 1171662769}
   clearPanel: {fileID: 676135634}
   earnedGoldText: {fileID: 439177561}
