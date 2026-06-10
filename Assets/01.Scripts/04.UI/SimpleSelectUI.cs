@@ -5,21 +5,26 @@ using _01.Scripts._03.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using CharacterInfo = _01.Scripts._03.Data.CharacterInfo;
 
 namespace _01.Scripts._04.UI
 {
-    public class CharacterSelectUI : MonoBehaviour
+    public class SimpleSelectUI : MonoBehaviour
     {
         [SerializeField] private CharacterData characterData;
+        [SerializeField] private WeaponData weaponData;
         [SerializeField] private SelectedCharacterUI[] selectedCharacters;
+        [SerializeField] private Image selectedWeapon;
         [SerializeField] private GameObject characterButton;
+        [SerializeField] private GameObject weaponButton;
         [SerializeField] private Sprite lockedImage;
-        [SerializeField] private GameObject content;
+        [SerializeField] private GameObject characterContent;
+        [SerializeField] private GameObject weaponContent;
 
         private SelectedCharacterUI _selectedCharacter;
         private int _maxCharacterCount;
+        private int _maxWeaponCount;
         private List<bool> _unlockedCharacters;
+        private List<bool> _unLockedWeapons;
 
         private void Awake()
         {
@@ -38,12 +43,19 @@ namespace _01.Scripts._04.UI
 
         private void InitialSetting()
         {
-            // 캐릭터 해금 리스트 관리
+            // 해금 리스트 관리
             _maxCharacterCount = characterData.characterInfos.Count;
             _unlockedCharacters = new List<bool>();
             for (int i = 0; i < _maxCharacterCount; i++)
             {
                 _unlockedCharacters.Add(true);
+            }
+            
+            _maxWeaponCount = weaponData.weaponInfos.Count;
+            _unLockedWeapons = new List<bool>();
+            for (int i = 0; i < _maxWeaponCount; i++)
+            {
+                _unLockedWeapons.Add(true);
             }
             
             // 선택된 캐릭터 관리
@@ -78,12 +90,12 @@ namespace _01.Scripts._04.UI
             // 캐릭터 리스트 버튼 관리
             for (int i = 0; i < _maxCharacterCount; i++)
             {
-                Button button = Instantiate(characterButton.gameObject, content.transform).GetComponent<Button>();
+                Button button = Instantiate(characterButton.gameObject, characterContent.transform).GetComponent<Button>();
                 Image characterImage = button.transform.GetChild(0).GetComponent<Image>();
                 TextMeshProUGUI characterName = button.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
                 int index = i;
 
-                CharacterInfo characterInfo = characterData.characterInfos[index];
+                _03.Data.CharacterInfo characterInfo = characterData.characterInfos[index];
                 characterImage.sprite = characterInfo.sprite;
                 characterName.text = characterInfo.name;
 
@@ -116,6 +128,30 @@ namespace _01.Scripts._04.UI
                     canvasGroup.interactable = true;
                 });
             }
+            
+            // 무기 리스트 버튼 관리
+            for (int i = 0; i < _maxWeaponCount; i++)
+            {
+                Button button = Instantiate(weaponButton.gameObject, weaponContent.transform).GetComponent<Button>();
+                Image image = button.transform.GetChild(1).GetComponent<Image>();
+                int index = i;
+
+                image.sprite = weaponData.weaponInfos[i].sprite;
+
+                if (!_unLockedWeapons[index])
+                {
+                    image.sprite = lockedImage;
+                }
+                
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() =>
+                {
+                    selectedWeapon.sprite = weaponData.weaponInfos.Find(w => w.id == index).sprite;
+                    StageManager.Instance.selectedWeapon = index;
+                });
+            }
+            
+            
         }
         
         private void SwitchCard()

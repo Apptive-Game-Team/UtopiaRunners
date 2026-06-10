@@ -53,7 +53,7 @@ namespace _01.Scripts._04.UI
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() =>
                 {
-                    upgradeUI.representativeCharacterIndex = index;
+                    upgradeUI.characterIndex = index;
                     //upgradeUI.gameObject.SetActive(true);
                     UIOpenEffect(upgradeUI.gameObject);
                 });
