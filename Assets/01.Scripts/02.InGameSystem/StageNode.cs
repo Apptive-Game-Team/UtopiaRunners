@@ -100,11 +100,13 @@ namespace _01.Scripts._02.InGameSystem
                 transform.parent.transform.SetAsLastSibling();
             }
             transform.SetAsLastSibling();
-            
+
             stageSelectButton.onClick.RemoveAllListeners();
             stageSelectButton.onClick.AddListener(() =>
             {
+                StageManager.Instance.selectedWorldNum = _worldNum;
                 StageManager.Instance.selectedStageNum = stageNum;
+
                 SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterSelect]);
             });
         }

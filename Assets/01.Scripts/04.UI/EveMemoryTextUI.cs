@@ -18,7 +18,7 @@ public class EveMemoryTextUI : MonoBehaviour
 
         if (eveMemoryText != null)
         {
-            eveMemoryText.text = $"이브의 기억 : {eveMemory}";
+            eveMemoryText.text = $"{eveMemory}";
         }
     }
 }
