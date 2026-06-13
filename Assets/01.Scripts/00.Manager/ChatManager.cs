@@ -64,17 +64,17 @@ namespace _01.Scripts._00.Manager
         
         public bool IsPlaying { get; private set; }
         
-        public void StartChat(MultiChatMessageData data, Action onComplete = null)
+        public void StartChat(MultiChatMessageData data)
         {
             if (IsPlaying)
             {
                 return;
             }
             
-            StartCoroutine(ChatRoutine(data, onComplete));
+            StartCoroutine(ChatRoutine(data));
         }
 
-        private IEnumerator ChatRoutine(MultiChatMessageData data, Action onComplete)
+        private IEnumerator ChatRoutine(MultiChatMessageData data)
         {
             IsPlaying = true;
             Time.timeScale = 0f;
@@ -116,8 +116,6 @@ namespace _01.Scripts._00.Manager
             }
 
             EndChat();
-            
-            onComplete?.Invoke();
         }
 
         private IEnumerator TypeMessage(string line, string prefix)

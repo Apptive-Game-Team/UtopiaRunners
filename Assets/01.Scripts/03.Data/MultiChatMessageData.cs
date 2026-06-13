@@ -29,6 +29,7 @@ namespace _01.Scripts._03.Data
             public BGM targetBgm;
         }
         
+        public CinematicName cinematicName;
         public List<MultiChatMessage> chatMessages;
     }
 }
