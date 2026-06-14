@@ -10,32 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d334186ce5267e04e9d1692414d93405, type: 3}
-  m_Name: Test
+  m_Name: Test2
   m_EditorClassIdentifier: 
-  useFade: 0
-  cinematicName: 0
+  useFade: 1
+  cinematicName: 1
   chatMessages:
   - speakerName: 1
     faceType: 0
     isLeft: 1
     messages:
-    - "\uD14C\uC2A4\uD2B8 \uD14C\uC2A4\uD2B8"
-    - "\uC810\uD504\uB97C \uD55C \uBC88 \uD574\uBCFC\uAE4C\uC694?"
-    stopCinematic: 0
+    - "\uD398\uC774\uB4DC \uD14C\uC2A4\uD2B8 \uD398\uC774\uB4DC \uD14C\uC2A4\uD2B8"
+    stopCinematic: 1
     chatWaitCondition:
-      rid: 2654989949885219069
-    backgroundImage: 0
-    chatImage: 0
-    changeBgm: 0
-    targetBgm: 0
-  - speakerName: 0
-    faceType: 0
-    isLeft: 0
-    messages:
-    - "\uC798\uB6F0\uB124 \u314B"
-    stopCinematic: 0
-    chatWaitCondition:
-      rid: 2654989949885218885
+      rid: 2654989949885219070
     backgroundImage: 0
     chatImage: 0
     changeBgm: 0
@@ -43,10 +30,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2654989949885218885
+    - rid: 2654989949885219070
       type: {class: WaitNoneCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
       data: 
-    - rid: 2654989949885219069
-      type: {class: WaitKeyCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
-      data:
-        targetAction: 3

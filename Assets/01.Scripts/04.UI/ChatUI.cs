@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,10 @@ namespace _01.Scripts._04.UI
         [SerializeField] private TextMeshProUGUI messageText;
         [SerializeField] private Image background;
         [SerializeField] private Image chatIllustration;
+        [SerializeField] private CanvasGroup fadeCanvas;
         [SerializeField] private Image leftChar;
         [SerializeField] private Image rightChar;
+        [SerializeField] private GameObject[] chattingObjects;
 
         public void SetActive(bool active)
         {
@@ -50,6 +53,14 @@ namespace _01.Scripts._04.UI
             chatIllustration.DOFade(1f, 0.5f).From(0f).SetUpdate(true);
         }
 
+        public void SetActiveChatting(bool active)
+        {
+            foreach (GameObject chattingObject in chattingObjects)
+            {
+                chattingObject.SetActive(active);
+            }
+        }
+
         public void SetCharacters(Sprite sprite, bool isLeft)
         {
             Image active = isLeft ? leftChar : rightChar;
@@ -69,6 +80,27 @@ namespace _01.Scripts._04.UI
             else
             {
                 active.enabled = false;
+            }
+        }
+
+        public IEnumerator FadeInAndOut(bool fadeIn)
+        {
+            float targetAlpha = fadeIn ? 0f : 1f;
+            float duration = fadeIn ? 1.5f : 1.0f;
+
+            if (fadeIn)
+            {
+                yield return new WaitForSecondsRealtime(1f);
+            }
+            
+            yield return fadeCanvas.DOFade(targetAlpha, duration)
+                .SetEase(Ease.InOutQuad)
+                .SetUpdate(true) 
+                .WaitForCompletion();
+            
+            if (!fadeIn)
+            {
+                yield return new WaitForSecondsRealtime(1f);
             }
         }
     }

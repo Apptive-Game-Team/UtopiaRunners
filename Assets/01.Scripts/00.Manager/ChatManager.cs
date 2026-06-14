@@ -64,7 +64,7 @@ namespace _01.Scripts._00.Manager
         
         public bool IsPlaying { get; private set; }
         
-        public void StartChat(MultiChatMessageData data)
+        public void ShowChat(MultiChatMessageData data)
         {
             if (IsPlaying)
             {
@@ -76,9 +76,9 @@ namespace _01.Scripts._00.Manager
 
         private IEnumerator ChatRoutine(MultiChatMessageData data)
         {
-            IsPlaying = true;
-            Time.timeScale = 0f;
-            chatUI.SetActive(true);
+            StartChat();
+
+            bool isFirst = true;
 
             foreach (var msgGroup in data.chatMessages)
             {
@@ -92,15 +92,18 @@ namespace _01.Scripts._00.Manager
                     SoundManager.Instance.PlayBgm(msgGroup.targetBgm);
                 }
                 
-                if (msgGroup.chatImage != ChatImage.Nothing)
-                {
-                    yield return new WaitForSecondsRealtime(1.5f);
-                }
-                
                 var speaker = chatSpeakerDB.chatSpeakers.Find(s => s.speakerType == msgGroup.speakerName);
                 Sprite face = GetFaceSprite(speaker, msgGroup.faceType);
                 chatUI.SetCharacters(face, msgGroup.isLeft);
                 chatUI.UpdateName(speaker.speakerName ?? "???");
+
+                if (isFirst && data.useFade)
+                {
+                    chatUI.SetActiveChatting(false);
+                    yield return chatUI.FadeInAndOut(true);
+                    chatUI.SetActiveChatting(true);
+                    isFirst = false;
+                }
                 
                 string accumulated = "";
                 foreach (var line in msgGroup.messages)
@@ -122,6 +125,11 @@ namespace _01.Scripts._00.Manager
                 }
             }
 
+            if (data.useFade)
+            {
+                yield return chatUI.FadeInAndOut(false);
+            }
+            
             EndChat();
         }
 
@@ -143,11 +151,23 @@ namespace _01.Scripts._00.Manager
             yield return null;
         }
 
+        private void StartChat()
+        {
+            IsPlaying = true;
+            Time.timeScale = 0f;
+            chatUI.SetActive(true);
+        }
+        
         private void EndChat()
         {
             chatUI.SetActive(false);
             Time.timeScale = 1f;
             IsPlaying = false;
+        }
+
+        private void FadeInAndOut(bool fadeIn)
+        {
+            
         }
         
         private Sprite GetFaceSprite(ChatSpeakerData.ChatSpeakerInfo info, ChatSpeakerFaceType face) 

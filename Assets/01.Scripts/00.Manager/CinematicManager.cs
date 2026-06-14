@@ -10,6 +10,7 @@ namespace _01.Scripts._00.Manager
     public enum CinematicName
     {
         Test,
+        Test2,
     }
 
     public class CinematicManager : SingletonObject<CinematicManager>
@@ -21,6 +22,11 @@ namespace _01.Scripts._00.Manager
             if (Input.GetKeyDown(KeyCode.T))
             {
                 StartCoroutine(ShowCinematic(CinematicName.Test));
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(ShowCinematic(CinematicName.Test2));
             }
         }
         
@@ -34,7 +40,7 @@ namespace _01.Scripts._00.Manager
                 yield break;
             }
             
-            ChatManager.Instance.StartChat(_currentCinematic);
+            ChatManager.Instance.ShowChat(_currentCinematic);
             
             UnloadCurrentCinematic();
 

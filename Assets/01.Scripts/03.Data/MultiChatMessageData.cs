@@ -34,7 +34,8 @@ namespace _01.Scripts._03.Data
             public bool changeBgm;
             public BGM targetBgm;
         }
-        
+
+        public bool useFade = true;
         public CinematicName cinematicName;
         public List<MultiChatMessage> chatMessages;
     }
