@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d334186ce5267e04e9d1692414d93405, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  cinematicName: 0
   chatMessages:
   - speakerName: 1
     faceType: 0
     isLeft: 1
     messages:
     - "\uD14C\uC2A4\uD2B8 \uD14C\uC2A4\uD2B8"
-    - 1 2 3 4
+    - "\uC810\uD504\uB97C \uD55C \uBC88 \uD574\uBCFC\uAE4C\uC694?"
+    stopCinematic: 0
+    chatWaitCondition:
+      rid: 2654989949885219069
     backgroundImage: 0
     chatImage: 0
     changeBgm: 0
@@ -27,8 +31,21 @@ MonoBehaviour:
     faceType: 0
     isLeft: 0
     messages:
-    - "\uD14C\uC2A4\uD2B8 \uD14C\uC2A4\uD2B8"
+    - "\uC798\uB6F0\uB124 \u314B"
+    stopCinematic: 0
+    chatWaitCondition:
+      rid: 2654989949885218885
     backgroundImage: 0
     chatImage: 0
     changeBgm: 0
     targetBgm: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2654989949885218885
+      type: {class: WaitNoneCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
+      data: 
+    - rid: 2654989949885219069
+      type: {class: WaitKeyCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
+      data:
+        targetAction: 3

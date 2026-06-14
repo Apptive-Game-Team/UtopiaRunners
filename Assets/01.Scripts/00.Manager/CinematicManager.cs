@@ -15,6 +15,14 @@ namespace _01.Scripts._00.Manager
     public class CinematicManager : SingletonObject<CinematicManager>
     {
         private MultiChatMessageData _currentCinematic;
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                StartCoroutine(ShowCinematic(CinematicName.Test));
+            }
+        }
         
         public IEnumerator ShowCinematic(CinematicName cinematicName)
         {
@@ -45,7 +53,7 @@ namespace _01.Scripts._00.Manager
             
             foreach (var cinematic in allCinematic)
             {
-                if (cinematic.cinematicName == cinematicName && _currentCinematic == null)
+                if (cinematic.cinematicName == cinematicName && !_currentCinematic)
                 {
                     _currentCinematic = cinematic;
                 }
@@ -55,7 +63,7 @@ namespace _01.Scripts._00.Manager
                 }
             }
             
-            if (_currentCinematic == null)
+            if (!_currentCinematic)
             {
                 Debug.LogError($"[{cinematicName}] 이거 없음.");
             }

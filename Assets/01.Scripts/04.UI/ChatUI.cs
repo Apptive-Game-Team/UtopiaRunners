@@ -23,11 +23,21 @@ namespace _01.Scripts._04.UI
 
         public void UpdateName(string name) => nameText.text = name;
         public void UpdateMessage(string msg) => messageText.text = msg;
-        public void SetBackground(Sprite sprite) => background.sprite = sprite;
+        public void SetBackground(Sprite sprite)
+        {
+            if (!sprite)
+            {
+                background.enabled = false;
+                return;
+            }
+
+            background.enabled = true;
+            background.sprite = sprite;
+        }
 
         public void PlayIllustrationEffect(Sprite sprite)
         {
-            if (sprite == null)
+            if (!sprite)
             {
                 chatIllustration.enabled = false; 
                 return;
@@ -45,7 +55,7 @@ namespace _01.Scripts._04.UI
             Image active = isLeft ? leftChar : rightChar;
             Image inactive = isLeft ? rightChar : leftChar;
 
-            if (sprite != null)
+            if (sprite)
             {
                 active.sprite = sprite;
                 active.color = Color.white;

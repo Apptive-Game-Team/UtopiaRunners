@@ -82,6 +82,8 @@ namespace _01.Scripts._00.Manager
 
             foreach (var msgGroup in data.chatMessages)
             {
+                Time.timeScale = msgGroup.stopCinematic ? 0f : 1f;
+                
                 chatUI.SetBackground(GetBgSprite(msgGroup.backgroundImage));
                 chatUI.PlayIllustrationEffect(GetIllustrationSprite(msgGroup.chatImage));
 
@@ -107,11 +109,16 @@ namespace _01.Scripts._00.Manager
                     accumulated += line + "\n";
                     
                     float timer = 0;
-                    while (timer < 3f && !Input.GetKeyDown(KeyCode.Space))
+                    while (timer < 1f && !Input.GetKeyDown(KeyCode.Return))
                     {
                         timer += Time.unscaledDeltaTime;
                         yield return null;
                     }
+                }
+                
+                if (msgGroup.chatWaitCondition != null)
+                {
+                    yield return new WaitUntil(() => msgGroup.chatWaitCondition.IsConditionMet());
                 }
             }
 
@@ -124,7 +131,7 @@ namespace _01.Scripts._00.Manager
 
             for (int i = 0; i < line.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
                     chatUI.UpdateMessage(prefix + line);
                     break;
