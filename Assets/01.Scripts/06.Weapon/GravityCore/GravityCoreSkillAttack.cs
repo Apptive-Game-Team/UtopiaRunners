@@ -36,7 +36,7 @@ namespace _01.Scripts._06.Weapon.GravityCore
             {
                 Collider2D col = _results[i];
 
-                if (col != null && col.CompareTag("Enemy"))
+                if (col && col.CompareTag("Enemy") && !col.GetComponent<BossHp>())
                 {
                     col.transform.position = Vector2.Lerp(
                         col.transform.position, 

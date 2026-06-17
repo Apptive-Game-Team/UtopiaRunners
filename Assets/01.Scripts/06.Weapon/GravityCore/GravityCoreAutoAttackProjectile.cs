@@ -9,7 +9,12 @@ namespace _01.Scripts._06.Weapon.GravityCore
             if (collision.CompareTag("Enemy"))
             {
                 ApplyHit(collision.gameObject);
-                collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * 7f, ForceMode2D.Impulse);
+                if (!collision.GetComponent<BossHp>())
+                {
+                    collision.GetComponent<Rigidbody2D>()
+                        .AddForce((collision.transform.position - transform.position).normalized * 2f,
+                            ForceMode2D.Impulse);
+                }
                 Destroy(gameObject);
             }
         }
