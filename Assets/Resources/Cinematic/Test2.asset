@@ -22,7 +22,7 @@ MonoBehaviour:
     - "\uD398\uC774\uB4DC \uD14C\uC2A4\uD2B8 \uD398\uC774\uB4DC \uD14C\uC2A4\uD2B8"
     stopCinematic: 1
     chatWaitCondition:
-      rid: 2654989949885219070
+      rid: 2827875030654517439
     backgroundImage: 0
     chatImage: 0
     changeBgm: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2654989949885219070
-      type: {class: WaitNoneCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
-      data: 
+    - rid: 2827875030654517439
+      type: {class: WaitKeyCondition, ns: _01.Scripts._05.Utility, asm: Assembly-CSharp}
+      data:
+        targetAction: 3
