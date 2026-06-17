@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GoldManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class GoldManager : MonoBehaviour
     public int OwnedGold { get; private set; }
     public int StageGold { get; private set; }
 
+    public event Action OnGoldChanged;
+
     private const string OwnedGoldKey = "OwnedGold";
 
     private void Awake()
@@ -18,6 +21,8 @@ public class GoldManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+
             LoadGold();
         }
         else
@@ -29,6 +34,16 @@ public class GoldManager : MonoBehaviour
     private void LoadGold()
     {
         OwnedGold = PlayerPrefs.GetInt(OwnedGoldKey, 0);
+
+        OnGoldChanged?.Invoke();
+    }
+
+    private void SaveGold()
+    {
+        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
+        PlayerPrefs.Save();
+
+        OnGoldChanged?.Invoke();
     }
 
     public void ResetStageGold()
@@ -39,26 +54,51 @@ public class GoldManager : MonoBehaviour
     public void AddEnemyKillGold()
     {
         StageGold += enemyKillGold;
-        Debug.Log($"ÇöÀç ½ºÅ×ÀÌÁö °ñµå: {StageGold}");
     }
 
-    public void ApplyClearGold()
+    public int ApplyClearGold()
     {
         StageGold += clearGold;
         OwnedGold += StageGold;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
 
         Debug.Log($"È¹µæ °ñµå: {StageGold}, º¸À¯ °ñµå: {OwnedGold}");
+
+        return StageGold;
     }
 
     public void AddOwnedGold(int amount)
     {
+        if (amount <= 0) return;
+
         OwnedGold += amount;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
+
+        Debug.Log($"È¹µæ °ñµå: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+    }
+
+    public bool CanSpendGold(int amount)
+    {
+        return OwnedGold >= amount;
+    }
+
+    public bool TrySpendGold(int amount)
+    {
+        if (OwnedGold < amount)
+        {
+            Debug.Log($"°ñµå ºÎÁ·");
+            return false;
+        }
+
+        OwnedGold -= amount;
+
+        SaveGold();
+
+        Debug.Log($"³²Àº °ñµå: {OwnedGold}");
+
+        return true;
     }
 
     public void SpendGold(int amount)
@@ -68,7 +108,6 @@ public class GoldManager : MonoBehaviour
         if (OwnedGold < 0)
             OwnedGold = 0;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
     }
 }

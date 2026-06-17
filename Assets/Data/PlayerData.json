@@ -2,7 +2,7 @@
     "coin": 0,
     "currentWorld": 0,
     "currentStage": 0,
-    "playTime": 32.34859848022461,
+    "playTime": 45.23035430908203,
     "clearedStages": [
         {
             "worldNum": 0,
@@ -120,5 +120,22 @@
                 }
             ]
         }
+    ],
+    "characterGrade": [
+        4,
+        4,
+        3,
+        0,
+        0,
+        0
+    ],
+    "weaponGrade": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
     ]
 }
