@@ -17,7 +17,6 @@ namespace _01.Scripts._04.UI
         private SelectedCharacterUI _selectedCharacter;
         private Image _selectedWeapon;
         private int _maxCharacterCount;
-        private List<bool> _unlockedCharacters;
 
         private void Awake()
         {

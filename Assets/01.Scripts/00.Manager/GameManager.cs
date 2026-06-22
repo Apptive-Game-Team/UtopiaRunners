@@ -15,11 +15,15 @@ namespace _01.Scripts._00.Manager
         public StageNum currentStage = StageNum.Stage0;
         public float playTime = 0f;
         public List<WorldData> clearedStages = new();
+        public List<bool> unlockedCharacters = new();
+        public List<bool> unlockedWeapons = new();
         public List<int> characterGrade = new();
         public List<int> weaponGrade = new();
 
         public PlayerData()
         {
+            unlockedCharacters.Clear();
+            unlockedWeapons.Clear();
             clearedStages.Clear();
             characterGrade.Clear();
 
@@ -34,11 +38,16 @@ namespace _01.Scripts._00.Manager
             
                 clearedStages.Add(newWorld);
             }
-
+            
             for (int i = 0; i < 6; i++)
             {
+                unlockedCharacters.Add(false);
+                unlockedWeapons.Add(false);
                 characterGrade.Add(0);
             }
+
+            unlockedCharacters[0] = unlockedCharacters[1] = true;
+            unlockedWeapons[0] = true;
 
             for (int i = 0; i < 7; i++)
             {
@@ -148,6 +157,46 @@ namespace _01.Scripts._00.Manager
             playerData.coin += amount;
             
             OnCoinChanged?.Invoke();
+        }
+
+        public void ResetUnlockedCharacters()
+        {
+            playerData.unlockedCharacters[0] = true;
+            playerData.unlockedCharacters[1] = true;
+            playerData.unlockedCharacters[2] = false;
+            playerData.unlockedCharacters[3] = false;
+            playerData.unlockedCharacters[4] = false;
+            playerData.unlockedCharacters[5] = false;
+        }
+
+        public void UnlockCharacters()
+        {
+            playerData.unlockedCharacters[0] = true;
+            playerData.unlockedCharacters[1] = true;
+            playerData.unlockedCharacters[2] = true;
+            playerData.unlockedCharacters[3] = true;
+            playerData.unlockedCharacters[4] = true;
+            playerData.unlockedCharacters[5] = true;
+        }
+
+        public void ResetUnlockedWeapons()
+        {
+            playerData.unlockedWeapons[0] = true;
+            playerData.unlockedWeapons[1] = false;
+            playerData.unlockedWeapons[2] = false;
+            playerData.unlockedWeapons[3] = false;
+            playerData.unlockedWeapons[4] = false;
+            playerData.unlockedWeapons[5] = false;
+        }
+
+        public void UnlockWeapons()
+        {
+            playerData.unlockedWeapons[0] = true;
+            playerData.unlockedWeapons[1] = true;
+            playerData.unlockedWeapons[2] = true;
+            playerData.unlockedWeapons[3] = true;
+            playerData.unlockedWeapons[4] = true;
+            playerData.unlockedWeapons[5] = true;
         }
     }
 }
