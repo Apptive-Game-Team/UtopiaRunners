@@ -74,8 +74,7 @@ namespace _01.Scripts._06.Weapon
         protected virtual void ApplyHit(GameObject enemy)
         {
             float damage = CalculateDamage();
-            enemy.GetComponent<EnemyHp>()?.TakeDamage(damage);
-            enemy.GetComponent<BossHp>()?.TakeDamage(damage);
+            enemy.GetComponent<EnemyHp>().TakeDamage(damage);
             
             OnHitEffects?.Invoke(enemy, damage);
         }

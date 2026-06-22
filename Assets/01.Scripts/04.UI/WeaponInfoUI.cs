@@ -20,7 +20,6 @@ namespace _01.Scripts._04.UI
         [SerializeField] private TextMeshProUGUI upgradeStat;
         [SerializeField] private TextMeshProUGUI recommendedCharacter;
         [SerializeField] private GameObject content;
-        [SerializeField] private Button selectButton;
         [SerializeField] private Button upgradeButton;
 
         private int _maxWeaponCount;
@@ -72,12 +71,6 @@ namespace _01.Scripts._04.UI
                     weaponSkillDescription.text = weaponData.weaponInfos[index].skillDescription;
                     UpdateStatText(index);
                     recommendedCharacter.text = $"추천 캐릭터 : {weaponData.weaponInfos[index].recommendedCharacter}"; 
-                    
-                    selectButton.onClick.RemoveAllListeners();
-                    selectButton.onClick.AddListener(() =>
-                    {
-                        StageManager.Instance.selectedWeapon = index;
-                    });
                     
                     if (playerData.weaponGrade[index] >= weaponData.weaponInfos[index].apList.Count - 1)
                     {

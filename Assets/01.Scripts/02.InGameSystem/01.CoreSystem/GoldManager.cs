@@ -42,7 +42,7 @@ public class GoldManager : MonoBehaviour
         Debug.Log($"ÇöÀç ½ºÅ×ÀÌÁö °ñµå: {StageGold}");
     }
 
-    public void ApplyClearGold()
+    public int ApplyClearGold()
     {
         StageGold += clearGold;
         OwnedGold += StageGold;
@@ -50,7 +50,9 @@ public class GoldManager : MonoBehaviour
         PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
         PlayerPrefs.Save();
 
-        Debug.Log($"È¹µæ °ñµå: {StageGold}, º¸À¯ °ñµå: {OwnedGold}");
+        Debug.Log($"°ÔÀÓ Å¬¸®¾î. È¹µæ °ñµå: {StageGold}, º¸À¯ °ñµå: {OwnedGold}");
+
+        return StageGold;
     }
 
     public void AddOwnedGold(int amount)

@@ -15,6 +15,7 @@ namespace _01.Scripts._00.Manager
         public StageNum currentStage = StageNum.Stage0;
         public float playTime = 0f;
         public List<WorldData> clearedStages = new();
+        public int representativeCharacter = 0;
         public List<int> characterGrade = new();
         public List<int> weaponGrade = new();
 
@@ -62,13 +63,6 @@ namespace _01.Scripts._00.Manager
     }
 
     [Serializable]
-    public class SelectedData
-    {
-        public List<int> selectedCharacters = new() { 0, 1 };
-        public int selectedWeapon;
-    }
-
-    [Serializable]
     public class SoundData
     {
         public float masterVolume = 0.5f;
@@ -79,7 +73,6 @@ namespace _01.Scripts._00.Manager
     public class GameManager : SingletonObject<GameManager>
     {
         public PlayerData playerData;
-        public SelectedData selectedData;
         public SoundData soundData;
         private float _sessionStartTime;
 
@@ -90,16 +83,13 @@ namespace _01.Scripts._00.Manager
             base.Awake();
 
             playerData = new PlayerData();
-            selectedData = new SelectedData();
             soundData = new SoundData();
-            
             _sessionStartTime = Time.time;
         }
 
         private void Start()
         {
             LoadGame();
-            LoadSelected();
             LoadSound();
         }
         
@@ -131,16 +121,6 @@ namespace _01.Scripts._00.Manager
         {
             SaveLoadManager.Instance.LoadData(soundData);
             SoundManager.Instance.LoadSoundData(soundData);
-        }
-
-        public void SaveSelected()
-        {
-            SaveLoadManager.Instance.SaveData(selectedData);
-        }
-
-        public void LoadSelected()
-        {
-            SaveLoadManager.Instance.LoadData(selectedData);
         }
 
         public void AddAndUseCoin(int amount)

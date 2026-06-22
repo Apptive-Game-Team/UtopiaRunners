@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Linq;
 using _01.Scripts._03.Data;
-using _01.Scripts._04.UI;
 using _01.Scripts._07.Character;
 using _01.Scripts._06.Weapon;
 using Unity.VisualScripting;
@@ -17,7 +16,7 @@ namespace _01.Scripts._00.Manager
         [Header("In Game Setting")] 
         [SerializeField] private CharacterData characterData;
         [SerializeField] private GameObject gameOverPrefab;
-        [SerializeField] private WeaponData weaponData;
+        [SerializeField] private _04.UI.WeaponData weaponData;
         [SerializeField] private GameObject[] characters;
         [SerializeField] private GameObject[] weapons;
         [SerializeField] private Vector2 startPosition;
@@ -34,8 +33,6 @@ namespace _01.Scripts._00.Manager
         private Slider _subCharacterHp;
         private Image _weaponImage;
         private Slider _skillCoolTimeSlider;
-        private HoverTrigger _mainCharacterHover;
-        private HoverTrigger _subCharacterHover;
 
         private void Awake()
         {
@@ -84,23 +81,11 @@ namespace _01.Scripts._00.Manager
             weapon.Initialize(mainCharacter.damage);
             _weaponImage.sprite = weapon.weaponInfo.sprite;
             
-            HoverTrigger weaponHover = _weaponImage.gameObject.AddComponent<HoverTrigger>();
-            weaponHover.SetTooltipData($"{weapon.weaponInfo.name}     LV{GameManager.Instance.playerData.weaponGrade[weapon.weaponInfo.id]}\n",
-                $"{weapon.weaponInfo.characteristic}\n\n" + $"{weapon.weaponInfo.skillDescription}\n\n" +
-                $"공격력 : {weapon.weaponInfo.apList[GameManager.Instance.playerData.weaponGrade[weapon.weaponInfo.id]]} ");
-            
             mainCharacter.AfterInit();
             subCharacter.AfterInit();
 
-            Image mainCharacterImage = _mainCharacterHp.GetComponentInChildren<Image>();
-            Image subCharacterImage = _subCharacterHp.GetComponentInChildren<Image>();
-            mainCharacterImage.sprite = mainCharacter.characterInfo.sprite;
-            subCharacterImage.sprite = subCharacter.characterInfo.sprite;
-            
-            _mainCharacterHover = mainCharacterImage.gameObject.AddComponent<HoverTrigger>();
-            _subCharacterHover = subCharacterImage.gameObject.AddComponent<HoverTrigger>();
-            
-            RefreshCharacterTooltipData();
+            _mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
+            _subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
 
             mainCharacter.OnHpChanged += UpdateHpUI;
             subCharacter.OnHpChanged += UpdateHpUI;
@@ -109,27 +94,6 @@ namespace _01.Scripts._00.Manager
             subCharacter.OnDead += CheckDead;
             
             weapon.OnCoolDownChanged += SetSkillCoolTime;
-        }
-        
-        private void RefreshCharacterTooltipData()
-        {
-            if (_mainCharacterHover != null && mainCharacter != null)
-            {
-                _mainCharacterHover.SetTooltipData(
-                    $"{mainCharacter.characterInfo.name}     LV{GameManager.Instance.playerData.characterGrade[mainCharacter.characterInfo.id]}\n",
-                    $"{mainCharacter.characterInfo.story}\n\n{mainCharacter.characterInfo.skillDescription}\n\n" +
-                    $"공격력 : {mainCharacter.characterInfo.apList[GameManager.Instance.playerData.characterGrade[mainCharacter.characterInfo.id]]} " +
-                    $"체력 : {mainCharacter.characterInfo.hpList[GameManager.Instance.playerData.characterGrade[mainCharacter.characterInfo.id]]}");
-            }
-
-            if (_subCharacterHover != null && subCharacter != null)
-            {
-                _subCharacterHover.SetTooltipData(
-                    $"{subCharacter.characterInfo.name}     LV{GameManager.Instance.playerData.characterGrade[subCharacter.characterInfo.id]}\n",
-                    $"{subCharacter.characterInfo.story}\n\n{subCharacter.characterInfo.skillDescription}\n\n" +
-                    $"공격력 : {subCharacter.characterInfo.apList[GameManager.Instance.playerData.characterGrade[subCharacter.characterInfo.id]]} " +
-                    $"체력 : {subCharacter.characterInfo.hpList[GameManager.Instance.playerData.characterGrade[subCharacter.characterInfo.id]]}");
-            }
         }
         
         private void UpdateHpUI()
@@ -160,8 +124,6 @@ namespace _01.Scripts._00.Manager
 
         private void Tag()
         {
-            HoverUI.Instance?.HideTooltip();
-
             subCharacter.gameObject.SetActive(true);
             weapon.transform.SetParent(subCharacter.transform, false);
             mainCharacter.gameObject.SetActive(false);
@@ -171,8 +133,6 @@ namespace _01.Scripts._00.Manager
             _mainCharacterHp.GetComponentInChildren<Image>().sprite = mainCharacter.characterInfo.sprite;
             _subCharacterHp.GetComponentInChildren<Image>().sprite = subCharacter.characterInfo.sprite;
             
-            RefreshCharacterTooltipData();
-
             UpdateHpUI();
             
             weapon.SetDamage(mainCharacter.GetComponent<PlayerController>().damage);

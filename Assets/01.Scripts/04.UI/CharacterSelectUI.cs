@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using TMPro;
@@ -24,16 +23,6 @@ namespace _01.Scripts._04.UI
         private void Awake()
         {
             InitialSetting();
-        }
-
-        private void OnEnable()
-        {
-            InputManager.AddListener(ActionCode.Tag, InputType.Down, RegisterTag);
-        }
-
-        private void OnDisable()
-        {
-            InputManager.RemoveListener(ActionCode.Tag, InputType.Down, RegisterTag);
         }
 
         private void InitialSetting()
@@ -63,14 +52,16 @@ namespace _01.Scripts._04.UI
                     canvasGroup.interactable = true;
                 }
 
+                slot.upgradeButton.onClick.AddListener(() =>
+                {
+                    
+                });
+
                 slot.tagButton.onClick.AddListener(() =>
                 {
-                    if (DG.Tweening.DOTween.IsTweening(slot.transform))
-                    {
-                        return;
-                    }
-                    
-                    SwitchCard();
+                    slot.transform.SetAsFirstSibling();
+                    int otherIndex = (index + 1) % selectedCharacters.Length;
+                    _selectedCharacter = selectedCharacters[otherIndex];
                 });
             }
             
@@ -116,31 +107,6 @@ namespace _01.Scripts._04.UI
                     canvasGroup.interactable = true;
                 });
             }
-        }
-        
-        private void SwitchCard()
-        {
-            SelectedCharacterUI currentFront = _selectedCharacter;
-            SelectedCharacterUI currentBack = selectedCharacters.First(sc => sc != _selectedCharacter);
-            
-            currentBack.AnimateToForward(() =>
-            {
-                currentBack.transform.SetAsLastSibling(); 
-            });
-            
-            currentFront.AnimateToBackward();
-            
-            _selectedCharacter = currentBack;
-        }
-
-        private void RegisterTag()
-        {
-            if (DG.Tweening.DOTween.IsTweening(_selectedCharacter.transform))
-            {
-                return;
-            }
-            
-            SwitchCard();
         }
     }
 }

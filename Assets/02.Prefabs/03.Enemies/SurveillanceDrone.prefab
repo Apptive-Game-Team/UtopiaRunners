@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 5638619699242529360}
   - component: {fileID: 7238456967260056080}
   - component: {fileID: 8233783864504051366}
+  - component: {fileID: -543896676245658733}
+  - component: {fileID: 6054279359261679683}
   m_Layer: 0
   m_Name: SurveillanceDrone
   m_TagString: Enemy
@@ -62,7 +64,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.77, y: 0.45, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3363132716520849990}
@@ -136,7 +138,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 5
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -225,3 +227,28 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 71dc15487ef7c2848a4897b675a2a1ca, type: 2}
   maxHp: 0
   currentHp: 0
+--- !u!114 &-543896676245658733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207227089998715162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e13c89e116bb144e81975d036e99988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6054279359261679683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207227089998715162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37f00774cdb764aa36b7b6559486c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotOffset: {x: 0, y: 0, z: 0}

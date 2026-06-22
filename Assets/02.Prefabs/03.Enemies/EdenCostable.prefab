@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 8972259651305112207}
   - component: {fileID: 1494778464209964975}
   - component: {fileID: 1420551569740308515}
+  - component: {fileID: 3337985741165154378}
+  - component: {fileID: -3344776886074376029}
   m_Layer: 0
   m_Name: EdenCostable
   m_TagString: Enemy
@@ -62,7 +64,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.72, y: -1.6, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8910744016793934486}
@@ -136,7 +138,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 5
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -225,3 +227,28 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 07082d218dddae845a7295c89f79fea3, type: 2}
   maxHp: 0
   currentHp: 0
+--- !u!114 &3337985741165154378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424516164726684195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e13c89e116bb144e81975d036e99988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3344776886074376029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424516164726684195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37f00774cdb764aa36b7b6559486c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotOffset: {x: 0, y: 0, z: 0}
