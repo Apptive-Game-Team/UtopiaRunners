@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using _01.Scripts._03.Data;
 using _01.Scripts._05.Utility;
@@ -10,7 +9,6 @@ namespace _01.Scripts._00.Manager
     public enum CinematicName
     {
         Test,
-        Test2,
     }
 
     public class CinematicManager : SingletonObject<CinematicManager>
@@ -19,60 +17,24 @@ namespace _01.Scripts._00.Manager
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                StartCoroutine(ShowCinematic(CinematicName.Test));
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                StartCoroutine(ShowCinematic(CinematicName.Test2));
+                ShowCinematic(CinematicName.Test);
             }
         }
         
-        public IEnumerator ShowCinematic(CinematicName cinematicName)
+        public void ShowCinematic(CinematicName cinematicName)
         {
-            FindCinematic(cinematicName);
+            string path = $"Cinematic/{cinematicName}";
+            _currentCinematic = Resources.Load<MultiChatMessageData>(path);
 
             if (!_currentCinematic)
             {
                 Debug.LogError("No Cinematic Found");
-                yield break;
-            }
-            
-            ChatManager.Instance.ShowChat(_currentCinematic);
-            
-            UnloadCurrentCinematic();
-
-            yield return null;
-        }
-
-        private void FindCinematic(CinematicName cinematicName)
-        {
-            MultiChatMessageData[] allCinematic = Resources.LoadAll<MultiChatMessageData>("Cinematic");
-
-            if (allCinematic == null || allCinematic.Length == 0)
-            {
-                Debug.LogError("MultiChatMessageData가 존재하지 않음");
                 return;
             }
             
-            foreach (var cinematic in allCinematic)
-            {
-                if (cinematic.cinematicName == cinematicName && !_currentCinematic)
-                {
-                    _currentCinematic = cinematic;
-                }
-                else
-                {
-                    Resources.UnloadAsset(cinematic);
-                }
-            }
-            
-            if (!_currentCinematic)
-            {
-                Debug.LogError($"[{cinematicName}] 이거 없음.");
-            }
+            ChatManager.Instance.StartChat(_currentCinematic, UnloadCurrentCinematic);
         }
 
         private void UnloadCurrentCinematic()
