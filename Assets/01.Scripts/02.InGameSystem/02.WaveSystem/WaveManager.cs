@@ -1,24 +1,17 @@
 using System.Collections.Generic;
-using _01.Scripts._00.Manager;
-using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Wave Database")]
-    [SerializeField] private StageWaveDatabase stageWaveDatabase;
-
-    [Header("Runtime Wave Data")]
+    [Header("Wave Data")]
     [SerializeField] private StageWaveData stageWaveData;
+    [SerializeField] private SpawnPoint[] spawnPoints;
 
-    [Header("Systems")]
-    [SerializeField] private EnemySlotManager enemySlotManager;
+    [Header("Game Over Option")]
+    public float gameOverX = -8f;
+    [SerializeField] private GameObject gameOverUI;
 
-    [Header("Clear UI")]
-    [SerializeField] private GameObject clearPanel;
-    [SerializeField] private TMP_Text earnedGoldText;
-    [SerializeField] private TMP_Text earnedEveMemoryText;
-
+    private Dictionary<string, Transform> spawnPointMap = new Dictionary<string, Transform>();
     private List<ScheduledSpawn> scheduledSpawns = new List<ScheduledSpawn>();
 
     private float elapsedTime;
@@ -27,10 +20,19 @@ public class WaveManager : MonoBehaviour
     private bool isClearChecked;
     private bool isGameOver;
 
+    private void Awake()
+    {
+        foreach (SpawnPoint point in spawnPoints)
+        {
+            if (point == null) continue;
+
+            if (!spawnPointMap.ContainsKey(point.pointId))
+                spawnPointMap.Add(point.pointId, point.transform);
+        }
+    }
+
     private void Start()
     {
-        LoadSelectedStageWaveData();
-
         BuildSchedule();
         StartStage();
     }
@@ -48,35 +50,8 @@ public class WaveManager : MonoBehaviour
             currentSpawnIndex++;
         }
 
+        CheckEnemyOverflow();
         CheckStageClear();
-    }
-
-    private void LoadSelectedStageWaveData()
-    {
-        if (stageWaveDatabase == null)
-        {
-            Debug.LogError("StageWaveDatabase가 WaveManager에 연결되지 않았습니다.");
-            return;
-        }
-
-        if (StageManager.Instance == null)
-        {
-            Debug.LogError("StageManager.Instance가 없습니다.");
-            return;
-        }
-
-        WorldNum selectedWorldNum = StageManager.Instance.selectedWorldNum;
-        StageNum selectedStageNum = StageManager.Instance.selectedStageNum;
-
-        stageWaveData = stageWaveDatabase.GetWaveData(selectedWorldNum, selectedStageNum);
-
-        if (stageWaveData == null)
-        {
-            Debug.LogError($"StageWaveData 로드 실패. World: {selectedWorldNum}, Stage: {selectedStageNum}");
-            return;
-        }
-
-        Debug.Log($"StageWaveData 로드 성공. World: {selectedWorldNum}, Stage: {selectedStageNum}, Data: {stageWaveData.name}");
     }
 
     public void StartStage()
@@ -88,33 +63,15 @@ public class WaveManager : MonoBehaviour
         isClearChecked = false;
         isGameOver = false;
 
-        if (clearPanel != null)
-        {
-            clearPanel.SetActive(false);
-        }
-
         if (GoldManager.Instance != null)
         {
             GoldManager.Instance.ResetStageGold();
         }
-
-        if (EveMemoryManager.Instance != null)
-        {
-            EveMemoryManager.Instance.ResetStageRecord();
-        }
-
-        Time.timeScale = 1f;
     }
 
     private void BuildSchedule()
     {
         scheduledSpawns.Clear();
-
-        if (stageWaveData == null)
-        {
-            Debug.LogError("StageWaveData가 없습니다. 웨이브를 생성할 수 없습니다.");
-            return;
-        }
 
         foreach (WaveTimelineData timeline in stageWaveData.waveTimelines)
         {
@@ -127,7 +84,7 @@ public class WaveManager : MonoBehaviour
                 scheduledSpawns.Add(new ScheduledSpawn
                 {
                     prefab = spawnEvent.prefab,
-                    lane = spawnEvent.lane,
+                    spawnPointId = spawnEvent.spawnPointId,
                     spawnTime = timeline.baseTime + spawnEvent.delayFromBaseTime
                 });
             }
@@ -138,21 +95,22 @@ public class WaveManager : MonoBehaviour
 
     private void Spawn(ScheduledSpawn scheduled)
     {
-        if (enemySlotManager == null)
+        if (!spawnPointMap.TryGetValue(scheduled.spawnPointId, out Transform point))
         {
-            Debug.LogError("EnemySlotManager가 연결되지 않았습니다.");
             return;
         }
 
-        enemySlotManager.SpawnEnemy(
+        Instantiate(
             scheduled.prefab,
-            scheduled.lane
+            point.position,
+            Quaternion.identity
         );
     }
 
     private void CheckStageClear()
     {
         if (isClearChecked) return;
+        if (isGameOver) return;
 
         bool allWavesSpawned = currentSpawnIndex >= scheduledSpawns.Count;
 
@@ -171,41 +129,40 @@ public class WaveManager : MonoBehaviour
         isClearChecked = true;
         isPlaying = false;
 
-        int earnedGold = 0;
-        int earnedEveMemory = 0;
-
         if (GoldManager.Instance != null)
         {
-            earnedGold = GoldManager.Instance.ApplyClearGold();
+            GoldManager.Instance.ApplyClearGold();
         }
-
-        if (EveMemoryManager.Instance != null)
-        {
-            earnedEveMemory = EveMemoryManager.Instance.ApplyStageClearMemory();
-        }
-
-        ShowClearPanel(earnedGold, earnedEveMemory);
 
         Debug.Log("게임 클리어");
     }
 
-    private void ShowClearPanel(int earnedGold, int earnedEveMemory)
+    private void CheckEnemyOverflow()
     {
-        if (clearPanel != null)
-        {
-            clearPanel.SetActive(true);
-            clearPanel.transform.SetAsLastSibling();
-        }
+        if (isGameOver) return;
+        if (isClearChecked) return;
 
-        if (earnedGoldText != null)
-        {
-            earnedGoldText.text = $"획득 골드: {earnedGold}";
-        }
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (earnedEveMemoryText != null)
+        foreach (GameObject enemy in enemies)
         {
-            earnedEveMemoryText.text = $"획득 이브의 기억: {earnedEveMemory}";
+            if (enemy.transform.position.x <= gameOverX)
+            {
+                GameOver();
+                return;
+            }
         }
+    }
+
+    private void GameOver()
+    {
+        isGameOver = true;
+        isPlaying = false;
+
+        Debug.Log("게임 오버");
+
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
 
         Time.timeScale = 0f;
     }
@@ -213,7 +170,7 @@ public class WaveManager : MonoBehaviour
     private class ScheduledSpawn
     {
         public GameObject prefab;
-        public EnemyLane lane;
+        public string spawnPointId;
         public float spawnTime;
     }
 }

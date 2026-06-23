@@ -10,9 +10,8 @@ namespace _01.Scripts._02.InGameSystem
     public class StageNode : MonoBehaviour
     {
         [SerializeField] private StageNum stageNum;
-        [SerializeField] private Sprite unActivatedImage;
         [SerializeField] private Sprite activatedImage;
-        [SerializeField] private Sprite selectedImage;
+        [SerializeField] private Sprite unActivatedImage;
         [SerializeField] private Button stageSelectButton;
 
         private static StageNode _currentSelected;
@@ -33,50 +32,10 @@ namespace _01.Scripts._02.InGameSystem
             _worldNum = StageManager.Instance.selectedWorldNum;
             _isActivated = stageNum == 0 || GameManager.Instance.playerData
                 .clearedStages[(int)_worldNum].stages[Mathf.Max(0, (int)stageNum - 1)].isCleared;
+            
             _image = GetComponent<Image>();
-                
             _image.sprite = _isActivated ? activatedImage : unActivatedImage;
         }
-
-        /*public void OnSelect(BaseEventData eventData)
-        {
-            if (!_isActivated)
-            {
-                return;
-            }
-            
-            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
-            {
-                transform.parent.GetComponentInParent<Image>().enabled = true;
-            }
-            else
-            {
-                GetComponent<Image>().sprite = selectedImage;
-            }
-        }
-
-        public void OnDeselect(BaseEventData eventData)
-        {
-            if (!_isActivated)
-            {
-                return;
-            }
-            
-            GameObject clicked = EventSystem.current.currentSelectedGameObject;
-            if (clicked == null || clicked.GetComponent<StageNode>() == null)
-            {
-                return;
-            }
-            
-            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
-            {
-                transform.parent.GetComponent<Image>().enabled = false;
-            }                           
-            else
-            {
-                GetComponent<Image>().sprite = activatedImage;
-            }
-        }*/
 
         public void OnButtonClick()
         {
@@ -95,19 +54,15 @@ namespace _01.Scripts._02.InGameSystem
             
             stageSelectButton.gameObject.SetActive(true);
             
-            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
-            {
-                transform.parent.transform.SetAsLastSibling();
-            }
+            transform.parent.transform.SetAsLastSibling();
             transform.SetAsLastSibling();
-
+            
             stageSelectButton.onClick.RemoveAllListeners();
             stageSelectButton.onClick.AddListener(() =>
             {
-                StageManager.Instance.selectedWorldNum = _worldNum;
                 StageManager.Instance.selectedStageNum = stageNum;
-
-                SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.CharacterSelect]);
+                GameManager.Instance.SaveSelected();
+                SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.InGame]);
             });
         }
         
@@ -118,16 +73,8 @@ namespace _01.Scripts._02.InGameSystem
                 return;
             }
             
-            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
-            {
-                transform.parent.GetComponent<Image>().enabled = true;
-                transform.parent.SetAsLastSibling();
-            }
-            else
-            {
-                _image.sprite = selectedImage;
-            }
-
+            transform.parent.GetComponent<Image>().enabled = true;
+            transform.parent.SetAsLastSibling();
             transform.SetAsLastSibling();
         }
 
@@ -138,14 +85,7 @@ namespace _01.Scripts._02.InGameSystem
                 return;
             }
 
-            if (stageNum is StageNum.Stage2 or StageNum.Stage5)
-            {
-                transform.parent.GetComponent<Image>().enabled = false;
-            }
-            else
-            {
-                _image.sprite = activatedImage;
-            }
+            transform.parent.GetComponent<Image>().enabled = false;
         }
     }
 }

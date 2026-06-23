@@ -41,8 +41,6 @@ namespace _01.Scripts._04.UI
 
             for (int i = 0; i < _maxWeaponCount; i++)
             {
-                PlayerData playerData = GameManager.Instance.playerData;
-                
                 Button button = Instantiate(weaponButtonPrefab.gameObject, content.transform).GetComponent<Button>();
                 Image image = button.transform.GetChild(1).GetComponent<Image>();
                 int index = i;

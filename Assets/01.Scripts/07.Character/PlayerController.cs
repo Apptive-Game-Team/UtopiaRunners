@@ -107,11 +107,6 @@ namespace _01.Scripts._07.Character
                 isDead = true;
                 OnDead?.Invoke();
             }
-
-            if (EveMemoryManager.Instance != null)
-            {
-                EveMemoryManager.Instance.RecordMonsterHit();
-            }
         }
         
         public virtual void Heal(float amount)

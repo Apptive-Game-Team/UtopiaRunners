@@ -23,6 +23,11 @@ namespace _01.Scripts._04.UI
         
         private void UIOpenEffect()
         {
+            if (image.gameObject.activeSelf)
+            {
+                return;
+            }
+            
             CanvasGroup cg = image.GetComponentInChildren<CanvasGroup>();
             RectTransform rt = image.GetComponent<RectTransform>();
 
@@ -40,6 +45,11 @@ namespace _01.Scripts._04.UI
 
         private IEnumerator UICloseEffect()
         {
+            if (!image.gameObject.activeSelf)
+            {
+                yield break;
+            }
+            
             CanvasGroup cg = image.GetComponentInChildren<CanvasGroup>();
             RectTransform rt = image.GetComponent<RectTransform>();
 

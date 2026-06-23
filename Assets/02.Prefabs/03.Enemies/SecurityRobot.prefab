@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 8672748318149729024}
   - component: {fileID: 4953072330256189719}
   - component: {fileID: 1266764559695826126}
-  - component: {fileID: -682285756490467500}
-  - component: {fileID: 6696744381127587831}
   m_Layer: 0
   m_Name: SecurityRobot
   m_TagString: Enemy
@@ -33,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.91, y: -2.13, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 680929357277747064}
@@ -196,31 +194,6 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 9f72f58500643094b8068b05ca13e20e, type: 2}
   maxHp: 0
   currentHp: 0
---- !u!114 &-682285756490467500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6657782817184399291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e13c89e116bb144e81975d036e99988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6696744381127587831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6657782817184399291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d37f00774cdb764aa36b7b6559486c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &7561447132143054881
 GameObject:
   m_ObjectHideFlags: 0
