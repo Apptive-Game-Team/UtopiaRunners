@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8672748318149729024}
   - component: {fileID: 4953072330256189719}
   - component: {fileID: 1266764559695826126}
+  - component: {fileID: 1576107830154638678}
   m_Layer: 0
   m_Name: SecurityRobot
   m_TagString: Enemy
@@ -194,6 +195,19 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 9f72f58500643094b8068b05ca13e20e, type: 2}
   maxHp: 0
   currentHp: 0
+--- !u!114 &1576107830154638678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657782817184399291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37f00774cdb764aa36b7b6559486c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &7561447132143054881
 GameObject:
   m_ObjectHideFlags: 0
