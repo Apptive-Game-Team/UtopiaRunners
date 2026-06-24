@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 678399922}
   - component: {fileID: 678399925}
   - component: {fileID: 678399924}
-  - component: {fileID: 678399923}
+  - component: {fileID: 678399926}
   m_Layer: 5
   m_Name: MemoryAmount
   m_TagString: Untagged
@@ -2103,19 +2103,6 @@ RectTransform:
   m_AnchoredPosition: {x: 118, y: 0}
   m_SizeDelta: {x: 215.7468, y: 76.245}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &678399923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678399921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f26005d72932a34396bec6640039fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eveMemoryText: {fileID: 678399924}
 --- !u!114 &678399924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2215,6 +2202,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678399921}
   m_CullTransparentMesh: 1
+--- !u!114 &678399926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678399921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f26005d72932a34396bec6640039fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eveMemoryText: {fileID: 678399924}
 --- !u!1 &689680815
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,7 +3460,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 07b4952ee83f24041bfeb716b1952f5b, type: 2}
-  characterImage: {fileID: 2051081387}
+  weaponData: {fileID: 0}
+  selectedCharacters: []
+  selectedWeapon: {fileID: 0}
 --- !u!1001 &1513386644
 PrefabInstance:
   m_ObjectHideFlags: 0
