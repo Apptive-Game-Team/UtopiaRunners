@@ -64,24 +64,26 @@ namespace _01.Scripts._00.Manager
         
         public bool IsPlaying { get; private set; }
         
-        public void StartChat(MultiChatMessageData data, Action onComplete = null)
+        public void ShowChat(MultiChatMessageData data)
         {
             if (IsPlaying)
             {
                 return;
             }
             
-            StartCoroutine(ChatRoutine(data, onComplete));
+            StartCoroutine(ChatRoutine(data));
         }
 
-        private IEnumerator ChatRoutine(MultiChatMessageData data, Action onComplete)
+        private IEnumerator ChatRoutine(MultiChatMessageData data)
         {
-            IsPlaying = true;
-            Time.timeScale = 0f;
-            chatUI.SetActive(true);
+            StartChat();
+
+            bool isFirst = true;
 
             foreach (var msgGroup in data.chatMessages)
             {
+                Time.timeScale = msgGroup.stopCinematic ? 0f : 1f;
+                
                 chatUI.SetBackground(GetBgSprite(msgGroup.backgroundImage));
                 chatUI.PlayIllustrationEffect(GetIllustrationSprite(msgGroup.chatImage));
 
@@ -90,15 +92,18 @@ namespace _01.Scripts._00.Manager
                     SoundManager.Instance.PlayBgm(msgGroup.targetBgm);
                 }
                 
-                if (msgGroup.chatImage != ChatImage.Nothing)
-                {
-                    yield return new WaitForSecondsRealtime(1.5f);
-                }
-                
                 var speaker = chatSpeakerDB.chatSpeakers.Find(s => s.speakerType == msgGroup.speakerName);
                 Sprite face = GetFaceSprite(speaker, msgGroup.faceType);
                 chatUI.SetCharacters(face, msgGroup.isLeft);
                 chatUI.UpdateName(speaker.speakerName ?? "???");
+
+                if (isFirst && data.useFade)
+                {
+                    chatUI.SetActiveChatting(false);
+                    yield return chatUI.FadeInAndOut(true);
+                    chatUI.SetActiveChatting(true);
+                    isFirst = false;
+                }
                 
                 string accumulated = "";
                 foreach (var line in msgGroup.messages)
@@ -107,17 +112,25 @@ namespace _01.Scripts._00.Manager
                     accumulated += line + "\n";
                     
                     float timer = 0;
-                    while (timer < 3f && !Input.GetKeyDown(KeyCode.Space))
+                    while (timer < 1f && !Input.GetKeyDown(KeyCode.Return))
                     {
                         timer += Time.unscaledDeltaTime;
                         yield return null;
                     }
                 }
+                
+                if (msgGroup.chatWaitCondition != null)
+                {
+                    yield return new WaitUntil(() => msgGroup.chatWaitCondition.IsConditionMet());
+                }
             }
 
-            EndChat();
+            if (data.useFade)
+            {
+                yield return chatUI.FadeInAndOut(false);
+            }
             
-            onComplete?.Invoke();
+            EndChat();
         }
 
         private IEnumerator TypeMessage(string line, string prefix)
@@ -126,7 +139,7 @@ namespace _01.Scripts._00.Manager
 
             for (int i = 0; i < line.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
                     chatUI.UpdateMessage(prefix + line);
                     break;
@@ -138,11 +151,23 @@ namespace _01.Scripts._00.Manager
             yield return null;
         }
 
+        private void StartChat()
+        {
+            IsPlaying = true;
+            Time.timeScale = 0f;
+            chatUI.SetActive(true);
+        }
+        
         private void EndChat()
         {
             chatUI.SetActive(false);
             Time.timeScale = 1f;
             IsPlaying = false;
+        }
+
+        private void FadeInAndOut(bool fadeIn)
+        {
+            
         }
         
         private Sprite GetFaceSprite(ChatSpeakerData.ChatSpeakerInfo info, ChatSpeakerFaceType face) 
