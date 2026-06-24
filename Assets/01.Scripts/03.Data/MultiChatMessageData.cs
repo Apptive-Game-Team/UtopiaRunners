@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _01.Scripts._00.Manager;
+using _01.Scripts._05.Utility;
 using UnityEngine;
 
 namespace _01.Scripts._03.Data
@@ -19,6 +20,11 @@ namespace _01.Scripts._03.Data
             [Header("Content")]
             [TextArea(3, 10)]
             public List<string> messages;
+
+            [Header("WaitCondition")] 
+            public bool stopCinematic = true;
+            [SerializeReference, SubclassSelector] 
+            public ChatWaitCondition chatWaitCondition;
             
             [Header("Image Setting")]
             public BackgroundImage backgroundImage;
@@ -28,7 +34,9 @@ namespace _01.Scripts._03.Data
             public bool changeBgm;
             public BGM targetBgm;
         }
-        
+
+        public bool useFade = true;
+        public CinematicName cinematicName;
         public List<MultiChatMessage> chatMessages;
     }
 }

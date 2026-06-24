@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _01.Scripts._06.Weapon
@@ -6,22 +7,17 @@ namespace _01.Scripts._06.Weapon
     public class AutoAttackProjectile : MonoBehaviour
     {
         [SerializeField] private float speed = 10f;
-
-        // private GameObject _targetEnemy;
-        // private Vector3 _targetDirection;
-
-        private Vector3 _moveDirection = Vector3.right;
-
+        private GameObject _targetEnemy;
+        private Vector3 _targetDirection;
+        
         protected Action<GameObject, float> OnHitEffects;
         protected float Damage;
 
         public void Init(float damage)
         {
             Damage = damage;
-
-            _moveDirection = Vector3.right;
         }
-
+        
         public void AddEffect(Action<GameObject, float> effect)
         {
             OnHitEffects += effect;
@@ -29,9 +25,6 @@ namespace _01.Scripts._06.Weapon
 
         private void Update()
         {
-            transform.Translate(_moveDirection * (speed * Time.deltaTime), Space.World);
-
-            /*
             if (_targetEnemy == null)
             {
                 _targetEnemy = FindNearestEnemy();
@@ -41,15 +34,13 @@ namespace _01.Scripts._06.Weapon
                     Destroy(gameObject);
                     return;
                 }
-
+                
                 _targetDirection = (_targetEnemy.transform.position - transform.position).normalized;
             }
-
+            
             transform.Translate(_targetDirection * (speed * Time.deltaTime));
-            */
         }
-
-        /*
+    
         private GameObject FindNearestEnemy()
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -70,7 +61,6 @@ namespace _01.Scripts._06.Weapon
 
             return nearestEnemy;
         }
-        */
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
@@ -84,20 +74,12 @@ namespace _01.Scripts._06.Weapon
         protected virtual void ApplyHit(GameObject enemy)
         {
             float damage = CalculateDamage();
-
-            EnemyHp enemyHp = enemy.GetComponent<EnemyHp>();
-
-            if (enemyHp != null)
-            {
-                enemyHp.TakeDamage(damage);
-            }
-
+            enemy.GetComponent<EnemyHp>()?.TakeDamage(damage);
+            enemy.GetComponent<BossHp>()?.TakeDamage(damage);
+            
             OnHitEffects?.Invoke(enemy, damage);
         }
-
-        protected virtual float CalculateDamage()
-        {
-            return Damage;
-        }
+        
+        protected virtual float CalculateDamage() => Damage;
     }
 }
