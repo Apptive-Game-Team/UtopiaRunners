@@ -4,6 +4,6 @@ using UnityEngine;
 public class SpawnEventData
 {
     public GameObject prefab;
-    public string spawnPointId;
+    public EnemyLane lane;
     public float delayFromBaseTime;
 }

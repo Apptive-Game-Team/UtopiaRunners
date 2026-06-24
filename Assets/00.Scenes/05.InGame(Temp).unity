@@ -675,6 +675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730815838}
+  - component: {fileID: 730815839}
   m_Layer: 0
   m_Name: EnemySlotManager
   m_TagString: Untagged
@@ -697,6 +698,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730815839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730815837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582920ecefae18b48ae659281d211049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  moveSpeed: 20
+  destroyOverflowEnemy: 1
 --- !u!1001 &890350884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1009,14 +1038,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed4e0bc23d44f548a1364749deb40c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageWaveDatabase: {fileID: 0}
   stageWaveData: {fileID: 0}
-  spawnPoints:
-  - {fileID: 1293258054}
-  - {fileID: 599666072}
-  - {fileID: 1204718034}
-  - {fileID: 489949872}
-  gameOverX: -4
-  gameOverUI: {fileID: 6110438079998667341, guid: 04b1d09716a71f34ebcda19fab5e3581, type: 3}
+  enemySlotManager: {fileID: 0}
+  clearPanel: {fileID: 0}
+  earnedGoldText: {fileID: 0}
+  earnedEveMemoryText: {fileID: 0}
 --- !u!4 &1134438348
 Transform:
   m_ObjectHideFlags: 0
@@ -1441,6 +1468,59 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 969849889947929590, guid: 23689c495d6788443835f04b6b516e60, type: 3}
   m_PrefabInstance: {fileID: 1486418016}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1634294571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634294573}
+  - component: {fileID: 1634294572}
+  m_Layer: 0
+  m_Name: EveMemoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1634294572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634294571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9535c05dc23d384fb914c2a08499a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAllowedMonsterHitCount: 10
+  maxAllowedAccumulatedMonsterCount: 3
+  rewardPerCondition: 30
+  allClearBonus: 10
+  isAnyCharacterRetired: 0
+  monsterHitCount: 0
+  maxAccumulatedMonsterCount: 0
+  lastEarnedMemory: 0
+  ownedEveMemory: 0
+--- !u!4 &1634294573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634294571}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1666321486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,3 +2169,4 @@ SceneRoots:
   - {fileID: 890350884}
   - {fileID: 1486418016}
   - {fileID: 730815838}
+  - {fileID: 1634294573}
