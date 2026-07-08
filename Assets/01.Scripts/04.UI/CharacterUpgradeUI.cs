@@ -2,7 +2,6 @@ using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _01.Scripts._04.UI
@@ -18,81 +17,154 @@ namespace _01.Scripts._04.UI
         [SerializeField] private TextMeshProUGUI characterStory;
         [SerializeField] private TextMeshProUGUI characterSkillDescription;
         [SerializeField] private Image characterWeapon;
-        
+
+        [Header("Arrow Buttons")]
+        [SerializeField] private Button prevButton;
+        [SerializeField] private Button nextButton;
+
+        [Header("Upgrade")]
+        [SerializeField] private int upgradeGoldCost = 100;
+
         public int characterIndex;
-        
-        private _03.Data.CharacterInfo _characterInfo;
-        
+
+        private _01.Scripts._03.Data.CharacterInfo _characterInfo;
 
         private void OnEnable()
         {
+            if (prevButton != null)
+            {
+                prevButton.onClick.RemoveAllListeners();
+                prevButton.onClick.AddListener(OnClickPrevButton);
+            }
+
+            if (nextButton != null)
+            {
+                nextButton.onClick.RemoveAllListeners();
+                nextButton.onClick.AddListener(OnClickNextButton);
+            }
+
+            RefreshUI();
+        }
+
+        private void OnClickPrevButton()
+        {
+            characterIndex--;
+
+            if (characterIndex < 0)
+            {
+                characterIndex = characterData.characterInfos.Count - 1;
+            }
+
+            RefreshUI();
+        }
+
+        private void OnClickNextButton()
+        {
+            characterIndex++;
+
+            if (characterIndex >= characterData.characterInfos.Count)
+            {
+                characterIndex = 0;
+            }
+
+            RefreshUI();
+        }
+
+        private void RefreshUI()
+        {
             PlayerData playerData = GameManager.Instance.playerData;
-            
+
             _characterInfo = characterData.characterInfos[characterIndex];
-            
+
             characterImage.sprite = _characterInfo.sprite;
             characterNameText.text = _characterInfo.name;
+            characterStory.text = _characterInfo.story;
+            characterSkillDescription.text = _characterInfo.skillDescription;
+            characterWeapon.sprite = _characterInfo.recommendedWeapon;
+
             UpdateStatText();
+            RefreshSelectButton();
+            RefreshUpgradeButton();
+        }
 
-            
-            characterSelectButton.interactable = true;
-            characterUpgradeButton.interactable = true;
+        private void RefreshSelectButton()
+        {
+            characterSelectButton.onClick.RemoveAllListeners();
 
-            int otherCharacterIdx = StageManager.Instance.selectedCharacterIdx == 0 ? 1 : 0;
-            
+            int otherCharacterIdx =
+                StageManager.Instance.selectedCharacterIdx == 0 ? 1 : 0;
+
             if (StageManager.Instance.selectedCharacters[otherCharacterIdx] == characterIndex)
             {
                 characterSelectButton.interactable = false;
             }
             else
             {
-                characterSelectButton.onClick.RemoveAllListeners();
+                characterSelectButton.interactable = true;
+
                 characterSelectButton.onClick.AddListener(() =>
                 {
-                    StageManager.Instance.selectedCharacters[StageManager.Instance.selectedCharacterIdx] = characterIndex;
+                    StageManager.Instance.selectedCharacters[
+                        StageManager.Instance.selectedCharacterIdx
+                    ] = characterIndex;
                 });
             }
+        }
+
+        private void RefreshUpgradeButton()
+        {
+            PlayerData playerData = GameManager.Instance.playerData;
+
+            characterUpgradeButton.onClick.RemoveAllListeners();
 
             if (playerData.characterGrade[characterIndex] >= _characterInfo.apList.Count - 1)
             {
                 characterUpgradeButton.interactable = false;
+                return;
             }
-            else
+
+            characterUpgradeButton.interactable = true;
+
+            characterUpgradeButton.onClick.AddListener(() =>
             {
-                characterUpgradeButton.interactable = true;
-                
-                characterUpgradeButton.onClick.RemoveAllListeners();
-                characterUpgradeButton.onClick.AddListener(() =>
-                {
-                    playerData.characterGrade[characterIndex] = 
-                        Mathf.Min(_characterInfo.apList.Count - 1, playerData.characterGrade[characterIndex] + 1);
-                    UpdateStatText();
-                    
-                    if (playerData.characterGrade[characterIndex] >= _characterInfo.apList.Count - 1)
-                    {
-                        characterUpgradeButton.interactable = false;
-                    }
-                });
-            }
-            
-            characterStory.text = _characterInfo.story;
-            characterSkillDescription.text = _characterInfo.skillDescription;
-            characterWeapon.sprite = _characterInfo.recommendedWeapon;
+                if (GoldManager.Instance == null)
+                    return;
+
+                if (!GoldManager.Instance.TrySpendGold(upgradeGoldCost))
+                    return;
+
+                playerData.characterGrade[characterIndex] =
+                    Mathf.Min(
+                        _characterInfo.apList.Count - 1,
+                        playerData.characterGrade[characterIndex] + 1
+                    );
+
+                GameManager.Instance.SaveGame();
+
+                RefreshUI();
+            });
         }
 
         private void UpdateStatText()
         {
             PlayerData playerData = GameManager.Instance.playerData;
-            
-            upgradeStat.text = $"Hp : {_characterInfo.hpList[playerData.characterGrade[characterIndex]]}";
-            if (playerData.characterGrade[characterIndex] < _characterInfo.apList.Count - 1)
+
+            int grade = playerData.characterGrade[characterIndex];
+
+            upgradeStat.text = $"Hp : {_characterInfo.hpList[grade]}";
+
+            if (grade < _characterInfo.hpList.Count - 1)
             {
-                upgradeStat.text += $"<color=grey>({_characterInfo.hpList[playerData.characterGrade[characterIndex] + 1]})</color>";
+                upgradeStat.text +=
+                    $"<color=grey>({_characterInfo.hpList[grade + 1]})</color>";
             }
-            upgradeStat.text += $" / Ap : {_characterInfo.apList[playerData.characterGrade[characterIndex]]}";
-            if (playerData.characterGrade[characterIndex] < _characterInfo.apList.Count - 1)
+
+            upgradeStat.text += $" / Ap : {_characterInfo.apList[grade]}";
+
+            if (grade < _characterInfo.apList.Count - 1)
             {
-                upgradeStat.text += $"<color=grey>({_characterInfo.apList[playerData.characterGrade[characterIndex] + 1]})</color>";
+                upgradeStat.text +=
+                    $"<color=grey>({_characterInfo.apList[grade + 1]})</color>";
             }
         }
     }
