@@ -105,6 +105,12 @@ namespace _01.Scripts._04.UI
                     characterName.text = "???";
                     continue;
                 }
+                
+                HoverTrigger hover = button.gameObject.AddComponent<HoverTrigger>();
+                hover.SetTooltipData($"{characterInfo.name}     LV{GameManager.Instance.playerData.characterGrade[characterInfo.id]}\n",
+                    $"{characterInfo.story}\n\n" + $"{characterInfo.skillDescription}\n\n" +
+                    $"공격력 : {characterInfo.apList[GameManager.Instance.playerData.characterGrade[characterInfo.id]]} " +
+                    $"체력 : {characterInfo.hpList[GameManager.Instance.playerData.characterGrade[characterInfo.id]]}");
 
                 
                 button.onClick.RemoveAllListeners();
@@ -136,12 +142,19 @@ namespace _01.Scripts._04.UI
                 Image image = button.transform.GetChild(1).GetComponent<Image>();
                 int index = i;
 
+                WeaponInfo weaponInfo = weaponData.weaponInfos[index];
                 image.sprite = weaponData.weaponInfos[i].sprite;
 
                 if (!_unLockedWeapons[index])
                 {
                     image.sprite = lockedImage;
+                    continue;
                 }
+                
+                HoverTrigger hover = button.gameObject.AddComponent<HoverTrigger>();
+                hover.SetTooltipData($"{weaponInfo.name}     LV{GameManager.Instance.playerData.weaponGrade[weaponInfo.id]}\n",
+                    $"{weaponInfo.characteristic}\n\n" + $"{weaponInfo.skillDescription}\n\n" +
+                    $"공격력 : {weaponInfo.apList[GameManager.Instance.playerData.weaponGrade[weaponInfo.id]]} ");
                 
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() =>
