@@ -27,6 +27,8 @@ namespace _01.Scripts._04.UI
 
         private void UpdateCoinUI()
         {
+            if (coinText == null) return;
+
             if (GoldManager.Instance == null)
             {
                 coinText.text = "0";

@@ -54,6 +54,8 @@ public class GoldManager : MonoBehaviour
     public void AddEnemyKillGold()
     {
         StageGold += enemyKillGold;
+
+        Debug.Log($"ÇöÀç ½ºÅ×ÀÌÁö °ñµå: {StageGold}");
     }
 
     public int ApplyClearGold()
@@ -70,13 +72,17 @@ public class GoldManager : MonoBehaviour
 
     public void AddOwnedGold(int amount)
     {
-        if (amount <= 0) return;
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå È¹µæ·®: {amount}");
+            return;
+        }
 
         OwnedGold += amount;
 
         SaveGold();
 
-        Debug.Log($"È¹µæ °ñµå: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+        Debug.Log($"°ñµå È¹µæ: {amount}, º¸À¯ °ñµå: {OwnedGold}");
     }
 
     public bool CanSpendGold(int amount)
@@ -86,9 +92,15 @@ public class GoldManager : MonoBehaviour
 
     public bool TrySpendGold(int amount)
     {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            return false;
+        }
+
         if (OwnedGold < amount)
         {
-            Debug.Log($"°ñµå ºÎÁ·");
+            Debug.Log($"°ñµå ºÎÁ·. ÇÊ¿ä °ñµå: {amount}, º¸À¯ °ñµå: {OwnedGold}");
             return false;
         }
 
@@ -96,18 +108,41 @@ public class GoldManager : MonoBehaviour
 
         SaveGold();
 
-        Debug.Log($"³²Àº °ñµå: {OwnedGold}");
+        Debug.Log($"°ñµå »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
 
         return true;
     }
 
     public void SpendGold(int amount)
     {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            return;
+        }
+
         OwnedGold -= amount;
 
         if (OwnedGold < 0)
             OwnedGold = 0;
 
         SaveGold();
+
+        Debug.Log($"°ñµå °­Á¦ »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
+    }
+
+    [ContextMenu("Add Test Gold 1000")]
+    private void AddTestGold()
+    {
+        AddOwnedGold(1000);
+    }
+
+    [ContextMenu("Reset Gold")]
+    private void ResetGold()
+    {
+        OwnedGold = 0;
+        SaveGold();
+
+        Debug.Log("°ñµå ÃÊ±âÈ­");
     }
 }
