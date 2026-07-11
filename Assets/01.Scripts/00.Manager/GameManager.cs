@@ -44,15 +44,11 @@ namespace _01.Scripts._00.Manager
                 unlockedCharacters.Add(false);
                 unlockedWeapons.Add(false);
                 characterGrade.Add(0);
+                weaponGrade.Add(0);
             }
 
             unlockedCharacters[0] = unlockedCharacters[1] = true;
             unlockedWeapons[0] = true;
-
-            for (int i = 0; i < 7; i++)
-            {
-                weaponGrade.Add(0);
-            }
         }
     }
 
@@ -91,8 +87,7 @@ namespace _01.Scripts._00.Manager
         public SelectedData selectedData;
         public SoundData soundData;
         private float _sessionStartTime;
-
-        public Action OnCoinChanged;
+        
 
         protected override void Awake()
         {
@@ -121,7 +116,6 @@ namespace _01.Scripts._00.Manager
 
         public void SaveGame()
         {
-            UpdatePlayTime();
             SaveLoadManager.Instance.SaveData(playerData);
         }
 
@@ -152,13 +146,6 @@ namespace _01.Scripts._00.Manager
             SaveLoadManager.Instance.LoadData(selectedData);
         }
 
-        public void AddAndUseCoin(int amount)
-        {
-            playerData.coin += amount;
-            
-            OnCoinChanged?.Invoke();
-        }
-
         public void ResetUnlockedCharacters()
         {
             playerData.unlockedCharacters[0] = true;
@@ -167,6 +154,8 @@ namespace _01.Scripts._00.Manager
             playerData.unlockedCharacters[3] = false;
             playerData.unlockedCharacters[4] = false;
             playerData.unlockedCharacters[5] = false;
+
+            SaveGame();
         }
 
         public void UnlockCharacters()
@@ -177,6 +166,8 @@ namespace _01.Scripts._00.Manager
             playerData.unlockedCharacters[3] = true;
             playerData.unlockedCharacters[4] = true;
             playerData.unlockedCharacters[5] = true;
+            
+            SaveGame();
         }
 
         public void ResetUnlockedWeapons()
@@ -187,6 +178,8 @@ namespace _01.Scripts._00.Manager
             playerData.unlockedWeapons[3] = false;
             playerData.unlockedWeapons[4] = false;
             playerData.unlockedWeapons[5] = false;
+            
+            SaveGame();
         }
 
         public void UnlockWeapons()
@@ -197,6 +190,8 @@ namespace _01.Scripts._00.Manager
             playerData.unlockedWeapons[3] = true;
             playerData.unlockedWeapons[4] = true;
             playerData.unlockedWeapons[5] = true;
+            
+            SaveGame();
         }
     }
 }

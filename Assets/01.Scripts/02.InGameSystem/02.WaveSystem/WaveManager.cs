@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _01.Scripts._00.Manager;
 using TMPro;
@@ -55,13 +56,13 @@ public class WaveManager : MonoBehaviour
     {
         if (stageWaveDatabase == null)
         {
-            Debug.LogError("StageWaveDatabase°¡ WaveManager¿¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("StageWaveDatabaseï¿½ï¿½ WaveManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
         if (StageManager.Instance == null)
         {
-            Debug.LogError("StageManager.Instance°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("StageManager.Instanceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
@@ -72,11 +73,11 @@ public class WaveManager : MonoBehaviour
 
         if (stageWaveData == null)
         {
-            Debug.LogError($"StageWaveData ·Îµå ½ÇÆÐ. World: {selectedWorldNum}, Stage: {selectedStageNum}");
+            Debug.LogError($"StageWaveData ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½. World: {selectedWorldNum}, Stage: {selectedStageNum}");
             return;
         }
 
-        Debug.Log($"StageWaveData ·Îµå ¼º°ø. World: {selectedWorldNum}, Stage: {selectedStageNum}, Data: {stageWaveData.name}");
+        Debug.Log($"StageWaveData ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½. World: {selectedWorldNum}, Stage: {selectedStageNum}, Data: {stageWaveData.name}");
     }
 
     public void StartStage()
@@ -112,7 +113,7 @@ public class WaveManager : MonoBehaviour
 
         if (stageWaveData == null)
         {
-            Debug.LogError("StageWaveData°¡ ¾ø½À´Ï´Ù. ¿þÀÌºê¸¦ »ý¼ºÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("StageWaveDataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ìºê¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
@@ -140,7 +141,7 @@ public class WaveManager : MonoBehaviour
     {
         if (enemySlotManager == null)
         {
-            Debug.LogError("EnemySlotManager°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("EnemySlotManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
@@ -184,9 +185,45 @@ public class WaveManager : MonoBehaviour
             earnedEveMemory = EveMemoryManager.Instance.ApplyStageClearMemory();
         }
 
+        UnlockCharacterAndWeapon(StageManager.Instance.selectedWorldNum, StageManager.Instance.selectedStageNum);
         ShowClearPanel(earnedGold, earnedEveMemory);
 
-        Debug.Log("°ÔÀÓ Å¬¸®¾î");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½");
+    }
+
+    private void UnlockCharacterAndWeapon(WorldNum worldNum, StageNum stageNum)
+    {
+        if (worldNum == WorldNum.World0)
+        {
+            var characterList = GameManager.Instance.playerData.unlockedCharacters;
+            var weaponList = GameManager.Instance.playerData.unlockedWeapons;
+            switch (stageNum)
+            {
+                case StageNum.Stage0:
+                    characterList[2] = true;
+                    weaponList[1] = true;
+                    break;
+                case StageNum.Stage1:
+                    characterList[3] = true;
+                    weaponList[2] = true;
+                    break;
+                case StageNum.Stage2:
+                    weaponList[3] = true;
+                    break;
+                case StageNum.Stage3:
+                    characterList[4] = true;
+                    weaponList[4] = true;
+                    break;
+                case StageNum.Stage4:
+                    characterList[5] = true;
+                    weaponList[5] = true;
+                    break;
+                case StageNum.Stage5:
+                    break;
+            }
+            
+            GameManager.Instance.SaveGame();
+        }
     }
 
     private void ShowClearPanel(int earnedGold, int earnedEveMemory)
@@ -199,12 +236,12 @@ public class WaveManager : MonoBehaviour
 
         if (earnedGoldText != null)
         {
-            earnedGoldText.text = $"È¹µæ °ñµå: {earnedGold}";
+            earnedGoldText.text = $"È¹ï¿½ï¿½ ï¿½ï¿½ï¿½: {earnedGold}";
         }
 
         if (earnedEveMemoryText != null)
         {
-            earnedEveMemoryText.text = $"È¹µæ ÀÌºêÀÇ ±â¾ï: {earnedEveMemory}";
+            earnedEveMemoryText.text = $"È¹ï¿½ï¿½ ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {earnedEveMemory}";
         }
 
         Time.timeScale = 0f;
