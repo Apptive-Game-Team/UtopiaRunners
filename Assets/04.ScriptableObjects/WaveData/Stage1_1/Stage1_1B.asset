@@ -15,8 +15,8 @@ MonoBehaviour:
   baseTime: 10
   spawnEvents:
   - prefab: {fileID: 5207227089998715162, guid: 055015cb8d768824a8f713865b5d449c, type: 3}
-    spawnPointId: Mid
+    lane: 2
     delayFromBaseTime: 0
   - prefab: {fileID: 6657782817184399291, guid: dd0aa4d7cf1f4154dbc6a3b44050ae75, type: 3}
-    spawnPointId: Down
+    lane: 2
     delayFromBaseTime: 3
