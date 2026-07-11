@@ -1,6 +1,10 @@
+using System.Collections;
+using _01.Scripts._04.UI;
 using _01.Scripts._05.Utility;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace _01.Scripts._00.Manager
 {
@@ -11,7 +15,6 @@ namespace _01.Scripts._00.Manager
         [SerializeField] private GameObject lobbyConfirmPanel;
 
         [SerializeField] private GameObject lobbyButton;
-        [SerializeField] private string inGameSceneName = "05.InGame(Temp)";
 
         protected override void Awake()
         {
@@ -33,10 +36,69 @@ namespace _01.Scripts._00.Manager
                 GameManager.Instance.SaveSound();
             }
 
-            optionPanel.SetActive(!optionPanel.activeSelf);
+            Image optionUI = optionPanel.transform.GetChild(0).GetComponent<Image>();
+            if (!optionPanel.activeSelf)
+            {
+                optionPanel.SetActive(true);
+                UIOpenEffect(optionUI);
+                UpdateLobbyButtonState();
+                UpdatePauseState();
+            }
+            else
+            {
+                StartCoroutine(UICloseEffect(optionUI));
+            }
+        }
+        
+        private void UIOpenEffect(Image image)
+        {
+            if (image.gameObject.activeSelf)
+            {
+                return;
+            }
+            
+            CanvasGroup cg = image.GetComponentInChildren<CanvasGroup>();
+            RectTransform rt = image.GetComponent<RectTransform>();
 
+            cg.alpha = 0;
+            rt.localScale = new Vector3(1f, 0.01f, 1f);
+            rt.anchoredPosition = new Vector2(0, -1080f);
+            
+            image.gameObject.SetActive(true);
+            
+            Sequence seq =  DOTween.Sequence();
+            seq.SetUpdate(true);
+            seq.Append(rt.DOAnchorPos(Vector2.zero, 0.2f).SetEase(Ease.OutCubic));
+            seq.Append(rt.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutCubic));
+            seq.Append(cg.DOFade(1, 0.1f).SetEase(Ease.OutCubic));
+        }
+
+        private IEnumerator UICloseEffect(Image image)
+        {
+            if (!image.gameObject.activeSelf)
+            {
+                yield break;
+            }
+            
+            CanvasGroup cg = image.GetComponentInChildren<CanvasGroup>();
+            RectTransform rt = image.GetComponent<RectTransform>();
+
+            Sequence seq =  DOTween.Sequence();
+            seq.SetUpdate(true);
+            seq.Append(cg.DOFade(0, 0.1f).SetEase(Ease.OutCubic));
+            seq.Append(rt.DOScale(new Vector3(1f, 0.01f, 1f), 0.2f).SetEase(Ease.OutCubic));
+            seq.Append(rt.DOAnchorPos(new Vector2(0, -1080f), 0.2f).SetEase(Ease.OutCubic));
+             
+            yield return seq.WaitForCompletion();
+            
+            image.gameObject.SetActive(false);
+            optionPanel.SetActive(false);
             UpdateLobbyButtonState();
             UpdatePauseState();
+            
+            rt.anchoredPosition = Vector2.zero;
+            rt.localScale = Vector3.one;
+            cg.alpha = 1;
         }
 
         public void OnClickOutYesButton()
@@ -71,7 +133,7 @@ namespace _01.Scripts._00.Manager
             Time.timeScale = 1f;
 
             lobbyConfirmPanel.SetActive(false);
-            SceneManager.LoadScene("01-0.LobbyScene");
+            SceneManager.LoadScene(SceneInfo.SceneNames[SceneName.Lobby]);
         }
 
         public void OnClickLobbyNoButton()
@@ -85,7 +147,7 @@ namespace _01.Scripts._00.Manager
         {
             if (lobbyButton == null) return;
 
-            bool isInGameScene = SceneManager.GetActiveScene().name == inGameSceneName;
+            bool isInGameScene = SceneManager.GetActiveScene().name == SceneInfo.SceneNames[SceneName.InGame];
 
             lobbyButton.SetActive(isInGameScene);
         }
