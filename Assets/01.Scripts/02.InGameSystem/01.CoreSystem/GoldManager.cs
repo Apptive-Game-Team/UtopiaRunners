@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GoldManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class GoldManager : MonoBehaviour
     public int OwnedGold { get; private set; }
     public int StageGold { get; private set; }
 
+    public event Action OnGoldChanged;
+
     private const string OwnedGoldKey = "OwnedGold";
 
     private void Awake()
@@ -18,6 +21,8 @@ public class GoldManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+
             LoadGold();
         }
         else
@@ -29,6 +34,16 @@ public class GoldManager : MonoBehaviour
     private void LoadGold()
     {
         OwnedGold = PlayerPrefs.GetInt(OwnedGoldKey, 0);
+
+        OnGoldChanged?.Invoke();
+    }
+
+    private void SaveGold()
+    {
+        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
+        PlayerPrefs.Save();
+
+        OnGoldChanged?.Invoke();
     }
 
     public void ResetStageGold()
@@ -39,36 +54,95 @@ public class GoldManager : MonoBehaviour
     public void AddEnemyKillGold()
     {
         StageGold += enemyKillGold;
+
         Debug.Log($"ÇöÀç ½ºÅ×ÀÌÁö °ñµå: {StageGold}");
     }
 
-    public void ApplyClearGold()
+    public int ApplyClearGold()
     {
         StageGold += clearGold;
         OwnedGold += StageGold;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
 
         Debug.Log($"È¹µæ °ñµå: {StageGold}, º¸À¯ °ñµå: {OwnedGold}");
+
+        return StageGold;
     }
 
     public void AddOwnedGold(int amount)
     {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå È¹µæ·®: {amount}");
+            return;
+        }
+
         OwnedGold += amount;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
+
+        Debug.Log($"°ñµå È¹µæ: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+    }
+
+    public bool CanSpendGold(int amount)
+    {
+        return OwnedGold >= amount;
+    }
+
+    public bool TrySpendGold(int amount)
+    {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            return false;
+        }
+
+        if (OwnedGold < amount)
+        {
+            Debug.Log($"°ñµå ºÎÁ·. ÇÊ¿ä °ñµå: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+            return false;
+        }
+
+        OwnedGold -= amount;
+
+        SaveGold();
+
+        Debug.Log($"°ñµå »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
+
+        return true;
     }
 
     public void SpendGold(int amount)
     {
+        if (amount <= 0)
+        {
+            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            return;
+        }
+
         OwnedGold -= amount;
 
         if (OwnedGold < 0)
             OwnedGold = 0;
 
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        SaveGold();
+
+        Debug.Log($"°ñµå °­Á¦ »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
+    }
+
+    [ContextMenu("Add Test Gold 1000")]
+    private void AddTestGold()
+    {
+        AddOwnedGold(1000);
+    }
+
+    [ContextMenu("Reset Gold")]
+    private void ResetGold()
+    {
+        OwnedGold = 0;
+        SaveGold();
+
+        Debug.Log("°ñµå ÃÊ±âÈ­");
     }
 }

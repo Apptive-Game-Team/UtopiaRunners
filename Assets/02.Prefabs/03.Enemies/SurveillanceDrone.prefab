@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5638619699242529360}
   - component: {fileID: 7238456967260056080}
   - component: {fileID: 8233783864504051366}
+  - component: {fileID: -7171687282334703141}
   m_Layer: 0
   m_Name: SurveillanceDrone
   m_TagString: Enemy
@@ -225,3 +226,16 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 71dc15487ef7c2848a4897b675a2a1ca, type: 2}
   maxHp: 0
   currentHp: 0
+--- !u!114 &-7171687282334703141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207227089998715162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37f00774cdb764aa36b7b6559486c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotOffset: {x: 0, y: 0, z: 0}
