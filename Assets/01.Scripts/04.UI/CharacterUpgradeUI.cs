@@ -48,32 +48,36 @@ namespace _01.Scripts._04.UI
 
         private void OnClickPrevButton()
         {
-            characterIndex--;
-
-            if (characterIndex < 0)
+            do
             {
-                characterIndex = characterData.characterInfos.Count - 1;
-            }
+                characterIndex--;
+
+                if (characterIndex < 0)
+                {
+                    characterIndex = characterData.characterInfos.Count - 1;
+                }
+            } while (!GameManager.Instance.playerData.unlockedCharacters[characterIndex]);
 
             RefreshUI();
         }
 
         private void OnClickNextButton()
         {
-            characterIndex++;
-
-            if (characterIndex >= characterData.characterInfos.Count)
+            do
             {
-                characterIndex = 0;
-            }
+                characterIndex++;
+
+                if (characterIndex >= characterData.characterInfos.Count)
+                {
+                    characterIndex = 0;
+                }
+            } while (!GameManager.Instance.playerData.unlockedCharacters[characterIndex]);
 
             RefreshUI();
         }
 
         private void RefreshUI()
         {
-            PlayerData playerData = GameManager.Instance.playerData;
-
             _characterInfo = characterData.characterInfos[characterIndex];
 
             characterImage.sprite = _characterInfo.sprite;
@@ -91,10 +95,8 @@ namespace _01.Scripts._04.UI
         {
             characterSelectButton.onClick.RemoveAllListeners();
 
-            int otherCharacterIdx =
-                StageManager.Instance.selectedCharacterIdx == 0 ? 1 : 0;
-
-            if (StageManager.Instance.selectedCharacters[otherCharacterIdx] == characterIndex)
+            if (StageManager.Instance.selectedCharacters[0] == characterIndex ||
+                StageManager.Instance.selectedCharacters[1] == characterIndex)
             {
                 characterSelectButton.interactable = false;
             }

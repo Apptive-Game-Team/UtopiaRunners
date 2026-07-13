@@ -40,11 +40,7 @@ namespace _01.Scripts._04.UI
         {
             // 캐릭터 해금 리스트 관리
             _maxCharacterCount = characterData.characterInfos.Count;
-            _unlockedCharacters = new List<bool>();
-            for (int i = 0; i < _maxCharacterCount; i++)
-            {
-                _unlockedCharacters.Add(true);
-            }
+            _unlockedCharacters = GameManager.Instance.playerData.unlockedCharacters;
             
             // 선택된 캐릭터 관리
             _selectedCharacter = selectedCharacters[0];

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _01.Scripts._00.Manager;
 using _01.Scripts._03.Data;
 using DG.Tweening;
 using TMPro;
@@ -27,11 +28,7 @@ namespace _01.Scripts._04.UI
         private void InitialSetting()
         {
             _maxCharacterCount = characterData.characterInfos.Count;
-            _unlockedCharacters = new List<bool>();
-            for (int i = 0; i < _maxCharacterCount; i++)
-            {
-                _unlockedCharacters.Add(true);
-            }
+            _unlockedCharacters = GameManager.Instance.playerData.unlockedCharacters;
 
             for (int i = 0; i < _maxCharacterCount; i++)
             {

@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts._00.Manager;
 using UnityEngine;
 
 public class GoldManager : MonoBehaviour
@@ -33,15 +34,15 @@ public class GoldManager : MonoBehaviour
 
     private void LoadGold()
     {
-        OwnedGold = PlayerPrefs.GetInt(OwnedGoldKey, 0);
+        OwnedGold = GameManager.Instance.playerData.coin;
 
         OnGoldChanged?.Invoke();
     }
 
     private void SaveGold()
     {
-        PlayerPrefs.SetInt(OwnedGoldKey, OwnedGold);
-        PlayerPrefs.Save();
+        GameManager.Instance.playerData.coin = OwnedGold;
+        GameManager.Instance.SaveGame();
 
         OnGoldChanged?.Invoke();
     }
@@ -55,7 +56,7 @@ public class GoldManager : MonoBehaviour
     {
         StageGold += enemyKillGold;
 
-        Debug.Log($"ÇöÀç ½ºÅ×ÀÌÁö °ñµå: {StageGold}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {StageGold}");
     }
 
     public int ApplyClearGold()
@@ -65,7 +66,7 @@ public class GoldManager : MonoBehaviour
 
         SaveGold();
 
-        Debug.Log($"È¹µæ °ñµå: {StageGold}, º¸À¯ °ñµå: {OwnedGold}");
+        Debug.Log($"È¹ï¿½ï¿½ ï¿½ï¿½ï¿½: {StageGold}, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {OwnedGold}");
 
         return StageGold;
     }
@@ -74,7 +75,7 @@ public class GoldManager : MonoBehaviour
     {
         if (amount <= 0)
         {
-            Debug.LogWarning($"Àß¸øµÈ °ñµå È¹µæ·®: {amount}");
+            Debug.LogWarning($"ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È¹ï¿½æ·®: {amount}");
             return;
         }
 
@@ -82,7 +83,7 @@ public class GoldManager : MonoBehaviour
 
         SaveGold();
 
-        Debug.Log($"°ñµå È¹µæ: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+        Debug.Log($"ï¿½ï¿½ï¿½ È¹ï¿½ï¿½: {amount}, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {OwnedGold}");
     }
 
     public bool CanSpendGold(int amount)
@@ -94,13 +95,13 @@ public class GoldManager : MonoBehaviour
     {
         if (amount <= 0)
         {
-            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            Debug.LogWarning($"ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ë·®: {amount}");
             return false;
         }
 
         if (OwnedGold < amount)
         {
-            Debug.Log($"°ñµå ºÎÁ·. ÇÊ¿ä °ñµå: {amount}, º¸À¯ °ñµå: {OwnedGold}");
+            Debug.Log($"ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½: {amount}, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {OwnedGold}");
             return false;
         }
 
@@ -108,7 +109,7 @@ public class GoldManager : MonoBehaviour
 
         SaveGold();
 
-        Debug.Log($"°ñµå »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
+        Debug.Log($"ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {amount}, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {OwnedGold}");
 
         return true;
     }
@@ -117,7 +118,7 @@ public class GoldManager : MonoBehaviour
     {
         if (amount <= 0)
         {
-            Debug.LogWarning($"Àß¸øµÈ °ñµå »ç¿ë·®: {amount}");
+            Debug.LogWarning($"ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ë·®: {amount}");
             return;
         }
 
@@ -128,7 +129,7 @@ public class GoldManager : MonoBehaviour
 
         SaveGold();
 
-        Debug.Log($"°ñµå °­Á¦ »ç¿ë: {amount}, ³²Àº °ñµå: {OwnedGold}");
+        Debug.Log($"ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {amount}, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: {OwnedGold}");
     }
 
     [ContextMenu("Add Test Gold 1000")]
@@ -143,6 +144,6 @@ public class GoldManager : MonoBehaviour
         OwnedGold = 0;
         SaveGold();
 
-        Debug.Log("°ñµå ÃÊ±âÈ­");
+        Debug.Log("ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­");
     }
 }

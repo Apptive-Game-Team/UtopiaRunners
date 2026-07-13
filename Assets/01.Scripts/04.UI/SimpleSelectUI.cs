@@ -45,18 +45,10 @@ namespace _01.Scripts._04.UI
         {
             // 해금 리스트 관리
             _maxCharacterCount = characterData.characterInfos.Count;
-            _unlockedCharacters = new List<bool>();
-            for (int i = 0; i < _maxCharacterCount; i++)
-            {
-                _unlockedCharacters.Add(true);
-            }
+            _unlockedCharacters = GameManager.Instance.playerData.unlockedCharacters;
             
             _maxWeaponCount = weaponData.weaponInfos.Count;
-            _unLockedWeapons = new List<bool>();
-            for (int i = 0; i < _maxWeaponCount; i++)
-            {
-                _unLockedWeapons.Add(true);
-            }
+            _unLockedWeapons = GameManager.Instance.playerData.unlockedWeapons;
             
             // 선택된 캐릭터 관리
             _selectedCharacter = selectedCharacters[0];

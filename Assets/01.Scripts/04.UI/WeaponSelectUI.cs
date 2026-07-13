@@ -33,11 +33,7 @@ namespace _01.Scripts._04.UI
         private void InitialSetting()
         {
             _maxWeaponCount = weaponData.weaponInfos.Count;
-            _unLockedWeapons = new List<bool>();
-            for (int i = 0; i < _maxWeaponCount; i++)
-            {
-                _unLockedWeapons.Add(true);
-            }
+            _unLockedWeapons = GameManager.Instance.playerData.unlockedWeapons;
 
             for (int i = 0; i < _maxWeaponCount; i++)
             {
