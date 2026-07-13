@@ -194,6 +194,7 @@ namespace _01.Scripts._00.Manager
 
         private void CheckDead()
         {
+            _canTag = false;
             if (!subCharacter.isDead)
             {
                 Tag();
