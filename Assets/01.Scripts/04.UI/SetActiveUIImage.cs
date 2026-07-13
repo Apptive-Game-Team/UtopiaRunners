@@ -32,7 +32,7 @@ namespace _01.Scripts._04.UI
             RectTransform rt = image.GetComponent<RectTransform>();
 
             cg.alpha = 0;
-            rt.localScale = new Vector3(0.01f, 1f, 1f);
+            rt.localScale = new Vector3(1f, 0.01f, 1f);
             rt.anchoredPosition = new Vector2(0, -1080f);
             
             image.gameObject.SetActive(true);
