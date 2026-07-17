@@ -1,5 +1,5 @@
 {
-    "coin": 105,
+    "coin": 102,
     "currentWorld": 0,
     "currentStage": 0,
     "playTime": 0.0,
@@ -9,7 +9,7 @@
             "stages": [
                 {
                     "stageNum": 0,
-                    "isCleared": false
+                    "isCleared": true
                 },
                 {
                     "stageNum": 1,
