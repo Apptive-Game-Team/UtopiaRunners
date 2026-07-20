@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _01.Scripts._08.Enemy.BrokenTeddyBear;
 using DG.Tweening;
 using UnityEngine;
 
@@ -14,26 +15,24 @@ namespace _01.Scripts._08.Enemy
         }
 
         [Header("Components")]
-        [SerializeField] private BossHp bossHp;
         [SerializeField] private BossData data;
+        private EnemySlotManager _enemySlotManager;
 
-        [Header("Basic Attack (Button Throw)")]
+        [Header("Pattern - Button Throw")]
         [SerializeField] private BrokenTeddyBearButton[] buttonPrefabs;
 
-        [Header("Pattern - Hip Drop")]
-        [SerializeField] private float hipDropCooldown = 8f;
+        [Header("Pattern - Hip Drop")] 
+        [SerializeField] private Vector3 spawnPosition;
         [SerializeField] private float jumpHeight = 5f;
         [SerializeField] private float jumpDuration = 0.6f;
         [SerializeField] private float landDuration = 0.2f;
-        [SerializeField] private GameObject groundShockwavePrefab; // 전체 바닥 대미지 이펙트/콜라이더
 
         [Header("Pattern - Summon & Combine Robots")]
-        [SerializeField] private float summonCooldown = 12f;
-        [SerializeField] private GameObject minionRobotPrefab;
-        [SerializeField] private Transform[] robotSpawnPoints;
-        [SerializeField] private GameObject combinedRobotPrefab; // 4마리 합체 시 스폰될 거대 로봇
-        [SerializeField] private float combinedSpawnMinY = -3f;
-        [SerializeField] private float combinedSpawnMaxY = 3f;
+        [SerializeField] private GameObject[] minionRobotPrefabs;
+        [SerializeField] private GameObject clusterPrefab;
+        [SerializeField] private Vector3 clusterSpawnPos;
+        [SerializeField] private float combinedSpawnMinY = -2f;
+        [SerializeField] private float combinedSpawnMaxY = 2f;
 
         [Header("Pattern Option")]
         [SerializeField] private float delayBetweenPatterns = 1.5f;
@@ -43,13 +42,15 @@ namespace _01.Scripts._08.Enemy
         
         private bool _isPatternRunning;
         private Vector3 _originalPosition;
+        
+        private BossPatternData _buttonPattern;
+        private BossPatternData _hipDropPattern;
+        private BossPatternData _summonPattern;
 
         private void Awake()
         {
-            if (bossHp == null)
-                bossHp = GetComponent<BossHp>();
-
             _originalPosition = transform.position;
+            _enemySlotManager = FindFirstObjectByType<EnemySlotManager>();
             InitPatterns();
         }
 
@@ -62,15 +63,18 @@ namespace _01.Scripts._08.Enemy
         private void Update()
         {
             UpdateCooldowns();
-            CleanUpMinionList();
         }
 
         private void InitPatterns()
         {
+            _buttonPattern = data.patterns.Find(p => p.patternName == "Button");
+            _hipDropPattern = data.patterns.Find(p => p.patternName == "HipDrop");
+            _summonPattern = data.patterns.Find(p => p.patternName == "SummonRobots");
+            
             _runtimePatterns.Clear();
 
-            _runtimePatterns.Add(new PatternRuntimeData(PatternKind.HipDrop, hipDropCooldown));
-            _runtimePatterns.Add(new PatternRuntimeData(PatternKind.SummonRobots, summonCooldown));
+            _runtimePatterns.Add(new PatternRuntimeData(PatternKind.HipDrop, _hipDropPattern.cooldown));
+            _runtimePatterns.Add(new PatternRuntimeData(PatternKind.SummonRobots, _summonPattern.cooldown));
         }
 
         private void UpdateCooldowns()
@@ -82,11 +86,6 @@ namespace _01.Scripts._08.Enemy
                     pattern.currentCooldown -= Time.deltaTime;
                 }
             }
-        }
-        
-        private void CleanUpMinionList()
-        {
-            _activeMinions.RemoveAll(robot => !robot);
         }
         
         private IEnumerator PatternLoop()
@@ -151,11 +150,9 @@ namespace _01.Scripts._08.Enemy
 
         private IEnumerator BasicButtonAttackRoutine()
         {
-            BossPatternData pd = data.patterns.Find(p => p.patternName == "Button");
-            
             while (true)
             {
-                yield return new WaitForSeconds(pd.cooldown);
+                yield return new WaitForSeconds(_buttonPattern.cooldown);
                 
                 if (buttonPrefabs == null || buttonPrefabs.Length == 0)
                 {
@@ -168,13 +165,14 @@ namespace _01.Scripts._08.Enemy
                 }
                 
                 BrokenTeddyBearButton selectedButton = buttonPrefabs[Random.Range(0, buttonPrefabs.Length)];
-                selectedButton.InitSetting(pd.attackDamage);
+                selectedButton.InitSetting(_buttonPattern.attackDamage);
+                selectedButton.gameObject.SetActive(true);
                 
                 Vector3 targetPoint = selectedButton.targetPoint;
                 
                 GameObject buttonObj = Instantiate(selectedButton.gameObject, transform.position, Quaternion.identity);
-                buttonObj.transform.DOJump(targetPoint, Vector3.Distance(transform.position, targetPoint), 1, 1f)
-                    .SetEase(Ease.OutCubic)
+                buttonObj.transform.DOJump(targetPoint, Vector3.Distance(transform.position, targetPoint) / 4, 1, 2f)
+                    .SetEase(Ease.InSine)
                     .OnComplete(() =>
                     {
                         if (buttonObj)
@@ -200,10 +198,10 @@ namespace _01.Scripts._08.Enemy
 
             transform.position = _originalPosition;
             
-            if (groundShockwavePrefab)
-            {
-                Instantiate(groundShockwavePrefab, transform.position, Quaternion.identity);
-            }
+            GameObject go = Instantiate(_hipDropPattern.patternPrefab, spawnPosition, Quaternion.identity);
+            var sw = go.GetComponent<BrokenTeddyBearShockWave>();
+            sw.Init(_hipDropPattern.attackDamage);
+            sw.gameObject.SetActive(true);
 
             yield return new WaitForSeconds(0.5f);
 
@@ -214,37 +212,60 @@ namespace _01.Scripts._08.Enemy
         {
             _isPatternRunning = true;
             
-            CleanUpMinionList();
-
-            // 필드에 살아있는 로봇이 4마리 이상인 경우 -> 합체 로봇으로 변환!
+            Sequence seq = DOTween.Sequence();
+            
             if (_activeMinions.Count >= 4)
             {
-                // 1. 기존 잔여 로봇 4마리 파괴
+                GameObject clusterObj = Instantiate(clusterPrefab, clusterSpawnPos, Quaternion.identity);
+                clusterObj.GetComponent<BrokenTeddyBearCluster>().Init(_summonPattern.attackDamage);
+                
                 for (int i = _activeMinions.Count - 1; i >= 0; i--)
                 {
-                    if (_activeMinions[i] != null)
-                    {
-                        Destroy(_activeMinions[i]);
-                    }
+                    Vector2 randomOffset = Random.insideUnitCircle * 0.3f;
+                    Vector3 targetPos = clusterObj.transform.position + (Vector3)randomOffset;
+                    float randomRotation = Random.Range(-720f, 720f);
+                    
+                    _activeMinions[i].GetComponent<Collider2D>().enabled = false;
+                    _activeMinions[i].GetComponent<EnemyController>().enabled = false;
+                    _enemySlotManager.UnregisterEnemy(_activeMinions[i].GetComponent<SlotEnemy>());
+                    _activeMinions[i].transform.SetParent(clusterObj.transform);
+                    seq.Join(_activeMinions[i].transform.DOMove(targetPos, 0.5f)
+                        .SetEase(Ease.OutSine));
+                    seq.Join(_activeMinions[i].transform
+                        .DORotate(new Vector3(0, 0, randomRotation), 0.5f, RotateMode.FastBeyond360)
+                        .SetEase(Ease.InQuad));
                 }
+                
+                yield return seq.WaitForCompletion();
                 _activeMinions.Clear();
-
-                // 2. 무작위 Y값 위치 계산 후 합체 로봇 생성
+                
                 float randomY = Random.Range(combinedSpawnMinY, combinedSpawnMaxY);
-                Vector3 spawnPos = new Vector3(transform.position.x - 3f, randomY, transform.position.z);
-
-                if (combinedRobotPrefab != null)
-                {
-                    Instantiate(combinedRobotPrefab, spawnPos, Quaternion.identity);
-                }
-            }
-            else // 4마리 미만인 경우 -> 미니언 소환
-            {
-                if (robotSpawnPoints != null && minionRobotPrefab != null)
-                {
-                    foreach (Transform spawnPt in robotSpawnPoints)
+                Vector3 dir = (new Vector3(-6f, randomY, 0f) - clusterObj.transform.position);
+                Vector3 endPos = clusterObj.transform.position + dir * 3f;
+                clusterObj.transform.DOMove(endPos, 2f)
+                    .SetEase(Ease.OutSine)
+                    .OnComplete(() =>
                     {
-                        GameObject minion = Instantiate(minionRobotPrefab, spawnPt.position, Quaternion.identity);
+                        if (clusterObj)
+                        {
+                            Destroy(clusterObj);
+                        }
+                    });
+            }
+            else
+            {
+                EnemyLane[] lanes =
+                {
+                    EnemyLane.Bottom,
+                    EnemyLane.Middle
+                };
+
+                for (int i = 0; i < minionRobotPrefabs.Length && i < lanes.Length; i++)
+                {
+                    GameObject minion = _enemySlotManager.SpawnEnemy(minionRobotPrefabs[i], lanes[i], true);
+
+                    if (minion != null)
+                    {
                         _activeMinions.Add(minion);
                     }
                 }

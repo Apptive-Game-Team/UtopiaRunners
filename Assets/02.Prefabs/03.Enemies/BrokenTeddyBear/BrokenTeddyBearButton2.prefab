@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6459378840089211836
 Transform:
   m_ObjectHideFlags: 0
@@ -102,11 +102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 1
-  headPoint: {x: -7, y: 1, z: 0}
-  legPoint: {x: -7, y: -2, z: 0}
+  headPoint: {x: -5.5, y: 1, z: 0}
+  legPoint: {x: -5.5, y: -2, z: 0}
   explodeObject: {fileID: 5902522776197938111, guid: 8e0feb41223954540aae164f05aa2b38, type: 3}
-  targetPoint: {x: 0, y: 0, z: 0}
-  damage: 0
+  targetPoint: {x: -6.5, y: -2, z: 0}
+  damage: 12
 --- !u!61 &481057923200681876
 BoxCollider2D:
   m_ObjectHideFlags: 0

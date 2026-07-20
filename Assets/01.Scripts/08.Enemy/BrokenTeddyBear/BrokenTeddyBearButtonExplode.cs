@@ -9,7 +9,7 @@ namespace _01.Scripts._08.Enemy
         
         private void Start()
         {
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.5f);
         }
 
         public void Init(float d)
@@ -21,7 +21,7 @@ namespace _01.Scripts._08.Enemy
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<PlayerController>().TakeDamage(1);
+                other.GetComponent<PlayerController>().TakeDamage(damage);
             }
         }
     }

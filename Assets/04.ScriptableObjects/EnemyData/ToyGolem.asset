@@ -16,5 +16,5 @@ MonoBehaviour:
   attackDamage: 10
   healthPoint: 10
   attackType: 0
-  enemyPatternPrefab: {fileID: 0}
+  enemyPatternPrefab: {fileID: 7735932227129044953, guid: 692a964a289813947b7f9d5fa602587f, type: 3}
   cooldown: 3

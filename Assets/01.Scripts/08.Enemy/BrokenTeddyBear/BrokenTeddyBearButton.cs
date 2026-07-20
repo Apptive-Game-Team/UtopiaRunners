@@ -18,6 +18,8 @@ namespace _01.Scripts._08.Enemy
         public Vector3 targetPoint;
         public float damage;
 
+        private BrokenTeddyBearButtonExplode _explode;
+
         public void InitSetting(float d)
         {
             targetPoint = buttonType == ButtonType.Head ? headPoint : legPoint;
@@ -35,7 +37,9 @@ namespace _01.Scripts._08.Enemy
         public void Explode()
         {
             GameObject go = Instantiate(explodeObject, transform.position, Quaternion.identity);
-            go.GetComponent<BrokenTeddyBearButtonExplode>().Init(damage);
+            _explode = go.GetComponent<BrokenTeddyBearButtonExplode>();
+            _explode.Init(damage);
+            _explode.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }
